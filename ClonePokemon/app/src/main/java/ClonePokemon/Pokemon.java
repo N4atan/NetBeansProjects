@@ -15,9 +15,10 @@ public class Pokemon implements Criatura{
 	private int defense;
 	private int speed;
 	
-	public Pokemon(String name, int hp, int defense, int speed) {
+	public Pokemon(String name, int hp, int forca, int defense, int speed) {
 		this.name = name;
 		this.hp = hp;
+		this.forca = forca;
 		this.defense = defense;
 		this.speed = speed;
 	}
@@ -34,6 +35,9 @@ public class Pokemon implements Criatura{
 	public void setDefense(int newDefense) { this.defense = newDefense; }
 	public void setSpeed(int newSpeed)	  { this.speed = newSpeed;	     }
 	
+	public String toString(){
+		return this.getName() + " - Hp: " + this.getHp();
+	}
 	
 	@Override
 	public void atacar(Pokemon oponentePokemon){
@@ -46,13 +50,17 @@ public class Pokemon implements Criatura{
 	}
 	
 	@Override
-	public boolean esquivar(Pokemon oponentePokemon){
-		//Se for maior, consegue esquivar.
-		return this.getSpeed() > oponentePokemon.getSpeed();
+	public boolean fugir(Pokemon oponentePokemon, int somaResultDados){
+		return somaResultDados >= oponentePokemon.getSpeed();
 	}
 	
 	@Override
 	public void usarItem(){
 		
+	}
+	
+	@Override
+	public boolean estaVivo() {
+		return this.getHp() > 0;
 	}
 }

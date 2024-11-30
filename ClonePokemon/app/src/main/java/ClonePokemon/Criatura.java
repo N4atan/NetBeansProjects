@@ -10,6 +10,7 @@ package ClonePokemon;
  */
 public interface Criatura {	
 	void atacar(Pokemon oponentePokemon);
-	boolean esquivar(Pokemon oponentePokemon);
+	boolean fugir(Pokemon oponentePokemon, int somaResultDados);
 	void usarItem();
+	boolean estaVivo();
 }

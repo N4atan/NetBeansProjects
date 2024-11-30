@@ -3,12 +3,90 @@
  */
 package ClonePokemon;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.Scanner;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+public class App {
+
+	public void batalhar(Pokemon meuPokemon, Pokemon oponentePokemon, Scanner sc, Dados dados) {
+		
+		boolean emBatalha = true;
+		
+		while(meuPokemon.estaVivo() && oponentePokemon.estaVivo() && emBatalha) {
+			// Exibe os status
+			System.out.println("==============================================");
+			System.out.println("|                              STATUS DE BATALHA                         |");
+			System.out.println("|=============================================|");
+			System.out.println("| Jogador: " + meuPokemon.getName() + " | Hp: " + meuPokemon.getHp());
+			System.out.println("| Inimigo: " + oponentePokemon.getName() + " | Hp: " + oponentePokemon.getHp());
+			System.out.println("|=============================================|");
+			System.out.println("| 1. Atacar                                                                           |");
+			System.out.println("| 3. Fugir                                                                       |");
+			System.out.println("|=============================================|");
+			System.out.println("> ");
+			int escolha1 = sc.nextInt();
+			
+			sc.nextLine();
+			
+
+			boolean souMaisRapido = meuPokemon.getSpeed() > oponentePokemon.getSpeed();
+
+			switch (escolha1) {
+				case 1:
+					if(souMaisRapido) {
+						meuPokemon.atacar(oponentePokemon);
+						oponentePokemon.atacar(meuPokemon);
+
+						System.out.print("\n> Voce atacou primeiro! Aperte ENTER para continuar\n");
+						sc.nextLine();
+					} else {
+						oponentePokemon.atacar(meuPokemon);
+						meuPokemon.atacar(oponentePokemon);
+
+						System.out.print("\n> O seu oponente atacou primeiro! Aperte ENTER para continuar\n");
+						sc.nextLine();
+					}
+					break;
+
+				case 3: 
+					dados.rolarDados();
+
+					if(meuPokemon.fugir(oponentePokemon, dados.somaResultDados())) {
+						System.out.print("\n> Voce conseguiu escapar! Aperte ENTER para continuar\n");
+						sc.nextLine();
+						emBatalha = false;
+					} else {
+						System.out.print("\n> Voce nao conseguiu escapar! Aperte ENTER para continuar\n");
+						sc.nextLine();
+					}
+					break;
+
+				default:
+					break;
+			}
+			
+			if(meuPokemon.estaVivo() && emBatalha) {
+				System.out.print("\n> Voce GANHOU! aperte ENTER para continuar.\n");
+				sc.nextLine();
+			} else if(!emBatalha) {
+				System.out.print("\n> Voce FUGIU! aperte ENTER para continuar.\n");
+				sc.nextLine();
+			} else {
+				System.out.print("\n> Voce PERDEU! aperte ENTER para continuar.\n");
+				sc.nextLine();
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		App app = new App();
+		Scanner sc = new Scanner(System.in);
+		Dados dados = new Dados();
+		
+		//Pokemon pikachu0 = new Pikachu();
+		//Pokemon pikachu1 = new Pikachu();
+		
+		//app.batalhar(pikachu0, pikachu1, sc, dados);
+		
+		sc.close();
+	}
 }
