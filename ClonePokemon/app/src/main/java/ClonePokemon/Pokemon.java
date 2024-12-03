@@ -35,8 +35,13 @@ public class Pokemon implements Criatura{
 	public void setDefense(int newDefense) { this.defense = newDefense; }
 	public void setSpeed(int newSpeed)	  { this.speed = newSpeed;	     }
 	
-	public String toString(){
-		return this.getName() + " - Hp: " + this.getHp();
+	@Override
+	public String toString() {
+			return "Pokémon: " + name + "\n" +
+				"HP: " + hp + "\n" +
+				"Força: " + forca + "\n" +
+				"Defesa: " + defense + "\n" +
+				"Velocidade: " + speed;
 	}
 	
 	@Override
@@ -63,4 +68,6 @@ public class Pokemon implements Criatura{
 	public boolean estaVivo() {
 		return this.getHp() > 0;
 	}
+	
+	
 }

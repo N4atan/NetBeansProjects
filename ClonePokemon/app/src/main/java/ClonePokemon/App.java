@@ -7,11 +7,17 @@ import java.util.Scanner;
 
 public class App {
 
+	// Método para perguntar o nome do jogador, vai ser chamado como primeiro!
+	public static String askPlayerName(Scanner sc) {
+		System.out.print("????? \nOla treinador! Qual seu nome? \n> ");
+		return sc.nextLine();
+	}
+
 	public void batalhar(Pokemon meuPokemon, Pokemon oponentePokemon, Scanner sc, Dados dados) {
-		
+
 		boolean emBatalha = true;
-		
-		while(meuPokemon.estaVivo() && oponentePokemon.estaVivo() && emBatalha) {
+
+		while (meuPokemon.estaVivo() && oponentePokemon.estaVivo() && emBatalha) {
 			// Exibe os status
 			System.out.println("==============================================");
 			System.out.println("|                              STATUS DE BATALHA                         |");
@@ -22,17 +28,16 @@ public class App {
 			System.out.println("| 1. Atacar                                                                           |");
 			System.out.println("| 3. Fugir                                                                       |");
 			System.out.println("|=============================================|");
-			System.out.println("> ");
+			System.out.print("> ");
 			int escolha1 = sc.nextInt();
-			
+
 			sc.nextLine();
-			
 
 			boolean souMaisRapido = meuPokemon.getSpeed() > oponentePokemon.getSpeed();
 
 			switch (escolha1) {
 				case 1:
-					if(souMaisRapido) {
+					if (souMaisRapido) {
 						meuPokemon.atacar(oponentePokemon);
 						oponentePokemon.atacar(meuPokemon);
 
@@ -47,10 +52,10 @@ public class App {
 					}
 					break;
 
-				case 3: 
+				case 3:
 					dados.rolarDados();
 
-					if(meuPokemon.fugir(oponentePokemon, dados.somaResultDados())) {
+					if (meuPokemon.fugir(oponentePokemon, dados.somaResultDados())) {
 						System.out.print("\n> Voce conseguiu escapar! Aperte ENTER para continuar\n");
 						sc.nextLine();
 						emBatalha = false;
@@ -63,11 +68,11 @@ public class App {
 				default:
 					break;
 			}
-			
-			if(meuPokemon.estaVivo() && emBatalha) {
+
+			if (meuPokemon.estaVivo() && emBatalha) {
 				System.out.print("\n> Voce GANHOU! aperte ENTER para continuar.\n");
 				sc.nextLine();
-			} else if(!emBatalha) {
+			} else if (!emBatalha) {
 				System.out.print("\n> Voce FUGIU! aperte ENTER para continuar.\n");
 				sc.nextLine();
 			} else {
@@ -81,11 +86,13 @@ public class App {
 		App app = new App();
 		Scanner sc = new Scanner(System.in);
 		Dados dados = new Dados();
-		
+		ProfessorOak  professorOak = new ProfessorOak();
 		//Pokemon pikachu0 = new Pikachu();
 		//Pokemon pikachu1 = new Pikachu();
-		
 		//app.batalhar(pikachu0, pikachu1, sc, dados);
+		
+		Treinador player = new Treinador(askPlayerName(sc));
+		professorOak.introduction(player, sc, dados);
 		
 		sc.close();
 	}

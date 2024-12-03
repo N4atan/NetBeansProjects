@@ -27,4 +27,9 @@ public class Dados {
 	public int somaResultDados() {
 		return  dado1 +  dado2 +   dado3 +  dado4 +  dado5;
 	}
+	
+	public int rolaSomaResultDados() {
+		this.rolarDados();
+		return  dado1 +  dado2 +   dado3 +  dado4 +  dado5;
+	}
 }

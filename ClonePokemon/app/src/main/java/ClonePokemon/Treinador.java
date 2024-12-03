@@ -28,5 +28,6 @@ public class Treinador {
 		}
 	}
 	
+	public String getName() { return this.name; }
 	
 }
