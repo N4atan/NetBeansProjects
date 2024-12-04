@@ -37,20 +37,34 @@ public class Pokemon implements Criatura{
 	
 	@Override
 	public String toString() {
-			return "Pokémon: " + name + "\n" +
-				"HP: " + hp + "\n" +
-				"Força: " + forca + "\n" +
-				"Defesa: " + defense + "\n" +
-				"Velocidade: " + speed;
+			return "\n| Pokémon: " + name + "\n" +
+				"| HP: " + hp + "\n" +
+				"| Força: " + forca + "\n" +
+				"| Defesa: " + defense + "\n" +
+				"| Velocidade: " + speed + "\n" +
+				"|= = = = = = = = = = = = = = = = = =|";
 	}
 	
 	@Override
 	public void atacar(Pokemon oponentePokemon){
-		int dano = this.getForca() - oponentePokemon.getDefense();
+		int dano = this.getForca() - (oponentePokemon.getDefense() / 4);
 		
-		//Pra evitar que o dano seja zero!
-		dano = dano < 1 ? 1 : dano;
+		// Garante que o dano mínimo seja 1
+		if (dano < 1) {
+			dano = 1;
+		}
+				
+		oponentePokemon.setHp(oponentePokemon.getHp() - dano);
+	}
+	
+	public void atacar2(Pokemon oponentePokemon){
+		int dano = this.getForca() - (oponentePokemon.getDefense() / 2);
 		
+		// Garante que o dano mínimo seja 1
+		if (dano < 1) {
+			dano = 1;
+		}
+				
 		oponentePokemon.setHp(oponentePokemon.getHp() - dano);
 	}
 	

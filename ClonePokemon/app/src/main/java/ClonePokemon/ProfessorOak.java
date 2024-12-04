@@ -34,7 +34,7 @@ public class ProfessorOak extends Treinador {
 				"Aperte ENTER para rolar todos os dados!");
 		sc.nextLine();
 		
-		int hp = dados.rolaSomaResultDados();
+		int hp = dados.rolaSomaResultDados() + dados.rolaSomaResultDados();
 		int forca = dados.rolaSomaResultDados();
 		int defense = dados.rolaSomaResultDados();
 		int speed = dados.rolaSomaResultDados();

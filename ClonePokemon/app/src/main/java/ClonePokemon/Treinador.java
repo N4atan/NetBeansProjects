@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Treinador {
 	private String name;
-	private ArrayList<Pokemon> time;
+	public ArrayList<Pokemon> time;
 	
 	public Treinador(String name){
 		this.name = name;

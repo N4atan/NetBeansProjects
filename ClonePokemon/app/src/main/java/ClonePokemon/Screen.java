@@ -8,9 +8,10 @@ package ClonePokemon;
  *
  * @author NATANGABRIELWILDNERD
  */
-public class Pikachu extends Pokemon {
-	//Hp, forca, defense, speed
-	public Pikachu() {
-		super("Pikachu", 30, 23, 30, 10);
+public abstract class Screen {
+
+	public static void clear() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
 	}
 }

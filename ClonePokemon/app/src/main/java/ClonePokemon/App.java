@@ -8,9 +8,10 @@ import java.util.Scanner;
 public class App {
 
 	// Método para perguntar o nome do jogador, vai ser chamado como primeiro!
-	public static String askPlayerName(Scanner sc) {
+	public String askPlayerName(Scanner sc) {
 		System.out.print("????? \nOla treinador! Qual seu nome? \n> ");
-		return sc.nextLine();
+		String name = sc.nextLine();
+		return name;
 	}
 
 	public void batalhar(Pokemon meuPokemon, Pokemon oponentePokemon, Scanner sc, Dados dados) {
@@ -39,15 +40,23 @@ public class App {
 				case 1:
 					if (souMaisRapido) {
 						meuPokemon.atacar(oponentePokemon);
-						oponentePokemon.atacar(meuPokemon);
+						oponentePokemon.atacar2(meuPokemon);
 
-						System.out.print("\n> Voce atacou primeiro! Aperte ENTER para continuar\n");
+						System.out.print("\n> Voce atacou primeiro! Aperte ENTER para continuar");
 						sc.nextLine();
 					} else {
-						oponentePokemon.atacar(meuPokemon);
+						oponentePokemon.atacar2(meuPokemon);
 						meuPokemon.atacar(oponentePokemon);
 
-						System.out.print("\n> O seu oponente atacou primeiro! Aperte ENTER para continuar\n");
+						System.out.print("\n> O seu oponente atacou primeiro! Aperte ENTER para continuar");
+						sc.nextLine();
+					}
+					
+					if(!meuPokemon.estaVivo()){
+						System.out.print("Voce morreu! Aperte ENTER para continuar!");
+						sc.nextLine();
+					} else if(!oponentePokemon.estaVivo()){
+						System.out.print("Voce venceu! Aperte ENTER para continuar! Seu HP é:" + meuPokemon.getHp());
 						sc.nextLine();
 					}
 					break;
@@ -56,44 +65,44 @@ public class App {
 					dados.rolarDados();
 
 					if (meuPokemon.fugir(oponentePokemon, dados.somaResultDados())) {
-						System.out.print("\n> Voce conseguiu escapar! Aperte ENTER para continuar\n");
+						System.out.print("\n> Voce conseguiu escapar! Aperte ENTER para continuar");
 						sc.nextLine();
 						emBatalha = false;
 					} else {
-						System.out.print("\n> Voce nao conseguiu escapar! Aperte ENTER para continuar\n");
+						System.out.print("\n> Voce nao conseguiu escapar! Aperte ENTER para continuar");
 						sc.nextLine();
 					}
 					break;
 
 				default:
+					System.out.print("Escolha Invadia! Aperte ENTER para voltar ao menu. ");
+					sc.nextLine();
 					break;
-			}
-
-			if (meuPokemon.estaVivo() && emBatalha) {
-				System.out.print("\n> Voce GANHOU! aperte ENTER para continuar.\n");
-				sc.nextLine();
-			} else if (!emBatalha) {
-				System.out.print("\n> Voce FUGIU! aperte ENTER para continuar.\n");
-				sc.nextLine();
-			} else {
-				System.out.print("\n> Voce PERDEU! aperte ENTER para continuar.\n");
-				sc.nextLine();
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		App app = new App();
-		Scanner sc = new Scanner(System.in);
-		Dados dados = new Dados();
-		ProfessorOak  professorOak = new ProfessorOak();
-		//Pokemon pikachu0 = new Pikachu();
-		//Pokemon pikachu1 = new Pikachu();
-		//app.batalhar(pikachu0, pikachu1, sc, dados);
 		
-		Treinador player = new Treinador(askPlayerName(sc));
-		professorOak.introduction(player, sc, dados);
 		
-		sc.close();
+		try {
+			Scanner sc = new Scanner(System.in);
+			Dados dados = new Dados();
+			ProfessorOak  professorOak = new ProfessorOak();
+			Pokemon pikachu0 = new Pikachu();
+			
+			
+			
+			Treinador player = new Treinador(app.askPlayerName(sc));
+			Screen.clear();
+			
+			professorOak.introduction(player, sc, dados);
+			
+			app.batalhar(player.time.get(0), pikachu0, sc, dados);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
