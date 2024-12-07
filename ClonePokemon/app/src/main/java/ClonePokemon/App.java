@@ -13,21 +13,24 @@ public class App {
 		String name = sc.nextLine();
 		return name;
 	}
-
+	
+	//Método de batalha;
 	public void batalhar(Pokemon meuPokemon, Pokemon oponentePokemon, Scanner sc, Dados dados) {
 
 		boolean emBatalha = true;
 
 		while (meuPokemon.estaVivo() && oponentePokemon.estaVivo() && emBatalha) {
+			Screen.clearSimple();
+			
 			// Exibe os status
-			System.out.println("==============================================");
-			System.out.println("|                              STATUS DE BATALHA                         |");
+			System.out.println("\n==============================================");
+			System.out.println("|                              BATALHA		                            |");
 			System.out.println("|=============================================|");
 			System.out.println("| Jogador: " + meuPokemon.getName() + " | Hp: " + meuPokemon.getHp());
 			System.out.println("| Inimigo: " + oponentePokemon.getName() + " | Hp: " + oponentePokemon.getHp());
 			System.out.println("|=============================================|");
 			System.out.println("| 1. Atacar                                                                           |");
-			System.out.println("| 3. Fugir                                                                       |");
+			System.out.println("| 3. Fugir                                                                             |");
 			System.out.println("|=============================================|");
 			System.out.print("> ");
 			int escolha1 = sc.nextInt();
@@ -38,6 +41,7 @@ public class App {
 
 			switch (escolha1) {
 				case 1:
+					//Checar quem ataca primeiro;
 					if (souMaisRapido) {
 						meuPokemon.atacar(oponentePokemon);
 						oponentePokemon.atacar2(meuPokemon);
@@ -52,6 +56,7 @@ public class App {
 						sc.nextLine();
 					}
 					
+					//Checar se morreu;
 					if(!meuPokemon.estaVivo()){
 						System.out.print("Voce morreu! Aperte ENTER para continuar!");
 						sc.nextLine();
@@ -63,7 +68,8 @@ public class App {
 
 				case 3:
 					dados.rolarDados();
-
+					
+					//Se o resultado dos dados for maior que a velocidade do inimigo, eu consigo;
 					if (meuPokemon.fugir(oponentePokemon, dados.somaResultDados())) {
 						System.out.print("\n> Voce conseguiu escapar! Aperte ENTER para continuar");
 						sc.nextLine();
@@ -84,22 +90,20 @@ public class App {
 
 	public static void main(String[] args) {
 		App app = new App();
-		
+		Dados dados = new Dados();
+		ProfessorOak  professorOak = new ProfessorOak();
+		Rota1 rota1 = new Rota1();
 		
 		try {
 			Scanner sc = new Scanner(System.in);
-			Dados dados = new Dados();
-			ProfessorOak  professorOak = new ProfessorOak();
-			Pokemon pikachu0 = new Pikachu();
-			
-			
 			
 			Treinador player = new Treinador(app.askPlayerName(sc));
-			Screen.clear();
 			
 			professorOak.introduction(player, sc, dados);
 			
-			app.batalhar(player.time.get(0), pikachu0, sc, dados);
+			rota1.leavingPallet(sc);
+			rota1.firstEncounter(app, player, sc, dados);
+			
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

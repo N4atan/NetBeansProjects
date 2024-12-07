@@ -9,9 +9,14 @@ package ClonePokemon;
  * @author NATANGABRIELWILDNERD
  */
 public abstract class Screen {
-
 	public static void clear() {
-		System.out.print("\033[H\033[2J");
+		System.out.print((char) 27 + "[H" + (char) 27 + "[2J");
 		System.out.flush();
+	}
+	
+	public static void clearSimple() {
+		for(int i = 0; i < 50; i++) {
+			System.out.println("\n");
+		}
 	}
 }
