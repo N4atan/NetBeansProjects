@@ -14,10 +14,12 @@ public class Pokemon implements Criatura{
 	private int forca;
 	private int defense;
 	private int speed;
+	private int hpMax;
 	
 	public Pokemon(String name, int hp, int forca, int defense, int speed) {
 		this.name = name;
 		this.hp = hp;
+		this.hpMax = hp;
 		this.forca = forca;
 		this.defense = defense;
 		this.speed = speed;
@@ -26,20 +28,22 @@ public class Pokemon implements Criatura{
 	
 	public String getName()	{ return this.name;     }
 	public int getHp()		{ return this.hp;	       }
+	public int getHpMax()		{ return this.hpMax;	       }
 	public int getDefense()	{ return this.defense; }
 	public int getSpeed()		{ return this.speed;    }
 	public int getForca()		{ return this.forca;      }
 	
 	
 	public void setHp(int newHp)		  { this.hp = newHp;		     }
+	public void setHpMax(int newHpMax)		  { this.hpMax = newHpMax;		     }
 	public void setDefense(int newDefense) { this.defense = newDefense; }
 	public void setSpeed(int newSpeed)	  { this.speed = newSpeed;	     }
 	
 	@Override
 	public String toString() {
-			return "\n| Pokémon: " + name + "\n" +
+			return "\n| Pokemon: " + name + "\n" +
 				"| HP: " + hp + "\n" +
-				"| Força: " + forca + "\n" +
+				"| Forca: " + forca + "\n" +
 				"| Defesa: " + defense + "\n" +
 				"| Velocidade: " + speed + "\n" +
 				"|= = = = = = = = = = = = = = = = = =|";

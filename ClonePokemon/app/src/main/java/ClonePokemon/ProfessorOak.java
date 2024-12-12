@@ -17,16 +17,21 @@ public class ProfessorOak extends Treinador {
 	}
 
 	public void introduction(Treinador player, Scanner sc, Dados dados) {
-		try {
+		
 			Screen.clearSimple(); 
 			
-			System.out.println("Professor Oak:"
-					+ "\n"
-					+ "Ola! Seja bem-vindo ao incrivel mundo dos Pokemon! Meu nome eh Professor Carvalho, e sou um pesquisador dedicado ao estudo dessas criaturas fascinantes que compartilham este mundo conosco.\n"
-					+ "Hoje, eh um dia muito especial: voce esta prestes a iniciar sua jornada como treinador Pokemon! Mas, antes de partir, você precisara de um companheiro para acompanha-lo nessa aventura. Aqui estao tres Pokemon iniciais. Cada um deles possui habilidades únicas e personalidades diferentes. Escolha com sabedoria!");
+			System.out.println("""
+						Professor Oak:
+						Ola! Seja bem-vindo ao incrivel mundo dos Pokemon! 
+						Meu nome eh Professor Carvalho.
+						Sou um pesquisador dedicado ao estudo dessas criaturas fascinantes que compartilham este mundo conosco.
+						Hoje, eh um dia muito especial: voce esta prestes a iniciar sua jornada como treinador Pokemon! 
+						Mas, antes de partir, voce precisara de um companheiro para acompanha-lo nessa aventura. 
+						Aqui estao tres Pokemon iniciais. Cada um deles possui habilidades unicas e personalidades diferentes. Escolha com sabedoria!
+						""");
 			
-			Thread.sleep(2000);
-			System.out.println("[1] - Charmander - O Pokemon Lagarto.\n[2] - Bulbasaur - O Pokemon Semente.\n[3] - Squirtle - O Pokemon Tartaruga");
+			TerminalUtils.sleep(2000);
+			System.out.println("[ 1 - Charmander - O Pokemon Lagarto ] # [ 2 - Bulbasaur - O Pokemon Semente ] # [ 3 - Squirtle - O Pokemon Tartaruga ]");
 			System.out.print (">  ");
 			int escolhaOak = sc.nextInt();
 			sc.nextLine ();
@@ -34,9 +39,11 @@ public class ProfessorOak extends Treinador {
 			//Precisa rolar os dados para definir atributos. Rola e soma = setAtributo. Ai repete!
 			
 			
-			System.out.print("Professor Oak: \n" + 
-					"Boa escolha! Agora vamos rolar os dados e definir os atributos!" + 
-					"Aperte ENTER para rolar todos os dados!");
+			System.out.print("""
+						\nProfessor Oak:
+						Boa escolha! Agora vamos rolar os dados e definir os atributos!
+						Aperte ENTER para rolar todos os dados!
+						""");
 			sc.nextLine();
 			
 
@@ -49,22 +56,27 @@ public class ProfessorOak extends Treinador {
 				player.adicionarAoTime(new Pokemon("Charmander", hp, forca, defense, speed));
 			} else if(escolhaOak == 2) {
 				player.adicionarAoTime(new Pokemon("Bulbasaur", hp, forca, defense, speed));
-			} else {
+			} else if(escolhaOak == 3) {
 				player.adicionarAoTime(new Pokemon("Squirtle", hp, forca, defense, speed));
+			} else {
+				player.adicionarAoTime(new Pokemon("Bulbasaur", hp, forca, defense, speed)); 
 			}
 			
 			
 			player.exibirTime();
 
-			Thread.sleep(3000);
-			System.out.println("Professor Oak: \nAgora, sua jornada está prestes a começar. O mundo dos Pokémon está repleto de desafios, batalhas e descobertas incríveis. Confie no seu Pokémon e no seu instinto, e tenho certeza de que você será bem-sucedido.\n" +
-						"Boa sorte " + player.getName() + "! Vou ficar ansioso para ouvir sobre suas aventuras. Ah, e não se esqueça de vir me visitar de vez em quando para me contar o que encontrou por aí!");
+			TerminalUtils.sleep(2000);
+			System.out.println("""
+						\nProfessor Oak:
+						Agora, sua jornada esta prestes a comecar. 
+						O mundo dos Pokemon esta repleto de desafios, batalhas e descobertas incriveis. 
+						Confie no seu Pokemon e no seu instinto, e tenho certeza de que voce sera bem-sucedido.
+						Boa sorte! Vou ficar ansioso para ouvir sobre suas aventuras. 
+						Ah, e nao se esqueca de vir me visitar de vez em quando para me contar o que encontrou por ai!
+						""");
 
-			System.out.print("\nAperte ENTER para prosseguir!");
-			sc.nextLine();
-		} catch (InterruptedException e) {
-			System.out.println("O diálogo foi interrompido.");
-		}
+			TerminalUtils.block(sc);
+		
 	}
 
 }

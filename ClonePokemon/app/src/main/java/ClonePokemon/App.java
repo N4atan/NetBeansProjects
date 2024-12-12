@@ -101,8 +101,7 @@ public class App {
 			
 			professorOak.introduction(player, sc, dados);
 			
-			rota1.leavingPallet(sc);
-			rota1.firstEncounter(app, player, sc, dados);
+			rota1.init(app, player, sc, dados);
 			
 			
 		} catch (Exception e) {
