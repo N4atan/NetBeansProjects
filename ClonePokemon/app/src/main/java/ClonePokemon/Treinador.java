@@ -23,6 +23,10 @@ public class Treinador {
 		System.out.println("| -  O pokemon " + pokemon.getName() + " foi adicionado a equipe! ");
 	}
 	
+	public void adicionarAoTime2(Pokemon pokemon) {
+		time.add(pokemon);
+	}
+	
 	public void exibirTime() {
 		for(Pokemon pokemon : time) {
 			System.out.println(pokemon.toString());

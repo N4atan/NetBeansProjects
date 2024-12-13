@@ -65,6 +65,7 @@ public class App {
 					} else if(!oponentePokemon.estaVivo()){
 						System.out.print("Voce venceu! Aperte ENTER para continuar! Seu HP é:" + meuPokemon.getHp());
 						sc.nextLine();
+
 					}
 					break;
 
@@ -106,13 +107,15 @@ public class App {
 			professorOak.introduction(player, sc, dados);
 			rota1.init(app, player, sc, dados);
 			
-			while(true) {
+			while(player.time.get(0).estaVivo()) {
 				if(App.localDoJogo.equals("Viridian")){
 					viridianCity.init(sc, player);
 				} else if(App.localDoJogo.equals("Rota 2")) {
-					rota2.init(sc, dados, app, player);
+					rota2.init2(sc, dados, app, player);
 				}
 			}
+			
+			System.out.println("Fim de Jogo!");
 			
 			
 
