@@ -9,8 +9,9 @@ import java.util.ArrayList;
  * @author NATANGABRIELWILDNERD
  */
 public class Treinador {
-	private String name;
+	public String name;
 	public ArrayList<Pokemon> time;
+	
 	
 	public Treinador(String name){
 		this.name = name;
@@ -29,5 +30,7 @@ public class Treinador {
 	}
 	
 	public String getName() { return this.name; }
+
+	
 	
 }

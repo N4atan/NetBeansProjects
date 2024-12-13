@@ -33,7 +33,7 @@ public class Rota1 {
 		};
 		
 		afterBattle = new String[]{
-			"Apos a batalha intensa, voce respira aliviado, seu Pokemon parece mais forte e confiante.",
+			"Apos o encontro com o pokemon selvagem, voce respira aliviado, seu Pokemon parece forte e confiante.",
 			"Voce observa a estrada a frente, com arvores e grama se estendendo ate onde os olhos podem ver.",
 			"O caminho continua aberto, e uma sensacao de determinacao cresce dentro de voce.",
 		};
@@ -67,11 +67,11 @@ public class Rota1 {
 		for(String text : beforeBattle) { System.out.println(text); }
 	}
 
-	public Pokemon firstEncounter() {
+	public Pokemon firstEncounter(Dados dados) {
 		if(Math.random() < 0.5){
-			return new Pokemon("Rattata", 6, 5, 6, 12);
+			return new Pokemon("Rattata", dados.rolaSomaResultDados(), dados.rolaSomaResultDados(), dados.rolaSomaResultDados(), dados.rolaSomaResultDados());
 		} else {
-			return new Pokemon("Pidgey", 12, 5, 6, 8);
+			return new Pokemon("Pidgey", dados.rolaSomaResultDados(), dados.rolaSomaResultDados(), dados.rolaSomaResultDados(), dados.rolaSomaResultDados());
 		}
 	}	
 	
@@ -112,7 +112,7 @@ public class Rota1 {
 				initializationBattle();
 				TerminalUtils.block(sc);
 				
-				app.batalhar(player.time.get(0), firstEncounter(), sc, dados);
+				app.batalhar(player.time.get(0), firstEncounter(dados), sc, dados);
 				Screen.clearSimple();
 				
 				afterBattle();
@@ -126,5 +126,7 @@ public class Rota1 {
 		
 		showEnding();
 		TerminalUtils.block(sc);
+		App.localDoJogo = "Viridian";
+		
 	}
 }

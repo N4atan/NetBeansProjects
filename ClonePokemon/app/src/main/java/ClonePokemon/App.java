@@ -6,7 +6,9 @@ package ClonePokemon;
 import java.util.Scanner;
 
 public class App {
-
+	
+	public static String localDoJogo;
+	
 	// Método para perguntar o nome do jogador, vai ser chamado como primeiro!
 	public String askPlayerName(Scanner sc) {
 		System.out.print("????? \nOla treinador! Qual seu nome? \n> ");
@@ -93,17 +95,27 @@ public class App {
 		Dados dados = new Dados();
 		ProfessorOak  professorOak = new ProfessorOak();
 		Rota1 rota1 = new Rota1();
+		ViridianCity viridianCity = new ViridianCity();
+		Rota2 rota2 = new Rota2(dados);
+		
 		
 		try {
 			Scanner sc = new Scanner(System.in);
-			
 			Treinador player = new Treinador(app.askPlayerName(sc));
 			
 			professorOak.introduction(player, sc, dados);
-			
 			rota1.init(app, player, sc, dados);
 			
+			while(true) {
+				if(App.localDoJogo.equals("Viridian")){
+					viridianCity.init(sc, player);
+				} else if(App.localDoJogo.equals("Rota 2")) {
+					rota2.init(sc, dados, app, player);
+				}
+			}
 			
+			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -35,9 +35,7 @@ public class Pokemon implements Criatura{
 	
 	
 	public void setHp(int newHp)		  { this.hp = newHp;		     }
-	public void setHpMax(int newHpMax)		  { this.hpMax = newHpMax;		     }
-	public void setDefense(int newDefense) { this.defense = newDefense; }
-	public void setSpeed(int newSpeed)	  { this.speed = newSpeed;	     }
+
 	
 	@Override
 	public String toString() {
