@@ -80,45 +80,6 @@ public class Rota2 {
 		return dados.dado1;
 	}
 
-	public void init(Scanner sc, Dados dados, App app, Treinador player) {
-		Screen.clearSimple();
-		
-		System.out.print("""
-					----------------------------------------------
-					-	Rota 2			         -
-					----------------------------------------------
-					[ 1 . Avançar ] 
-					[ 2. Voltar ] 
-                                           O que voce deseja fazer? \n> 
-						 """);
-		int escolha = sc.nextInt();
-		sc.nextLine();
-
-		switch (escolha) {
-			case 1:
-				if (firstOne) {
-					showMessageFirstOne();
-					TerminalUtils.block(sc);
-					iniciarBattles(sc, dados, app, player);
-					firstOne = false;
-				} else {
-					showMessageOtherTime();
-					if (!treinadoresDerrotados) {
-						iniciarBattles(sc, dados, app, player);
-					}
-				}
-				break;
-
-			case 2:
-				App.localDoJogo = "Viridian";
-				break;
-
-			default:
-				System.out.println("Escolha Invalida!");
-				break;
-		}
-	}
-
 	public void iniciarBattles(Scanner sc, Dados dados, App app, Treinador player) {
 		int qtdTreinadores = howMany(dados, sc);
 		
@@ -183,7 +144,7 @@ public class Rota2 {
 
 			switch (escolha) {
 				case 1:
-					//Checa se foram derrotados
+					//Checa se foram derrotados --> Inutil por enquanto, pois idependente, ira setar como derrotados.
 					if (!treinadoresDerrotados) {
 						iniciarBattles(sc, dados, app, player);
 					} else {
