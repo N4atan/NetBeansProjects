@@ -26,8 +26,12 @@ public class TelaLaboratorio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnSquirtle = new javax.swing.JButton();
+        BtnCharmander = new javax.swing.JButton();
+        BtnBulbassaur = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         DialogueTxtArea = new javax.swing.JTextArea();
+        BtnInteracao = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,6 +39,48 @@ public class TelaLaboratorio extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(685, 500));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        BtnSquirtle.setBackground(new java.awt.Color(255, 255, 255));
+        BtnSquirtle.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
+        BtnSquirtle.setText("Squirtle");
+        BtnSquirtle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255)));
+        BtnSquirtle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnSquirtle.setFocusable(false);
+        BtnSquirtle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSquirtleActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnSquirtle);
+        BtnSquirtle.setBounds(440, 390, 100, 40);
+
+        BtnCharmander.setBackground(new java.awt.Color(255, 255, 255));
+        BtnCharmander.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
+        BtnCharmander.setText("Charmander");
+        BtnCharmander.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        BtnCharmander.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnCharmander.setFocusable(false);
+        BtnCharmander.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCharmanderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnCharmander);
+        BtnCharmander.setBounds(180, 390, 100, 40);
+
+        BtnBulbassaur.setBackground(new java.awt.Color(255, 255, 255));
+        BtnBulbassaur.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
+        BtnBulbassaur.setText("Bulbassaur");
+        BtnBulbassaur.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 102)));
+        BtnBulbassaur.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnBulbassaur.setFocusable(false);
+        BtnBulbassaur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBulbassaurActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnBulbassaur);
+        BtnBulbassaur.setBounds(310, 390, 100, 40);
 
         DialogueTxtArea.setColumns(20);
         DialogueTxtArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -51,16 +97,71 @@ public class TelaLaboratorio extends javax.swing.JFrame {
             Meu nome eh Professor Carvalho.
             Sou um pesquisador dedicado ao estudo dessas criaturas fascinantes que compartilham este mundo conosco.
             """);
+            BtnCharmander.setVisible(false);
+            BtnBulbassaur.setVisible(false);
+            BtnSquirtle.setVisible(false);
 
             getContentPane().add(jScrollPane1);
             jScrollPane1.setBounds(160, 300, 400, 150);
+
+            BtnInteracao.setBackground(new java.awt.Color(255, 255, 255));
+            BtnInteracao.setText("...");
+            BtnInteracao.setFocusPainted(false);
+            BtnInteracao.setFocusable(false);
+            BtnInteracao.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    BtnInteracaoActionPerformed(evt);
+                }
+            });
+            getContentPane().add(BtnInteracao);
+            BtnInteracao.setBounds(570, 420, 41, 24);
 
             jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabri\\OneDrive\\Documentos\\NetBeansProjects\\ClonePokemon\\app\\src\\main\\java\\Images\\ProfessorOak2.png")); // NOI18N
             getContentPane().add(jLabel2);
             jLabel2.setBounds(40, 0, 637, 1097);
 
             pack();
+            setLocationRelativeTo(null);
         }// </editor-fold>//GEN-END:initComponents
+	
+	public int stage = 0;
+    private void BtnInteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInteracaoActionPerformed
+        // TODO add your handling code here:
+		switch(stage) {
+			case 0:
+				DialogueTxtArea.setText("""
+                        Hoje, eh um dia muito especial: voce esta prestes a iniciar sua jornada como treinador Pokemon! 
+                        Mas, antes de partir, voce precisara de um companheiro para acompanha-lo nessa aventura.                         
+                          """);
+				stage++;
+				break;
+				
+			case 1:
+				DialogueTxtArea.setText("""                       
+                        Aqui estao tres Pokemon iniciais. Cada um deles possui habilidades unicas e personalidades diferentes. Escolha com sabedoria!
+                          """);
+				
+				BtnInteracao.setVisible(false);
+				BtnCharmander.setVisible(true);
+				BtnBulbassaur.setVisible(true);
+				BtnSquirtle.setVisible(true);
+
+				stage++;								
+				break;
+		}
+    }//GEN-LAST:event_BtnInteracaoActionPerformed
+
+    private void BtnSquirtleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSquirtleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSquirtleActionPerformed
+
+    private void BtnCharmanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCharmanderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCharmanderActionPerformed
+
+    private void BtnBulbassaurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBulbassaurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBulbassaurActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -100,6 +201,10 @@ public class TelaLaboratorio extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBulbassaur;
+    private javax.swing.JButton BtnCharmander;
+    private javax.swing.JButton BtnInteracao;
+    private javax.swing.JButton BtnSquirtle;
     private javax.swing.JTextArea DialogueTxtArea;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
