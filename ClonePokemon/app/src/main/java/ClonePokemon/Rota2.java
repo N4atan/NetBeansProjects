@@ -66,9 +66,9 @@ public class Rota2 {
 		System.out.println("Narrador: ");
 		System.out.print("""
 					Vamos rolar os dados, para ver quantos treinadores voce vai enfrentar!
-                                           Aperte ENTER para rolar os Dados... 
+					Aperte ENTER para rolar os Dados... 
                      """);
-		TerminalUtils.block(sc);
+		sc.nextLine();
 
 		TerminalUtils.sleep(5000);
 
@@ -112,7 +112,7 @@ public class Rota2 {
 
 		System.out.println("""
 					Narrador:
-                                           Bom, voce passou pelos treinadores e voltou para a cidade de Viridian!
+					Muito bem, voce passou pelos treinadores e voltou para a cidade de Viridian!
                      """);
 		treinadoresDerrotados = true;
 		App.localDoJogo = "Viridian";

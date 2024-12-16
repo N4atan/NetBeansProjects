@@ -24,7 +24,7 @@ public class CentroPokemon {
 		
 		for (Pokemon pokemon : player.time) { 
 			pokemon.setHp(pokemon.getHpMax());
-			System.out.println("\nO pokemon " + pokemon.getName() + "foi curado! Hp: " + pokemon.getHp());
+			System.out.println("\nO pokemon " + pokemon.getName() + " foi curado! Hp: " + pokemon.getHp());
 		}
 		
 		System.out.println("""
