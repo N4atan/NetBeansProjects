@@ -21,9 +21,14 @@ public class Rota1 {
 
 	public Rota1() {
 		leavePallet = new String[]{
-			"Depois de pegar seu Pokemon com o Professor Oak, voce deixa o laboratorio e segue em direcao a Rota 1, o primeiro passo em sua jornada. A cidade de Pallet fica para tras, e a estrada de terra diante de voce se estende ate a proxima cidade, Viridian City.",
-			"Enquanto caminha, voce ouve os sons de Pokemon selvagens na grama alta ao seu redor. O vento refresca o rosto, e a sensacao de liberdade eh intensa. Seu objetivo agora eh claro: chegar a Viridian City, onde voce podera se preparar para os proximos desafios.",
-			"Voce tem 2 opcoes: "
+			"Depois de pegar seu Pokemon com o Professor Oak, voce deixa o laboratorio e segue em direcao a Rota 1", 
+			"O primeiro passo em sua jornada.", 
+			"A cidade de Pallet fica para tras, e a estrada de terra diante de voce se estende ate a proxima cidade, Viridian City.",
+			"Enquanto caminha, voce ouve os sons de Pokemon selvagens na grama alta ao seu redor.",
+			"O vento refresca o rosto, e a sensacao de liberdade eh intensa.", 
+			"Seu objetivo agora eh claro: chegar a Viridian City, onde voce podera se preparar para os proximos desafios.",
+			"Voce tem 2 opcoes: ",
+			
 		};
 		
 		beforeBattle = new String[]{
@@ -62,9 +67,27 @@ public class Rota1 {
 		for(String text : leavePallet) { System.out.println(text);}
 	}
 	
+	public int i = 0;
+	public String leavingPallet2() {
+		if(i < leavePallet.length) {
+			return leavePallet[i++];
+		} else {
+			return "END";
+		}
+	}
+	
 	public void initializationBattle() {
 		System.out.println("\nNarrador:");
 		for(String text : beforeBattle) { System.out.println(text); }
+	}
+	
+	public int k =0;
+	public String initializationBattle2() {
+		if(k < beforeBattle.length) {
+			return leavePallet[k++];
+		} else {
+			return "END";
+		}
 	}
 
 	public Pokemon firstEncounter(Dados dados) {
@@ -82,8 +105,12 @@ public class Rota1 {
 	
 	public void interactWithNpc() {
 		System.out.println("\nDouglas:");
-		for(String text : npcDialogue) { System.out.println(text); }
-		
+		for(String text : npcDialogue) { System.out.println(text); }	
+	}
+	
+	public String interactWithNpc2() {
+		String fullDialogue = String.join("\n", npcDialogue);
+		return fullDialogue;
 	}
 	
 	public void showEnding(){
@@ -92,12 +119,20 @@ public class Rota1 {
 		//TerminalUtils.block(sc);
 	}
 	
+	public int j = 0;
+	public String showEnding2(){
+		if(j < commonEnding.length) {
+			return commonEnding[j++];
+		} else {
+			return "END";
+		}
+	}
+	
 	public void init(App app, Treinador player, Scanner sc, Dados dados) {
 		Screen.clearSimple();
 		
 		leavingPallet();
 		
-		System.out.println("[ 1 - Falar com o npc ] # [ 2 - Passar reto ]");
 		System.out.print("O que voce deseja fazer? \n> ");
 		int escolha = sc.nextInt();
 		sc.nextLine();
