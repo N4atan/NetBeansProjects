@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Rota 1"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="fd" green="fd" red="fd" type="rgb"/>
     </Property>
@@ -166,7 +167,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\gabri\OneDrive\Documentos\NetBeansProjects\ClonePokemon\app\src\images\pokemon_anime_kanto_region_route_1_by_nepheskhaim_dgwzvvh-fullview.png"/>
+          <Image iconType="2" name="C:\Users\NATANGABRIELWILDNERD\Documents\NetBeansProjects\ClonePokemon\app\src\images\pokemon_anime_kanto_region_route_1_by_nepheskhaim_dgwzvvh-fullview.png"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

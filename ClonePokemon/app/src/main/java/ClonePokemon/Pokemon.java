@@ -55,7 +55,7 @@ public class Pokemon implements Criatura{
 		if (dano < 1) {
 			dano = 1;
 		}
-				
+		
 		oponentePokemon.setHp(oponentePokemon.getHp() - dano);
 	}
 	

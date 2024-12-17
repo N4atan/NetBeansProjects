@@ -35,6 +35,7 @@ public class TelaLaboratorio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(685, 500));
         setResizable(false);
@@ -114,9 +115,9 @@ public class TelaLaboratorio extends javax.swing.JFrame {
                 }
             });
             getContentPane().add(BtnInteracao);
-            BtnInteracao.setBounds(570, 420, 41, 24);
+            BtnInteracao.setBounds(570, 420, 27, 27);
 
-            jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabri\\OneDrive\\Documentos\\NetBeansProjects\\ClonePokemon\\app\\src\\main\\java\\Images\\ProfessorOak2.png")); // NOI18N
+            jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\NATANGABRIELWILDNERD\\Documents\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\ProfessorOak2.png")); // NOI18N
             getContentPane().add(jLabel2);
             jLabel2.setBounds(40, 0, 637, 1097);
 
@@ -148,19 +149,60 @@ public class TelaLaboratorio extends javax.swing.JFrame {
 
 				stage++;								
 				break;
+				
+			case 3:
+				DialogueTxtArea.setText("""
+			O mundo dos Pokemon esta repleto de desafios, batalhas e descobertas incriveis. 
+			Confie no seu Pokemon e no seu instinto, e tenho certeza de que voce sera bem-sucedido.
+			Boa sorte! Vou ficar ansioso para ouvir sobre suas aventuras. 
+			Ah, e nao se esqueca de vir me visitar de vez em quando para me contar o que encontrou por ai! 
+                            """);
+				stage++;
+				
+				
+				break;
+				
+			case 4:
+				TelaTeste telaTest = new TelaTeste(player);
+				this.dispose();
+				telaTest.setVisible(true);
+				
+				break;
 		}
     }//GEN-LAST:event_BtnInteracaoActionPerformed
 
     private void BtnSquirtleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSquirtleActionPerformed
         // TODO add your handling code here:
+		player.adicionarAoTime(new Pokemon("Squirtle", 20, 20, 20, 20));
+		
+		BtnInteracao.setVisible(true);
+				BtnCharmander.setVisible(false);
+				BtnBulbassaur.setVisible(false);
+				BtnSquirtle.setVisible(false);
+				
+		setDialogueTxtAreaAfterChose();		
     }//GEN-LAST:event_BtnSquirtleActionPerformed
 
     private void BtnCharmanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCharmanderActionPerformed
         // TODO add your handling code here:
+		player.adicionarAoTime(new Pokemon("Charmander", 20, 20, 20, 20));
+		BtnInteracao.setVisible(true);
+				BtnCharmander.setVisible(false);
+				BtnBulbassaur.setVisible(false);
+				BtnSquirtle.setVisible(false);
+				
+		setDialogueTxtAreaAfterChose();
     }//GEN-LAST:event_BtnCharmanderActionPerformed
 
     private void BtnBulbassaurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBulbassaurActionPerformed
         // TODO add your handling code here:
+		player.adicionarAoTime(new Pokemon("Bulbassaur", 20, 20, 20, 20));
+		BtnInteracao.setVisible(true);
+				BtnCharmander.setVisible(false);
+				BtnBulbassaur.setVisible(false);
+				BtnSquirtle.setVisible(false);
+				
+		setDialogueTxtAreaAfterChose();
     }//GEN-LAST:event_BtnBulbassaurActionPerformed
 
 	/**
@@ -199,6 +241,18 @@ public class TelaLaboratorio extends javax.swing.JFrame {
 		
 		
 	}
+	
+	private void setDialogueTxtAreaAfterChose(){
+		DialogueTxtArea.setText("""
+                          Boa Escolha!
+                         Agora, sua jornada esta prestes a comecar.                          
+                          """);
+		stage++;
+		
+	}
+	
+	
+	public Treinador player = new Treinador("Jogador1");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBulbassaur;
