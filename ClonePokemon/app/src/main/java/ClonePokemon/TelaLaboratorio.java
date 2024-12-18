@@ -115,9 +115,9 @@ public class TelaLaboratorio extends javax.swing.JFrame {
                 }
             });
             getContentPane().add(BtnInteracao);
-            BtnInteracao.setBounds(570, 420, 27, 27);
+            BtnInteracao.setBounds(570, 420, 41, 24);
 
-            jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\NATANGABRIELWILDNERD\\Documents\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\ProfessorOak2.png")); // NOI18N
+            jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabri\\OneDrive\\Documentos\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\ProfessorOak2.png")); // NOI18N
             getContentPane().add(jLabel2);
             jLabel2.setBounds(40, 0, 637, 1097);
 
@@ -154,20 +154,27 @@ public class TelaLaboratorio extends javax.swing.JFrame {
 				DialogueTxtArea.setText("""
 			O mundo dos Pokemon esta repleto de desafios, batalhas e descobertas incriveis. 
 			Confie no seu Pokemon e no seu instinto, e tenho certeza de que voce sera bem-sucedido.
+                            """);
+				stage++;
+				break;
+				
+			case 4:
+				DialogueTxtArea.setText("""
 			Boa sorte! Vou ficar ansioso para ouvir sobre suas aventuras. 
 			Ah, e nao se esqueca de vir me visitar de vez em quando para me contar o que encontrou por ai! 
                             """);
 				stage++;
-				
-				
 				break;
 				
-			case 4:
-				TelaTeste telaTest = new TelaTeste(player);
-				this.dispose();
-				telaTest.setVisible(true);
-				
-				break;
+			case 5:
+				try{
+					TelaTeste telaTestenew = new TelaTeste(player);
+					this.dispose();
+					telaTestenew.setVisible(true);				
+					break;
+				} catch (Exception e) {
+					System.out.println("Erro genérico: " + e.getMessage());
+				}
 		}
     }//GEN-LAST:event_BtnInteracaoActionPerformed
 

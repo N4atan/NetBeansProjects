@@ -84,7 +84,7 @@ public class Rota1 {
 	public int k =0;
 	public String initializationBattle2() {
 		if(k < beforeBattle.length) {
-			return leavePallet[k++];
+			return beforeBattle[k++];
 		} else {
 			return "END";
 		}

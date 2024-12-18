@@ -112,14 +112,14 @@ public class TelaTeste extends javax.swing.JFrame {
         getContentPane().add(BtnInteracao);
         BtnInteracao.setBounds(580, 420, 90, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\NATANGABRIELWILDNERD\\Documents\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\pokemon_anime_kanto_region_route_1_by_nepheskhaim_dgwzvvh-fullview.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabri\\OneDrive\\Documentos\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\Route1.png")); // NOI18N
         jLabel1.setFocusable(false);
         jLabel1.setMaximumSize(new java.awt.Dimension(680, 500));
         jLabel1.setMinimumSize(new java.awt.Dimension(680, 500));
         jLabel1.setName(""); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(680, 500));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-400, -60, 1220, 650);
+        jLabel1.setBounds(-400, -60, 1100, 650);
 
         pack();
         setLocationRelativeTo(null);
@@ -182,7 +182,7 @@ public class TelaTeste extends javax.swing.JFrame {
 		} else {
 			//Logica de batalha
 			TelaBatalha telaBatalha = new TelaBatalha(player, rota1.firstEncounter(dados));
-			this.dispose();
+			//this.setVisible(false);
 			telaBatalha.setVisible(true);
 
 			stage = 1;
