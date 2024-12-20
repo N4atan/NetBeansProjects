@@ -286,11 +286,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="LblFundo">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\gabri\OneDrive\Documentos\NetBeansProjects\ClonePokemon\app\src\images\Battle.jpg"/>
-        </Property>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="-13" y="-4" width="570" height="430"/>

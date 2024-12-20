@@ -101,7 +101,7 @@ public class TelaBatalha extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(325, 341, 207, 59);
+        jPanel2.setBounds(325, 341, 207, 45);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -169,7 +169,7 @@ public class TelaBatalha extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel5);
-        jPanel5.setBounds(12, 13, 190, 71);
+        jPanel5.setBounds(12, 13, 178, 56);
 
         StatusBattleTxtArea.setEditable(false);
         StatusBattleTxtArea.setColumns(20);
@@ -181,7 +181,7 @@ public class TelaBatalha extends javax.swing.JFrame {
         jScrollPane1.setViewportView(StatusBattleTxtArea);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(17, 290, 271, 106);
+        jScrollPane1.setBounds(17, 290, 271, 110);
 
         LblPokemonOponente.setFocusable(false);
         getContentPane().add(LblPokemonOponente);
@@ -191,8 +191,6 @@ public class TelaBatalha extends javax.swing.JFrame {
         } else {
             setRattataImg();
         }
-
-        LblFundo.setIcon(new javax.swing.ImageIcon("C:\\Users\\gabri\\OneDrive\\Documentos\\NetBeansProjects\\ClonePokemon\\app\\src\\images\\Battle.jpg")); // NOI18N
         getContentPane().add(LblFundo);
         LblFundo.setBounds(-13, -4, 570, 430);
 
