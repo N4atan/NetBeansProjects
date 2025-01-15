@@ -18,7 +18,7 @@ public class Phase1 extends javax.swing.JFrame {
 	 */
 	public Phase1() {
 		initComponents();
-		//setImgArrow();
+		//setImgArrow();	
 	}
 
 	/**
@@ -31,7 +31,11 @@ public class Phase1 extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         arrow = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        skeleton = new javax.swing.JLabel();
+        key = new javax.swing.JLabel();
+        chest = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -40,33 +44,108 @@ public class Phase1 extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(400, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(400, 400));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 400));
         jPanel1.setLayout(null);
 
         arrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow.png"))); // NOI18N
         arrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(arrow);
-        arrow.setBounds(260, 100, 90, 62);
+        arrow.setBounds(400, 180, 90, 62);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skeleton.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(-10, 190, 70, 100);
+        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skeleton.png"))); // NOI18N
+        jPanel1.add(skeleton);
+        skeleton.setBounds(230, 200, 70, 100);
+
+        key.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Key.png"))); // NOI18N
+        key.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        key.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                keyMouseClicked(evt);
+            }
+        });
+        jPanel1.add(key);
+        key.setBounds(330, 90, 30, 30);
+
+        chest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chest1.png"))); // NOI18N
+        chest.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        chest.setMaximumSize(new java.awt.Dimension(96, 96));
+        chest.setPreferredSize(new java.awt.Dimension(96, 96));
+        chest.setRequestFocusEnabled(false);
+        chest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chestMouseClicked(evt);
+            }
+        });
+        jPanel1.add(chest);
+        chest.setBounds(60, 50, 96, 96);
+        setImgChest();
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setFocusable(false);
+
+        txtArea.setEditable(false);
+        txtArea.setColumns(20);
+        txtArea.setFont(new java.awt.Font("Candara Light", 3, 18)); // NOI18N
+        txtArea.setLineWrap(true);
+        txtArea.setRows(5);
+        txtArea.setWrapStyleWord(true);
+        txtArea.setBorder(new javax.swing.border.MatteBorder(null));
+        txtArea.setFocusable(false);
+        txtArea.setRequestFocusEnabled(false);
+        jScrollPane1.setViewportView(txtArea);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(170, 360, 190, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(539, 478));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void keyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keyMouseClicked
+        // TODO add your handling code here:
+		keyChest = true;
+		key.setVisible(false);
+    }//GEN-LAST:event_keyMouseClicked
+
+    private void chestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chestMouseClicked
+        // TODO add your handling code here:
+		if(keyChest){
+			txtArea.setText("  Parabens!");
+			setImgChest2();
+		} else {
+			txtArea.setText("  Voce precisa da chave!");
+		}
+    }//GEN-LAST:event_chestMouseClicked
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+		if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+			backToMenu();
+		}
+    }//GEN-LAST:event_formKeyPressed
 
 	/**
 	 * @param args the command line arguments
@@ -105,10 +184,16 @@ public class Phase1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel arrow;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel chest;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel key;
+    private javax.swing.JLabel skeleton;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
-
+	
+	private boolean keyChest = false;
+	
 	// Método para redimensionar a imagem e ajustar o tamanho do JLabel
 	public void setImgArrow() {
 		// Carrega a imagem original
@@ -124,4 +209,41 @@ public class Phase1 extends javax.swing.JFrame {
 		// Define a imagem redimensionada no JLabel
 		arrow.setIcon(new ImageIcon(scaledImage));
 	}
+	
+	public void setImgChest() {
+		// Carrega a imagem original
+		ImageIcon icon = new ImageIcon(getClass().getResource("/images/chest1.png"));
+
+		// Ajusta o tamanho do JLabel para 50x50
+		chest.setPreferredSize(new Dimension(96, 96));
+
+		// Redimensiona a imagem para caber no JLabel
+		Image image = icon.getImage();
+		Image scaledImage = image.getScaledInstance(96, 96, Image.SCALE_SMOOTH);
+
+		// Define a imagem redimensionada no JLabel
+		chest.setIcon(new ImageIcon(scaledImage));
+	}
+	
+	public void setImgChest2() {
+		// Carrega a imagem original
+		ImageIcon icon = new ImageIcon(getClass().getResource("/images/chest2.png"));
+
+		// Ajusta o tamanho do JLabel para 50x50
+		chest.setPreferredSize(new Dimension(96, 96));
+
+		// Redimensiona a imagem para caber no JLabel
+		Image image = icon.getImage();
+		Image scaledImage = image.getScaledInstance(96, 96, Image.SCALE_SMOOTH);
+
+		// Define a imagem redimensionada no JLabel
+		chest.setIcon(new ImageIcon(scaledImage));
+	}
+	
+	public void backToMenu(){
+		Menu menu = new Menu();
+		this.dispose(); 
+		menu.setVisible(true); 
+	}
 }
+

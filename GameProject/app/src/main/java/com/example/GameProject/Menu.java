@@ -110,6 +110,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void BtnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStartActionPerformed
         // TODO add your handling code here:
+		Phase1 phase1 = new Phase1();
+		this.dispose();
+		phase1.setVisible(true);
     }//GEN-LAST:event_BtnStartActionPerformed
 
 	/**
