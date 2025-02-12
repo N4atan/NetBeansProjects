@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class App {
 	public static void main(String[] args) {
-		Pokedex pokedex = new Pokedex();
-		Trainner treinadorUser = new Trainner("User");
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				Trainner user = new Trainner("UserDefault");
+				new HomeJForm(new Pokedex(), user).setVisible(true);
+			}
+		});
 	}
 }
