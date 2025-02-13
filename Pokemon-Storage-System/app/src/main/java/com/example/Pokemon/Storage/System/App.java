@@ -7,7 +7,7 @@ public class App {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				Trainner user = new Trainner("UserDefault");
-				new HomeJForm(new Pokedex(), user).setVisible(true);
+				new BoxJForm(new Pokedex(), user).setVisible(true);
 			}
 		});
 	}

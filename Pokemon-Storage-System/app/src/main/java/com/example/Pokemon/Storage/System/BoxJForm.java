@@ -4,6 +4,7 @@
  */
 package com.example.Pokemon.Storage.System;
 
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,8 +17,9 @@ public class BoxJForm extends javax.swing.JFrame {
 	/**
 	 * Creates new form BoxJForm
 	 */
-	public BoxJForm(HomeJForm homeJForm) {
-		this.homeJForm = homeJForm;
+	public BoxJForm(Pokedex pokedex, Trainner user) {
+		this.pokedex = pokedex;
+		this.user = user;
 
 		initComponents();
 	}
@@ -37,43 +39,74 @@ public class BoxJForm extends javax.swing.JFrame {
         lblIdPokedexPokeSelection = new javax.swing.JLabel();
         lblNivelPokeSelection = new javax.swing.JLabel();
         lblTypePokeSelection = new javax.swing.JLabel();
+        lblTypePokeSelection1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setName("Pokemon Storage System"); // NOI18N
         setPreferredSize(new java.awt.Dimension(700, 400));
 
-        jListPokedex.setModel(attListaPokemons());
+        jListPokedex.setBackground(new java.awt.Color(0, 255, 0));
+        jListPokedex.setFont(new java.awt.Font("Jersey 10", 0, 24)); // NOI18N
+        jListPokedex.setForeground(new java.awt.Color(255, 255, 255));
         jListPokedex.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListPokedex.setFixedCellWidth(80);
-        jListPokedex.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        jListPokedex.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
+        jListPokedex.setSelectionBackground(jListPokedex.getBackground());
+        jListPokedex.setSelectionForeground(new java.awt.Color(255, 51, 51));
         jListPokedex.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListPokedexMouseClicked(evt);
             }
         });
+        jListPokedex.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jListPokedexKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListPokedex);
+        DefaultListModel<String> listModel = new DefaultListModel<>();
 
-        lblIdPokedexPokeSelection1.setBackground(new java.awt.Color(255, 255, 255));
+        for (Pokemon p : pokedex.pokemonDisponiveis) {
+            listModel.addElement(p.getName());
+        }
+        jListPokedex.setModel(listModel);
+
+        lblIdPokedexPokeSelection1.setBackground(new java.awt.Color(102, 102, 102));
         lblIdPokedexPokeSelection1.setForeground(new java.awt.Color(255, 255, 255));
 
-        lblNomePokeSelection.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
-        lblNomePokeSelection.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePokeSelection.setFont(new java.awt.Font("Jersey 10", 0, 36)); // NOI18N
+        lblNomePokeSelection.setForeground(new java.awt.Color(255, 255, 255));
         lblNomePokeSelection.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNomePokeSelection.setText("Nome");
 
-        lblIdPokedexPokeSelection.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        lblIdPokedexPokeSelection.setForeground(new java.awt.Color(0, 0, 0));
+        lblIdPokedexPokeSelection.setFont(new java.awt.Font("Jersey 10", 0, 18)); // NOI18N
+        lblIdPokedexPokeSelection.setForeground(new java.awt.Color(255, 255, 255));
         lblIdPokedexPokeSelection.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblIdPokedexPokeSelection.setText("Id-Pokedex");
 
-        lblNivelPokeSelection.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        lblNivelPokeSelection.setForeground(new java.awt.Color(0, 0, 0));
+        lblNivelPokeSelection.setFont(new java.awt.Font("Jersey 10", 0, 18)); // NOI18N
+        lblNivelPokeSelection.setForeground(new java.awt.Color(255, 255, 255));
         lblNivelPokeSelection.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNivelPokeSelection.setText("Nivel");
 
-        lblTypePokeSelection.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        lblTypePokeSelection.setFont(new java.awt.Font("Jersey 10", 0, 18)); // NOI18N
         lblTypePokeSelection.setForeground(new java.awt.Color(0, 0, 0));
         lblTypePokeSelection.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTypePokeSelection.setText("Type");
+
+        lblTypePokeSelection1.setFont(new java.awt.Font("Jersey 10", 0, 18)); // NOI18N
+        lblTypePokeSelection1.setForeground(new java.awt.Color(0, 0, 0));
+        lblTypePokeSelection1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 176, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout lblIdPokedexPokeSelection1Layout = new javax.swing.GroupLayout(lblIdPokedexPokeSelection1);
         lblIdPokedexPokeSelection1.setLayout(lblIdPokedexPokeSelection1Layout);
@@ -85,17 +118,24 @@ public class BoxJForm extends javax.swing.JFrame {
                     .addComponent(lblNomePokeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIdPokedexPokeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNivelPokeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTypePokeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(lblIdPokedexPokeSelection1Layout.createSequentialGroup()
+                        .addComponent(lblTypePokeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTypePokeSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         lblIdPokedexPokeSelection1Layout.setVerticalGroup(
             lblIdPokedexPokeSelection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblIdPokedexPokeSelection1Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNomePokeSelection)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTypePokeSelection)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lblIdPokedexPokeSelection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTypePokeSelection)
+                    .addComponent(lblTypePokeSelection1))
+                .addGap(38, 38, 38)
                 .addComponent(lblNivelPokeSelection)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblIdPokedexPokeSelection)
@@ -107,51 +147,103 @@ public class BoxJForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblIdPokedexPokeSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(298, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIdPokedexPokeSelection1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lblIdPokedexPokeSelection1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jListPokedexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPokedexMouseClicked
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		String nameOfPokemonSelectioned = jListPokedex.getSelectedValue();
 		System.out.println("Pokemon selecionado na lista: " + nameOfPokemonSelectioned);
-		
+
 		Pokemon pokemonSelectioned = null;
-		
+
 		//Vai pegar no arrayList o pokemon certo.
-		for(Pokemon p : homeJForm.pokedex.pokemonDisponiveis){
-			if(p.getName().equalsIgnoreCase(nameOfPokemonSelectioned)){
+		for (Pokemon p : pokedex.pokemonDisponiveis) {
+			if (p.getName().equalsIgnoreCase(nameOfPokemonSelectioned)) {
 				pokemonSelectioned = p;
 				System.out.println("Pokemon achado no banco de dados!");
 				break;
 			}
 		}
-		
+
 		//Para visualização de dados do pokemon selecionado.
-		if(pokemonSelectioned != null){
+		if (pokemonSelectioned != null) {
 			lblNomePokeSelection.setText(pokemonSelectioned.getName());
 			lblIdPokedexPokeSelection.setText("#" + Integer.toString(pokemonSelectioned.getNumberPokedex()));
-			lblTypePokeSelection.setText(pokemonSelectioned.getType());
-			lblNivelPokeSelection.setText("Nivel: "+Integer.toString(pokemonSelectioned.getNivel()));
+			lblNivelPokeSelection.setText("Lv: " + Integer.toString(pokemonSelectioned.getNivel()));
+
+			// Define a cor do tipo (ou tipos)
+			String[] tipos = pokemonSelectioned.getType().split("/");
+			if (tipos.length == 1) {
+				lblTypePokeSelection.setText(tipos[0]);
+				lblTypePokeSelection.setForeground(getColorForType(tipos[0]));
+
+				lblTypePokeSelection1.setText("");
+			} else if (tipos.length == 2) {
+				lblTypePokeSelection.setText(tipos[0]);
+				lblTypePokeSelection.setForeground(getColorForType(tipos[0]));
+
+				lblTypePokeSelection1.setText(tipos[1]);
+				lblTypePokeSelection1.setForeground(getColorForType(tipos[1]));
+			}
 		}
     }//GEN-LAST:event_jListPokedexMouseClicked
+
+    private void jListPokedexKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jListPokedexKeyPressed
+		// TODO add your handling code here:
+		if (evt.getKeyCode() == evt.VK_ENTER) {
+			String nameOfPokemonSelectioned = jListPokedex.getSelectedValue();
+			System.out.println("Pokemon selecionado na lista: " + nameOfPokemonSelectioned);
+
+			Pokemon pokemonSelectioned = null;
+
+			//Vai pegar no arrayList o pokemon certo.
+			for (Pokemon p : pokedex.pokemonDisponiveis) {
+				if (p.getName().equalsIgnoreCase(nameOfPokemonSelectioned)) {
+					pokemonSelectioned = p;
+					System.out.println("Pokemon achado no banco de dados!");
+					break;
+				}
+			}
+
+			//Para visualização de dados do pokemon selecionado.
+			if (pokemonSelectioned != null) {
+				lblNomePokeSelection.setText(pokemonSelectioned.getName());
+				lblIdPokedexPokeSelection.setText("#" + Integer.toString(pokemonSelectioned.getNumberPokedex()));
+				lblNivelPokeSelection.setText("Lv: " + Integer.toString(pokemonSelectioned.getNivel()));
+
+				// Define a cor do tipo (ou tipos)
+				String[] tipos = pokemonSelectioned.getType().split("/");
+				if (tipos.length == 1) {
+					lblTypePokeSelection.setText(tipos[0]);
+					lblTypePokeSelection.setForeground(getColorForType(tipos[0]));
+
+					lblTypePokeSelection1.setText("");
+				} else if (tipos.length == 2) {
+					lblTypePokeSelection.setText(tipos[0]);
+					lblTypePokeSelection.setForeground(getColorForType(tipos[0]));
+
+					lblTypePokeSelection1.setText(tipos[1]);
+					lblTypePokeSelection1.setForeground(getColorForType(tipos[1]));
+				}
+			}
+		}
+    }//GEN-LAST:event_jListPokedexKeyPressed
 
 	/**
 	 * @param args the command line arguments
@@ -183,22 +275,55 @@ public class BoxJForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> jListPokedex;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblIdPokedexPokeSelection;
     private javax.swing.JPanel lblIdPokedexPokeSelection1;
     private javax.swing.JLabel lblNivelPokeSelection;
     private javax.swing.JLabel lblNomePokeSelection;
     private javax.swing.JLabel lblTypePokeSelection;
+    private javax.swing.JLabel lblTypePokeSelection1;
     // End of variables declaration//GEN-END:variables
 
-	HomeJForm homeJForm;
+	public Pokedex pokedex;
+	public Trainner user;
 
-	public DefaultListModel<String> attListaPokemons() {
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Pokemon p : homeJForm.pokedex.pokemonDisponiveis) {
-			listModel.addElement(p.getName());
+	private Color getColorForType(String type) {
+		switch (type.toLowerCase()) {
+			case "água":
+				return Color.BLUE;
+			case "fogo":
+				return Color.RED;
+			case "grama":
+				return Color.GREEN;
+			case "elétrico":
+				return Color.YELLOW;
+			case "gelo":
+				return Color.CYAN;
+			case "lutador":
+				return Color.ORANGE;
+			case "veneno":
+				return Color.MAGENTA;
+			case "terra":
+				return new Color(165, 42, 42); // Marrom
+			case "voador":
+				return new Color(135, 206, 250); // Azul claro
+			case "psíquico":
+				return new Color(255, 105, 180); // Rosa
+			case "inseto":
+				return new Color(154, 205, 50); // Verde oliva
+			case "pedra":
+				return new Color(139, 69, 19); // Marrom escuro
+			case "fantasma":
+				return new Color(75, 0, 130); // Roxo
+			case "dragão":
+				return new Color(70, 130, 180); // Azul metálico
+			case "normal":
+				return Color.WHITE;
+			case "fada":
+				return Color.PINK;
+			default:
+				return Color.BLACK; // Cor padrão para tipos desconhecidos
 		}
-		return listModel;
 	}
-
 }
