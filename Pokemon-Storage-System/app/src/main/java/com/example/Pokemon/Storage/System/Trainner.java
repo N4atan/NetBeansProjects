@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Trainner {
 	//Atributo
 	private String name;
-	private ArrayList<Pokemon> partyPokemon;
+	public ArrayList<Pokemon> partyPokemon;
 	
 	//Construtor
 	public Trainner(String name){
@@ -19,13 +19,12 @@ public class Trainner {
 	}
 	
 	//Adiciona membro na equipe, caso tenha menos de 6 na equipe.
-	public String addPokemonInParty(Pokemon pokemon) {
+	public boolean addPokemonInParty(Pokemon pokemon) {
 		if(partyPokemon.size() < 6){
 			partyPokemon.add(pokemon);
-			System.out.println(pokemon);
-			return "";
+			return true;
 		} else {
-			return "Nao ha espaco disponivel!";
+			return false;
 		}
 	}
 	
