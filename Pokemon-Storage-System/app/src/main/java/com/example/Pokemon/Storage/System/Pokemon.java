@@ -11,13 +11,15 @@ public class Pokemon {
 	private String name;
 	private String type;
 	private int nivel;
+	private Ataque[] ataques;
 
 	//Constructor
-	public Pokemon(int numberPokedex, String name, String type, int nivel) {
+	public Pokemon(int numberPokedex, String name, String type, int nivel, Ataque[] ataques) {
 		this.numberPokedex = numberPokedex;
 		this.name = name;
 		this.type = type;
 		this.nivel = nivel;
+		this.ataques = ataques;
 	}
 
 	public int getNumberPokedex() {

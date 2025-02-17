@@ -749,15 +749,6 @@ public class BoxJForm extends javax.swing.JFrame {
 		}
 	}
 
-	private void attListaPokemonsDisponiveis() {
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-
-		for (Pokemon p : pokedex.pokemonDisponiveis) {
-			listModel.addElement(p.getName());
-		}
-		jListPokedex.setModel(listModel);
-
-	}
 
 	private void attListas(ArrayList<Pokemon> arrayPokemons, JList<String> lista) {
 		DefaultListModel<String> listModel = new DefaultListModel<>();
