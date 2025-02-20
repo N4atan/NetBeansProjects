@@ -42,4 +42,13 @@ public class Pokemon {
 	public String toString() {
 		return String.format("Nº: %d | Nome: %s | Tipo: %s | Nível: %d", numberPokedex, name, type, nivel);
 	}
+	
+	//Deve passar o index do ataque
+	public Ataque getAtaque(int index){
+		return this.ataques[index];
+	}
+	
+	public Ataque[] getAtaques(){
+		return this.ataques;
+	}
 }

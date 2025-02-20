@@ -12,6 +12,9 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation libs.guava
+
+     // Dependência do SQLite JDBC (adicionada manualmente)
+    implementation files('src/main/java/conexaoBanco/sqlite-jdbc-3.47.1.0.jar')
 }
 
 java {

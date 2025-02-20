@@ -28,199 +28,219 @@ public final class Pokedex {
 	}
 
 	public void addAtaques() {
+		// Ataques Normais
 		ataques.add(new Ataque("Tackle", "Normal", 40, 100));
 		ataques.add(new Ataque("Scratch", "Normal", 40, 100));
-		ataques.add(new Ataque("Ember", "Fogo", 40, 100));
-		ataques.add(new Ataque("Water Gun", "Água", 40, 100));
-		ataques.add(new Ataque("Vine Whip", "Grama", 45, 100));
-		ataques.add(new Ataque("Thunder Shock", "Elétrico", 40, 100));
 		ataques.add(new Ataque("Quick Attack", "Normal", 40, 100));
-		ataques.add(new Ataque("Bite", "Dark", 60, 100));
-		ataques.add(new Ataque("Flamethrower", "Fogo", 90, 100));
-		ataques.add(new Ataque("Hydro Pump", "Água", 110, 80));
-		ataques.add(new Ataque("Solar Beam", "Grama", 120, 100));
-		ataques.add(new Ataque("Thunderbolt", "Elétrico", 90, 100));
-		ataques.add(new Ataque("Psychic", "Psíquico", 90, 100));
-		ataques.add(new Ataque("Ice Beam", "Gelo", 90, 100));
 		ataques.add(new Ataque("Body Slam", "Normal", 85, 100));
-		ataques.add(new Ataque("Hyper Beam", "Normal", 150, 90));
 		ataques.add(new Ataque("Slash", "Normal", 70, 100));
-		ataques.add(new Ataque("Rock Slide", "Pedra", 75, 90));
-		ataques.add(new Ataque("Earthquake", "Terra", 100, 100));
-		ataques.add(new Ataque("Fire Blast", "Fogo", 110, 85));
-		ataques.add(new Ataque("Bubble Beam", "Água", 65, 100));
-		ataques.add(new Ataque("Razor Leaf", "Grama", 55, 95));
-		ataques.add(new Ataque("Thunder Wave", "Elétrico", 0, 90)); // Ataque de status
-		ataques.add(new Ataque("Poison Sting", "Veneno", 15, 100));
-		ataques.add(new Ataque("Confusion", "Psíquico", 50, 100));
-		ataques.add(new Ataque("Leech Seed", "Grama", 0, 90)); // Ataque de status
-		ataques.add(new Ataque("Fire Spin", "Fogo", 35, 85));
-		ataques.add(new Ataque("Surf", "Água", 90, 100));
-		ataques.add(new Ataque("Ice Punch", "Gelo", 75, 100));
-		ataques.add(new Ataque("Thunder Punch", "Elétrico", 75, 100));
-		ataques.add(new Ataque("Fire Punch", "Fogo", 75, 100));
-		ataques.add(new Ataque("Drill Peck", "Voador", 80, 100));
-		ataques.add(new Ataque("Mega Drain", "Grama", 40, 100));
-		ataques.add(new Ataque("Pin Missile", "Inseto", 25, 95));
-		ataques.add(new Ataque("Bone Club", "Terra", 65, 85));
-		ataques.add(new Ataque("Wing Attack", "Voador", 60, 100));
-		ataques.add(new Ataque("Swords Dance", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Double Kick", "Lutador", 30, 100));
-		ataques.add(new Ataque("Horn Attack", "Normal", 65, 100));
-		ataques.add(new Ataque("Stomp", "Normal", 65, 100));
-		ataques.add(new Ataque("Fury Attack", "Normal", 15, 85));
-		ataques.add(new Ataque("Horn Drill", "Normal", 0, 30)); // Ataque de um golpe
-		ataques.add(new Ataque("Toxic", "Veneno", 0, 85)); // Ataque de status
-		ataques.add(new Ataque("Agility", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Teleport", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Night Shade", "Fantasma", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Mimic", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Screech", "Normal", 0, 85)); // Ataque de status
-		ataques.add(new Ataque("Double Team", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Recover", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Harden", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Minimize", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Smokescreen", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Confuse Ray", "Fantasma", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Withdraw", "Água", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Defense Curl", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Barrier", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Light Screen", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Haze", "Gelo", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Reflect", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Focus Energy", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Bide", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Metronome", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Mirror Move", "Voador", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Self-Destruct", "Normal", 200, 100)); // Ataque de auto-destruição
-		ataques.add(new Ataque("Egg Bomb", "Normal", 100, 75));
-		ataques.add(new Ataque("Lick", "Fantasma", 30, 100));
-		ataques.add(new Ataque("Smog", "Veneno", 30, 70));
-		ataques.add(new Ataque("Sludge", "Veneno", 65, 100));
-		ataques.add(new Ataque("Bone Rush", "Terra", 25, 90));
-		ataques.add(new Ataque("Fire Spin", "Fogo", 35, 85));
-		ataques.add(new Ataque("Waterfall", "Água", 80, 100));
-		ataques.add(new Ataque("Clamp", "Água", 35, 85));
+		ataques.add(new Ataque("Hyper Beam", "Normal", 150, 90));
+		ataques.add(new Ataque("Double-Edge", "Normal", 120, 100));
+		ataques.add(new Ataque("Take Down", "Normal", 90, 85));
 		ataques.add(new Ataque("Swift", "Normal", 60, 100));
 		ataques.add(new Ataque("Skull Bash", "Normal", 130, 100));
-		ataques.add(new Ataque("Spike Cannon", "Normal", 20, 100));
-		ataques.add(new Ataque("Constrict", "Normal", 10, 100));
-		ataques.add(new Ataque("Amnesia", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Kinesis", "Psíquico", 0, 80)); // Ataque de status
-		ataques.add(new Ataque("Soft-Boiled", "Normal", 0, 100)); // Ataque de status
+
+		// Ataques de Fogo
+		ataques.add(new Ataque("Ember", "Fogo", 40, 100));
+		ataques.add(new Ataque("Flamethrower", "Fogo", 90, 100));
+		ataques.add(new Ataque("Fire Blast", "Fogo", 110, 85));
+		ataques.add(new Ataque("Fire Spin", "Fogo", 35, 85));
+		ataques.add(new Ataque("Fire Punch", "Fogo", 75, 100));
+		ataques.add(new Ataque("Blaze Kick", "Fogo", 85, 90));
+		ataques.add(new Ataque("Heat Wave", "Fogo", 95, 90));
+
+		// Ataques de Água
+		ataques.add(new Ataque("Water Gun", "Água", 40, 100));
+		ataques.add(new Ataque("Hydro Pump", "Água", 110, 80));
+		ataques.add(new Ataque("Bubble Beam", "Água", 65, 100));
+		ataques.add(new Ataque("Surf", "Água", 90, 100));
+		ataques.add(new Ataque("Aqua Tail", "Água", 90, 90));
+		ataques.add(new Ataque("Waterfall", "Água", 80, 100));
+		ataques.add(new Ataque("Whirlpool", "Água", 35, 85));
+
+		// Ataques de Grama
+		ataques.add(new Ataque("Vine Whip", "Grama", 45, 100));
+		ataques.add(new Ataque("Razor Leaf", "Grama", 55, 95));
+		ataques.add(new Ataque("Solar Beam", "Grama", 120, 100));
+		ataques.add(new Ataque("Mega Drain", "Grama", 40, 100));
+		ataques.add(new Ataque("Giga Drain", "Grama", 75, 100));
+		ataques.add(new Ataque("Leaf Blade", "Grama", 90, 100));
+		ataques.add(new Ataque("Seed Bomb", "Grama", 80, 100));
+
+		// Ataques Elétricos
+		ataques.add(new Ataque("Thunder Shock", "Elétrico", 40, 100));
+		ataques.add(new Ataque("Thunderbolt", "Elétrico", 90, 100));
+		ataques.add(new Ataque("Thunder", "Elétrico", 110, 70));
+		ataques.add(new Ataque("Thunder Punch", "Elétrico", 75, 100));
+		ataques.add(new Ataque("Spark", "Elétrico", 65, 100));
+		ataques.add(new Ataque("Volt Tackle", "Elétrico", 120, 100));
+		ataques.add(new Ataque("Discharge", "Elétrico", 80, 100));
+
+		// Ataques de Gelo
+		ataques.add(new Ataque("Ice Beam", "Gelo", 90, 100));
+		ataques.add(new Ataque("Blizzard", "Gelo", 110, 70));
+		ataques.add(new Ataque("Ice Punch", "Gelo", 75, 100));
+		ataques.add(new Ataque("Aurora Beam", "Gelo", 65, 100));
+		ataques.add(new Ataque("Icy Wind", "Gelo", 55, 95));
+		ataques.add(new Ataque("Frost Breath", "Gelo", 60, 90));
+		ataques.add(new Ataque("Avalanche", "Gelo", 60, 100));
+
+		// Ataques de Lutador
+		ataques.add(new Ataque("Double Kick", "Lutador", 30, 100));
 		ataques.add(new Ataque("High Jump Kick", "Lutador", 130, 90));
-		ataques.add(new Ataque("Glare", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Dream Eater", "Psíquico", 100, 100));
-		ataques.add(new Ataque("Poison Gas", "Veneno", 0, 90)); // Ataque de status
-		ataques.add(new Ataque("Barrage", "Normal", 15, 85));
-		ataques.add(new Ataque("Leech Life", "Inseto", 20, 100));
-		ataques.add(new Ataque("Lovely Kiss", "Normal", 0, 75)); // Ataque de status
-		ataques.add(new Ataque("Sky Attack", "Voador", 140, 90));
-		ataques.add(new Ataque("Transform", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Bubble", "Água", 40, 100));
-		ataques.add(new Ataque("Dizzy Punch", "Normal", 70, 100));
-		ataques.add(new Ataque("Spore", "Grama", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Flash", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Psywave", "Psíquico", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Splash", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Acid Armor", "Veneno", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Crabhammer", "Água", 100, 90));
-		ataques.add(new Ataque("Explosion", "Normal", 250, 100)); // Ataque de auto-destruição
-		ataques.add(new Ataque("Fury Swipes", "Normal", 18, 80));
-		ataques.add(new Ataque("Bonemerang", "Terra", 50, 90));
-		ataques.add(new Ataque("Rest", "Psíquico", 0, 100)); // Ataque de status
+		ataques.add(new Ataque("Brick Break", "Lutador", 75, 100));
+		ataques.add(new Ataque("Cross Chop", "Lutador", 100, 80));
+		ataques.add(new Ataque("Dynamic Punch", "Lutador", 100, 50));
+		ataques.add(new Ataque("Focus Blast", "Lutador", 120, 70));
+		ataques.add(new Ataque("Close Combat", "Lutador", 120, 100));
+
+		// Ataques de Veneno
+		ataques.add(new Ataque("Poison Sting", "Veneno", 15, 100));
+		ataques.add(new Ataque("Sludge", "Veneno", 65, 100));
+		ataques.add(new Ataque("Sludge Bomb", "Veneno", 90, 100));
+		ataques.add(new Ataque("Acid", "Veneno", 40, 100));
+		ataques.add(new Ataque("Toxic", "Veneno", 0, 90)); // Ataque de status
+		ataques.add(new Ataque("Venoshock", "Veneno", 65, 100));
+		ataques.add(new Ataque("Gunk Shot", "Veneno", 120, 80));
+
+		// Ataques de Terra
+		ataques.add(new Ataque("Earthquake", "Terra", 100, 100));
+		ataques.add(new Ataque("Dig", "Terra", 80, 100));
+		ataques.add(new Ataque("Bone Club", "Terra", 65, 85));
+		ataques.add(new Ataque("Bulldoze", "Terra", 60, 100));
+		ataques.add(new Ataque("Sand Tomb", "Terra", 35, 85));
+		ataques.add(new Ataque("Drill Run", "Terra", 80, 95));
+		ataques.add(new Ataque("Earth Power", "Terra", 90, 100));
+
+		// Ataques de Pedra
 		ataques.add(new Ataque("Rock Throw", "Pedra", 50, 90));
-		ataques.add(new Ataque("Sharpen", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Conversion", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Tri Attack", "Normal", 80, 100));
-		ataques.add(new Ataque("Super Fang", "Normal", 0, 90)); // Ataque de status
-		ataques.add(new Ataque("Slash", "Normal", 70, 100));
-		ataques.add(new Ataque("Substitute", "Normal", 0, 100)); // Ataque de status
-		ataques.add(new Ataque("Struggle", "Normal", 50, 100)); // Ataque de último recurso
+		ataques.add(new Ataque("Rock Slide", "Pedra", 75, 90));
+		ataques.add(new Ataque("Stone Edge", "Pedra", 100, 80));
+		ataques.add(new Ataque("Ancient Power", "Pedra", 60, 100));
+		ataques.add(new Ataque("Power Gem", "Pedra", 80, 100));
+		ataques.add(new Ataque("Rock Tomb", "Pedra", 60, 95));
+		ataques.add(new Ataque("Head Smash", "Pedra", 150, 80));
+
+		// Ataques de Psíquico
+		ataques.add(new Ataque("Confusion", "Psíquico", 50, 100));
+		ataques.add(new Ataque("Psychic", "Psíquico", 90, 100));
+		ataques.add(new Ataque("Psybeam", "Psíquico", 65, 100));
+		ataques.add(new Ataque("Future Sight", "Psíquico", 120, 100));
+		ataques.add(new Ataque("Zen Headbutt", "Psíquico", 80, 90));
+		ataques.add(new Ataque("Extrasensory", "Psíquico", 80, 100));
+		ataques.add(new Ataque("Psycho Cut", "Psíquico", 70, 100));
+
+		// Ataques de Inseto
+		ataques.add(new Ataque("Bug Bite", "Inseto", 60, 100));
+		ataques.add(new Ataque("Pin Missile", "Inseto", 25, 95));
+		ataques.add(new Ataque("X-Scissor", "Inseto", 80, 100));
+		ataques.add(new Ataque("Megahorn", "Inseto", 120, 85));
+		ataques.add(new Ataque("Signal Beam", "Inseto", 75, 100));
+		ataques.add(new Ataque("U-turn", "Inseto", 70, 100));
+		ataques.add(new Ataque("Bug Buzz", "Inseto", 90, 100));
+
+		// Ataques de Fantasma
+		ataques.add(new Ataque("Lick", "Fantasma", 30, 100));
+		ataques.add(new Ataque("Shadow Ball", "Fantasma", 80, 100));
+		ataques.add(new Ataque("Shadow Claw", "Fantasma", 70, 100));
+		ataques.add(new Ataque("Night Shade", "Fantasma", 0, 100)); // Ataque de status
+		ataques.add(new Ataque("Hex", "Fantasma", 65, 100));
+		ataques.add(new Ataque("Phantom Force", "Fantasma", 90, 100));
+		ataques.add(new Ataque("Shadow Sneak", "Fantasma", 40, 100));
+
+		// Ataques de Dragão
+		ataques.add(new Ataque("Dragon Claw", "Dragão", 80, 100));
+		ataques.add(new Ataque("Dragon Breath", "Dragão", 60, 100));
+		ataques.add(new Ataque("Dragon Pulse", "Dragão", 85, 100));
+		ataques.add(new Ataque("Outrage", "Dragão", 120, 100));
+		ataques.add(new Ataque("Dragon Tail", "Dragão", 60, 90));
+		ataques.add(new Ataque("Draco Meteor", "Dragão", 130, 90));
+		ataques.add(new Ataque("Dragon Rush", "Dragão", 100, 75));
+
+		// Ataques de Dark
+		ataques.add(new Ataque("Bite", "Dark", 60, 100));
+		ataques.add(new Ataque("Crunch", "Dark", 80, 100));
+		ataques.add(new Ataque("Dark Pulse", "Dark", 80, 100));
+		ataques.add(new Ataque("Night Slash", "Dark", 70, 100));
+		ataques.add(new Ataque("Sucker Punch", "Dark", 70, 100));
+		ataques.add(new Ataque("Foul Play", "Dark", 95, 100));
+		ataques.add(new Ataque("Knock Off", "Dark", 65, 100));
+
+		// Ataques de Aço
+		ataques.add(new Ataque("Iron Tail", "Aço", 100, 75));
+		ataques.add(new Ataque("Metal Claw", "Aço", 50, 95));
+		ataques.add(new Ataque("Flash Cannon", "Aço", 80, 100));
+		ataques.add(new Ataque("Iron Head", "Aço", 80, 100));
+		ataques.add(new Ataque("Steel Wing", "Aço", 70, 90));
+		ataques.add(new Ataque("Meteor Mash", "Aço", 90, 90));
+		ataques.add(new Ataque("Bullet Punch", "Aço", 40, 100));
+
+		// Ataques de Fada
+		ataques.add(new Ataque("Dazzling Gleam", "Fada", 80, 100));
+		ataques.add(new Ataque("Moonblast", "Fada", 95, 100));
+		ataques.add(new Ataque("Play Rough", "Fada", 90, 90));
+		ataques.add(new Ataque("Fairy Wind", "Fada", 40, 100));
+		ataques.add(new Ataque("Draining Kiss", "Fada", 50, 100));
+		ataques.add(new Ataque("Misty Explosion", "Fada", 100, 100));
+		ataques.add(new Ataque("Spirit Break", "Fada", 75, 100));
+
+		// Ataques de Voador
+		ataques.add(new Ataque("Wing Attack", "Voador", 60, 100));
+		ataques.add(new Ataque("Drill Peck", "Voador", 80, 100));
+		ataques.add(new Ataque("Aerial Ace", "Voador", 60, 100));
+		ataques.add(new Ataque("Air Slash", "Voador", 75, 95));
+		ataques.add(new Ataque("Brave Bird", "Voador", 120, 100));
+		ataques.add(new Ataque("Hurricane", "Voador", 110, 70));
+		ataques.add(new Ataque("Sky Attack", "Voador", 140, 90));
 	}
 
 	public void addPokemons() {
-		// Adicionando todos os 151 Pokémon da primeira geração com seus ataques
-		pokemonDisponiveis.add(new Pokemon(1, "Bulbasaur", "Grama/Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(4), ataques.get(25), ataques.get(21)})); // Tackle, Vine Whip, Leech Seed, Razor Leaf
-		pokemonDisponiveis.add(new Pokemon(2, "Ivysaur", "Grama/Veneno", 16, new Ataque[]{ataques.get(0), ataques.get(4), ataques.get(25), ataques.get(21)})); // Tackle, Vine Whip, Leech Seed, Razor Leaf
-		pokemonDisponiveis.add(new Pokemon(3, "Venusaur", "Grama/Veneno", 32, new Ataque[]{ataques.get(0), ataques.get(4), ataques.get(25), ataques.get(10)})); // Tackle, Vine Whip, Leech Seed, Solar Beam
+		// Adicionando Pokémon com ataques baseados no nível e tipo
+		pokemonDisponiveis.add(new Pokemon(1, "Bulbasaur", "Grama/Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(24)})); // Tackle, Vine Whip
+		pokemonDisponiveis.add(new Pokemon(2, "Ivysaur", "Grama/Veneno", 16, new Ataque[]{ataques.get(24), ataques.get(25), ataques.get(26)})); // Vine Whip, Razor Leaf, Leech Seed
+		pokemonDisponiveis.add(new Pokemon(3, "Venusaur", "Grama/Veneno", 32, new Ataque[]{ataques.get(25), ataques.get(26), ataques.get(27)})); // Razor Leaf, Solar Beam, Leech Seed
 
-		pokemonDisponiveis.add(new Pokemon(4, "Charmander", "Fogo", 5, new Ataque[]{ataques.get(0), ataques.get(2), ataques.get(27), ataques.get(8)})); // Tackle, Ember, Fire Spin, Flamethrower
-		pokemonDisponiveis.add(new Pokemon(5, "Charmeleon", "Fogo", 16, new Ataque[]{ataques.get(0), ataques.get(2), ataques.get(27), ataques.get(8)})); // Tackle, Ember, Fire Spin, Flamethrower
-		pokemonDisponiveis.add(new Pokemon(6, "Charizard", "Fogo/Voador", 36, new Ataque[]{ataques.get(0), ataques.get(2), ataques.get(27), ataques.get(19)})); // Tackle, Ember, Fire Spin, Fire Blast
+		pokemonDisponiveis.add(new Pokemon(4, "Charmander", "Fogo", 5, new Ataque[]{ataques.get(0), ataques.get(10)})); // Tackle, Ember
+		pokemonDisponiveis.add(new Pokemon(5, "Charmeleon", "Fogo", 16, new Ataque[]{ataques.get(10), ataques.get(11), ataques.get(12)})); // Ember, Flamethrower, Fire Spin
+		pokemonDisponiveis.add(new Pokemon(6, "Charizard", "Fogo/Voador", 36, new Ataque[]{ataques.get(11), ataques.get(12), ataques.get(13)})); // Flamethrower, Fire Blast, Heat Wave
 
-		pokemonDisponiveis.add(new Pokemon(7, "Squirtle", "Água", 5, new Ataque[]{ataques.get(0), ataques.get(3), ataques.get(20), ataques.get(9)})); // Tackle, Water Gun, Bubble Beam, Hydro Pump
-		pokemonDisponiveis.add(new Pokemon(8, "Wartortle", "Água", 16, new Ataque[]{ataques.get(0), ataques.get(3), ataques.get(20), ataques.get(9)})); // Tackle, Water Gun, Bubble Beam, Hydro Pump
-		pokemonDisponiveis.add(new Pokemon(9, "Blastoise", "Água", 36, new Ataque[]{ataques.get(0), ataques.get(3), ataques.get(20), ataques.get(9)})); // Tackle, Water Gun, Bubble Beam, Hydro Pump
+		pokemonDisponiveis.add(new Pokemon(7, "Squirtle", "Água", 5, new Ataque[]{ataques.get(0), ataques.get(17)})); // Tackle, Water Gun
+		pokemonDisponiveis.add(new Pokemon(8, "Wartortle", "Água", 16, new Ataque[]{ataques.get(17), ataques.get(18), ataques.get(19)})); // Water Gun, Bubble Beam, Hydro Pump
+		pokemonDisponiveis.add(new Pokemon(9, "Blastoise", "Água", 36, new Ataque[]{ataques.get(18), ataques.get(19), ataques.get(20)})); // Bubble Beam, Hydro Pump, Waterfall
 
-		pokemonDisponiveis.add(new Pokemon(10, "Caterpie", "Inseto", 3, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
-		pokemonDisponiveis.add(new Pokemon(11, "Metapod", "Inseto", 7, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
-		pokemonDisponiveis.add(new Pokemon(12, "Butterfree", "Inseto/Voador", 10, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
+		pokemonDisponiveis.add(new Pokemon(25, "Pikachu", "Elétrico", 8, new Ataque[]{ataques.get(0), ataques.get(31), ataques.get(32)})); // Tackle, Thunder Shock, Thunderbolt
+		pokemonDisponiveis.add(new Pokemon(26, "Raichu", "Elétrico", 30, new Ataque[]{ataques.get(32), ataques.get(33), ataques.get(34)})); // Thunderbolt, Thunder Punch, Volt Tackle
 
-		pokemonDisponiveis.add(new Pokemon(13, "Weedle", "Inseto/Veneno", 3, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
-		pokemonDisponiveis.add(new Pokemon(14, "Kakuna", "Inseto/Veneno", 7, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
-		pokemonDisponiveis.add(new Pokemon(15, "Beedrill", "Inseto/Veneno", 10, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, String Shot, Bug Bite, Harden
+		// Jolteon e Zapdos com os mesmos ataques
+		pokemonDisponiveis.add(new Pokemon(135, "Jolteon", "Elétrico", 5, new Ataque[]{ataques.get(31), ataques.get(32), ataques.get(34)})); // Thunder Shock, Thunderbolt, Volt Tackle
+		pokemonDisponiveis.add(new Pokemon(145, "Zapdos", "Elétrico/Voador", 5, new Ataque[]{ataques.get(31), ataques.get(32), ataques.get(34)})); // Thunder Shock, Thunderbolt, Volt Tackle
 
-		pokemonDisponiveis.add(new Pokemon(16, "Pidgey", "Normal/Voador", 3, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Gust, Quick Attack, Sand Attack
-		pokemonDisponiveis.add(new Pokemon(17, "Pidgeotto", "Normal/Voador", 18, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Gust, Quick Attack, Sand Attack
-		pokemonDisponiveis.add(new Pokemon(18, "Pidgeot", "Normal/Voador", 36, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Gust, Quick Attack, Sand Attack
+		// Adicionando mais Pokémon com diversidade de ataques
+		pokemonDisponiveis.add(new Pokemon(58, "Growlithe", "Fogo", 5, new Ataque[]{ataques.get(0), ataques.get(10)})); // Tackle, Ember
+		pokemonDisponiveis.add(new Pokemon(59, "Arcanine", "Fogo", 30, new Ataque[]{ataques.get(11), ataques.get(12), ataques.get(13)})); // Flamethrower, Fire Blast, Heat Wave
 
-		pokemonDisponiveis.add(new Pokemon(19, "Rattata", "Normal", 3, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Tail Whip, Quick Attack, Hyper Fang
-		pokemonDisponiveis.add(new Pokemon(20, "Raticate", "Normal", 20, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Tail Whip, Quick Attack, Hyper Fang
+		pokemonDisponiveis.add(new Pokemon(63, "Abra", "Psíquico", 5, new Ataque[]{ataques.get(0), ataques.get(50)})); // Tackle, Confusion
+		pokemonDisponiveis.add(new Pokemon(64, "Kadabra", "Psíquico", 16, new Ataque[]{ataques.get(50), ataques.get(51), ataques.get(52)})); // Confusion, Psybeam, Psychic
+		pokemonDisponiveis.add(new Pokemon(65, "Alakazam", "Psíquico", 36, new Ataque[]{ataques.get(51), ataques.get(52), ataques.get(53)})); // Psybeam, Psychic, Future Sight
 
-		pokemonDisponiveis.add(new Pokemon(21, "Spearow", "Normal/Voador", 4, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Peck, Leer, Fury Attack
-		pokemonDisponiveis.add(new Pokemon(22, "Fearow", "Normal/Voador", 20, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Peck, Leer, Fury Attack
+		pokemonDisponiveis.add(new Pokemon(66, "Machop", "Lutador", 5, new Ataque[]{ataques.get(0), ataques.get(40)})); // Tackle, Double Kick
+		pokemonDisponiveis.add(new Pokemon(67, "Machoke", "Lutador", 28, new Ataque[]{ataques.get(40), ataques.get(41), ataques.get(42)})); // Double Kick, Brick Break, Cross Chop
+		pokemonDisponiveis.add(new Pokemon(68, "Machamp", "Lutador", 36, new Ataque[]{ataques.get(41), ataques.get(42), ataques.get(43)})); // Brick Break, Cross Chop, Dynamic Punch
 
-		pokemonDisponiveis.add(new Pokemon(23, "Ekans", "Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Wrap, Poison Sting, Bite
-		pokemonDisponiveis.add(new Pokemon(24, "Arbok", "Veneno", 22, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Wrap, Poison Sting, Bite
+		// Gengar corrigido (Fantasma/Veneno)
+		pokemonDisponiveis.add(new Pokemon(92, "Gastly", "Fantasma/Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(60)})); // Tackle, Lick
+		pokemonDisponiveis.add(new Pokemon(93, "Haunter", "Fantasma/Veneno", 25, new Ataque[]{ataques.get(60), ataques.get(61), ataques.get(62)})); // Lick, Shadow Ball, Shadow Claw
+		pokemonDisponiveis.add(new Pokemon(94, "Gengar", "Fantasma/Veneno", 36, new Ataque[]{ataques.get(61), ataques.get(62), ataques.get(63)})); // Shadow Ball, Shadow Claw, Night Shade
 
-		pokemonDisponiveis.add(new Pokemon(25, "Pikachu", "Elétrico", 8, new Ataque[]{ataques.get(0), ataques.get(5), ataques.get(11), ataques.get(6)})); // Tackle, Thunder Shock, Thunderbolt, Quick Attack
-		pokemonDisponiveis.add(new Pokemon(26, "Raichu", "Elétrico", 30, new Ataque[]{ataques.get(0), ataques.get(5), ataques.get(11), ataques.get(6)})); // Tackle, Thunder Shock, Thunderbolt, Quick Attack
+		pokemonDisponiveis.add(new Pokemon(147, "Dratini", "Dragão", 5, new Ataque[]{ataques.get(0), ataques.get(70)})); // Tackle, Dragon Breath
+		pokemonDisponiveis.add(new Pokemon(148, "Dragonair", "Dragão", 30, new Ataque[]{ataques.get(70), ataques.get(71), ataques.get(72)})); // Dragon Breath, Dragon Pulse, Outrage
+		pokemonDisponiveis.add(new Pokemon(149, "Dragonite", "Dragão/Voador", 55, new Ataque[]{ataques.get(71), ataques.get(72), ataques.get(73)})); // Dragon Pulse, Outrage, Dragon Rush
 
-		pokemonDisponiveis.add(new Pokemon(27, "Sandshrew", "Terra", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Sand Attack, Slash
-		pokemonDisponiveis.add(new Pokemon(28, "Sandslash", "Terra", 22, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Sand Attack, Slash
+		// Adicionando mais Pokémon com ataques únicos
+		pokemonDisponiveis.add(new Pokemon(150, "Mewtwo", "Psíquico", 5, new Ataque[]{ataques.get(50), ataques.get(51), ataques.get(52)})); // Confusion, Psybeam, Psychic
+		pokemonDisponiveis.add(new Pokemon(151, "Mew", "Psíquico", 5, new Ataque[]{ataques.get(50), ataques.get(51), ataques.get(52)})); // Confusion, Psybeam, Psychic
 
-		pokemonDisponiveis.add(new Pokemon(29, "Nidoran♀", "Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Tail Whip, Double Kick
-		pokemonDisponiveis.add(new Pokemon(30, "Nidorina", "Veneno", 16, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Tail Whip, Double Kick
-		pokemonDisponiveis.add(new Pokemon(31, "Nidoqueen", "Veneno/Terra", 36, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Tail Whip, Double Kick
-
-		pokemonDisponiveis.add(new Pokemon(32, "Nidoran♂", "Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Peck, Focus Energy, Double Kick
-		pokemonDisponiveis.add(new Pokemon(33, "Nidorino", "Veneno", 16, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Peck, Focus Energy, Double Kick
-		pokemonDisponiveis.add(new Pokemon(34, "Nidoking", "Veneno/Terra", 36, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Peck, Focus Energy, Double Kick
-
-		pokemonDisponiveis.add(new Pokemon(35, "Clefairy", "Normal", 10, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Growl, Pound, Sing
-		pokemonDisponiveis.add(new Pokemon(36, "Clefable", "Normal", 30, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Growl, Pound, Sing
-
-		pokemonDisponiveis.add(new Pokemon(37, "Vulpix", "Fogo", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Tail Whip, Ember, Quick Attack
-		pokemonDisponiveis.add(new Pokemon(38, "Ninetales", "Fogo", 30, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Tail Whip, Ember, Quick Attack
-
-		pokemonDisponiveis.add(new Pokemon(39, "Jigglypuff", "Normal", 7, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Sing, Pound, Disable
-		pokemonDisponiveis.add(new Pokemon(40, "Wigglytuff", "Normal", 30, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Sing, Pound, Disable
-
-		pokemonDisponiveis.add(new Pokemon(41, "Zubat", "Veneno/Voador", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Leech Life, Supersonic, Astonish
-		pokemonDisponiveis.add(new Pokemon(42, "Golbat", "Veneno/Voador", 22, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Leech Life, Supersonic, Astonish
-
-		pokemonDisponiveis.add(new Pokemon(43, "Oddish", "Grama/Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Absorb, Sweet Scent, Acid
-		pokemonDisponiveis.add(new Pokemon(44, "Gloom", "Grama/Veneno", 21, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Absorb, Sweet Scent, Acid
-		pokemonDisponiveis.add(new Pokemon(45, "Vileplume", "Grama/Veneno", 36, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Absorb, Sweet Scent, Acid
-
-		pokemonDisponiveis.add(new Pokemon(46, "Paras", "Inseto/Grama", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Stun Spore, Leech Life
-		pokemonDisponiveis.add(new Pokemon(47, "Parasect", "Inseto/Grama", 24, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Stun Spore, Leech Life
-
-		pokemonDisponiveis.add(new Pokemon(48, "Venonat", "Inseto/Veneno", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Disable, Supersonic, Confusion
-		pokemonDisponiveis.add(new Pokemon(49, "Venomoth", "Inseto/Veneno", 22, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Disable, Supersonic, Confusion
-
-		pokemonDisponiveis.add(new Pokemon(50, "Diglett", "Terra", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Sand Attack, Dig
-		pokemonDisponiveis.add(new Pokemon(51, "Dugtrio", "Terra", 26, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Sand Attack, Dig
-
-		pokemonDisponiveis.add(new Pokemon(52, "Meowth", "Normal", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Growl, Bite
-		pokemonDisponiveis.add(new Pokemon(53, "Persian", "Normal", 28, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Growl, Bite
-
-		pokemonDisponiveis.add(new Pokemon(54, "Psyduck", "Água", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Tail Whip, Water Gun
-		pokemonDisponiveis.add(new Pokemon(55, "Golduck", "Água", 33, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Scratch, Tail Whip, Water Gun
-
-		pokemonDisponiveis.add(new Pokemon(56, "Mankey", "Lutador", 5, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Low Kick, Karate Chop, Fury Swipes
-		pokemonDisponiveis.add(new Pokemon(57, "Primeape", "Lutador", 28, new Ataque[]{ataques.get(0), ataques.get(1), ataques.get(34), ataques.get(33)})); // Tackle, Low Kick, Karate Chop, Fury Swipes
 		Collections.shuffle(pokemonDisponiveis);
 	}
+
 }
