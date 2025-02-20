@@ -23,6 +23,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+
+    // Dependência do SQLite JDBC (adicionada manualmente)
+    implementation files('src/main/java/conexaoBanco/sqlite-jdbc-3.47.1.0.jar')
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

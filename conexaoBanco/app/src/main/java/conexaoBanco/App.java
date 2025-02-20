@@ -3,13 +3,24 @@
  */
 package conexaoBanco;
 
+import java.sql.Connection;
+
 public class App {
 
-	public String getGreeting() {
-		return "Hello World!";
-	}
-
 	public static void main(String[] args) {
-		System.out.println(new App().getGreeting());
+		ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+		
+		//Criar conexão;
+		Connection conexao = conexaoSQLite.conectar();
+		
+		//Criando a tabela;
+		conexaoSQLite.criarTabelaUsuarios(conexao);
+		
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new Main(conexaoSQLite, conexao).setVisible(true);
+			}
+		});
+		
 	}
 }
