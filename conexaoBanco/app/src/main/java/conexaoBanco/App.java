@@ -4,23 +4,15 @@
 package conexaoBanco;
 
 import java.sql.Connection;
+import javax.swing.SwingUtilities;
 
 public class App {
 
 	public static void main(String[] args) {
-		ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
-		
-		//Criar conexão;
-		Connection conexao = conexaoSQLite.conectar();
-		
-		//Criando a tabela;
-		conexaoSQLite.criarTabelaUsuarios(conexao);
-		
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new Main(conexaoSQLite, conexao).setVisible(true);
-			}
+		// Cria e exibe a interface gráfica na EDT
+		SwingUtilities.invokeLater(() -> {
+			Main main = new Main(); // Passa a conexão para o construtor
+			main.setVisible(true);
 		});
-		
 	}
 }

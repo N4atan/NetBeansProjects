@@ -17,12 +17,13 @@ import java.sql.Statement; // Importa a classe Statement para executar comandos 
 import java.sql.PreparedStatement; // A classe PreparedStatement é usada para executar uma consulta SQL com parâmetros substituíveis.
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexaoSQLite {
 
 	// Método para conectar ao banco de dados
-	public Connection conectar() {
+	public static Connection conectar() {
 		Connection conexao = null; // Declara uma variável para armazenar a conexão
 		String url = "jdbc:sqlite:usuariosNovo.db"; // Define o caminho do banco de dados SQLite
 
@@ -39,7 +40,7 @@ public class ConexaoSQLite {
 	}
 
 	// Método para fechar a conexão com o banco de dados
-	public void desconectar(Connection conexao) {
+	public static void desconectar(Connection conexao) {
 		try {
 			// Verifica se a conexão não é nula (ou seja, se está aberta)
 			if (conexao != null) {
@@ -73,6 +74,10 @@ public class ConexaoSQLite {
 
 	// Definimos o método inserirUsuario, que recebe uma conexão com o banco de dados (conexao),
 	// um nome de usuário (nome) e um email de usuário (email).
+	public static void inserirUsuario2(Connection conexao, String nome, String email) {
+		
+	}
+	
 	public static void inserirUsuario(Connection conexao, String nome, String email) {
 
 		// A string sql contém o comando SQL que será executado no banco de dados. 
@@ -101,6 +106,25 @@ public class ConexaoSQLite {
 		}
 	}
 
+	public static boolean deletarUsuario(Connection conexao, int idUsuario) {
+		// Define o comando SQL para deletar um usuário com base no ID
+		String sql = "DELETE FROM usuarios WHERE id = ?";
+
+		try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+			// Define o valor do parâmetro (idUsuario) no comando SQL
+			pstmt.setInt(1, idUsuario); // Usamos setInt porque idUsuario é um int
+
+			// Executa o comando SQL
+			pstmt.executeUpdate();
+
+			System.out.println("Usuário deletado com sucesso!");
+			return true;
+		} catch (Exception e) {
+			System.out.println("Erro ao deletar usuário: " + e.getMessage());  // Exibe a mensagem de erro.
+			return false;
+		}
+	}
+
 	public static ArrayList<User> listarUsuarios(Connection conexao) {
 
 		// Criação de uma String para armazenar os resultados
@@ -124,5 +148,55 @@ public class ConexaoSQLite {
 
 		// Retorna o texto com os dados dos usuários
 		return listaUsers;
+	}
+
+	public static User getUsuario(Connection conexao, int idUsuario) {
+		// Define a query SQL para buscar um usuário pelo ID
+		String sql = "SELECT id, nome, email FROM usuarios WHERE id = ?";
+
+		try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+			// Define o parâmetro da query (idUsuario)
+			pstmt.setInt(1, idUsuario);
+
+			// Executa a query e obtém o ResultSet
+			try (ResultSet rs = pstmt.executeQuery()) {
+				// Verifica se há resultados
+				if (rs.next()) {
+					// Cria e retorna um objeto User com os dados do ResultSet
+					return new User(
+							rs.getInt("id"),
+							rs.getString("nome"),
+							rs.getString("email")
+					);
+				} else {
+					// Se não houver resultados, retorna null
+					System.out.println("Nenhum usuário encontrado com o ID: " + idUsuario);
+					return null;
+				}
+			}
+		} catch (SQLException e) {
+			// Trata erros de SQL
+			System.out.println("Erro ao buscar usuário: " + e.getMessage());
+			return null;
+		}
+	}
+
+	public static boolean atualizarUsuario(Connection conexao, User usuario) {
+		// Query SQL com placeholders (?)
+		String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE id = ?";
+
+		try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+			// Define os valores dos placeholders
+			pstmt.setString(1, usuario.nome); // Substitui o primeiro ? pelo nome
+			pstmt.setString(2, usuario.email); // Substitui o segundo ? pelo email
+			pstmt.setInt(3, usuario.id); // Substitui o terceiro ? pelo id
+
+			// Executa a query e verifica se alguma linha foi afetada
+			int rowsAffected = pstmt.executeUpdate();
+			return rowsAffected > 0; // Retorna true se pelo menos uma linha foi atualizada
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+			return false;
+		}
 	}
 }

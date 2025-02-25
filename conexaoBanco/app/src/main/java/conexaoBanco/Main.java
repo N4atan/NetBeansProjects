@@ -7,6 +7,7 @@ package conexaoBanco;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,9 +21,9 @@ public class Main extends javax.swing.JFrame {
 	/**
 	 * Creates new form Main
 	 */
-	public Main(ConexaoSQLite conexaoSQLite, Connection conexao) {
-		this.conexao = conexao;
-		this.conexaoSQLite = conexaoSQLite;
+	public Main() {
+		conexao = ConexaoSQLite.conectar();
+
 		initComponents();
 		attTableUsers();
 	}
@@ -41,13 +42,27 @@ public class Main extends javax.swing.JFrame {
         txtfNome = new javax.swing.JTextField();
         txtfEmail = new javax.swing.JTextField();
         btnAddUser = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jDialogAddUser1 = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtfNome2 = new javax.swing.JTextField();
+        txtfEmail2 = new javax.swing.JTextField();
+        btnUpdateUser = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtfId = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListaUsuarios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Adicionar = new javax.swing.JButton();
+        Deletar = new javax.swing.JButton();
+        Atualizar = new javax.swing.JButton();
 
         jDialogAddUser.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialogAddUser.setMinimumSize(new java.awt.Dimension(200, 250));
+        jDialogAddUser.setAlwaysOnTop(true);
+        jDialogAddUser.setMinimumSize(new java.awt.Dimension(200, 324));
         jDialogAddUser.setSize(new java.awt.Dimension(200, 250));
 
         jLabel1.setText("Nome:");
@@ -61,6 +76,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Jersey 10", 0, 48)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("CREATE");
+
         javax.swing.GroupLayout jDialogAddUserLayout = new javax.swing.GroupLayout(jDialogAddUser.getContentPane());
         jDialogAddUser.getContentPane().setLayout(jDialogAddUserLayout);
         jDialogAddUserLayout.setHorizontalGroup(
@@ -72,13 +91,16 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtfNome)
                     .addComponent(txtfEmail)
-                    .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jDialogAddUserLayout.setVerticalGroup(
             jDialogAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogAddUserLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,29 +108,127 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addComponent(btnAddUser)
                 .addGap(16, 16, 16))
         );
 
+        jDialogAddUser1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialogAddUser1.setAlwaysOnTop(true);
+        jDialogAddUser1.setMinimumSize(new java.awt.Dimension(200, 324));
+        jDialogAddUser1.setSize(new java.awt.Dimension(216, 324));
+
+        jLabel5.setText("Nome:");
+
+        jLabel6.setText("Email:");
+
+        txtfNome2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfNome2ActionPerformed(evt);
+            }
+        });
+
+        txtfEmail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfEmail2ActionPerformed(evt);
+            }
+        });
+
+        btnUpdateUser.setText("Atualizar");
+        btnUpdateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateUserActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Jersey 10", 0, 48)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("UPDATE");
+
+        jLabel8.setText("Id:");
+
+        txtfId.setEditable(false);
+        txtfId.setFocusable(false);
+        txtfId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfIdActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogAddUser1Layout = new javax.swing.GroupLayout(jDialogAddUser1.getContentPane());
+        jDialogAddUser1.getContentPane().setLayout(jDialogAddUser1Layout);
+        jDialogAddUser1Layout.setHorizontalGroup(
+            jDialogAddUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAddUser1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogAddUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtfEmail2)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdateUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtfNome2)
+                    .addGroup(jDialogAddUser1Layout.createSequentialGroup()
+                        .addGroup(jDialogAddUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialogAddUser1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(0, 83, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jDialogAddUser1Layout.setVerticalGroup(
+            jDialogAddUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAddUser1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(44, 44, 44)
+                .addGroup(jDialogAddUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtfNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtfEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateUser)
+                .addGap(16, 16, 16))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 51, 51));
 
+        jLabel3.setFont(new java.awt.Font("DialogInput", 3, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 51));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("CRUD");
+        jLabel3.setAlignmentY(10.0F);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTableListaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -130,14 +250,33 @@ public class Main extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTableListaUsuarios.setCellSelectionEnabled(false);
+        jTableListaUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableListaUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableListaUsuariosKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableListaUsuarios);
         jTableListaUsuarios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Adicionar.setText("Adicionar ");
+        Adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AdicionarActionPerformed(evt);
+            }
+        });
+
+        Deletar.setText("Deletar");
+        Deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletarActionPerformed(evt);
+            }
+        });
+
+        Atualizar.setText("Atualizar");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
             }
         });
 
@@ -147,22 +286,27 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(Adicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                        .addComponent(Deletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Atualizar)))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(29, 29, 29)
+                .addContainerGap(126, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Adicionar)
+                    .addComponent(Deletar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Atualizar))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -175,7 +319,7 @@ public class Main extends javax.swing.JFrame {
 		String nome = txtfNome.getText();
 		String email = txtfEmail.getText();
 
-		conexaoSQLite.inserirUsuario(conexao, nome, email);
+		ConexaoSQLite.inserirUsuario(conexao, nome, email);
 		JOptionPane.showMessageDialog(null, "Usuário inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
 		txtfNome.setText("");
@@ -186,42 +330,158 @@ public class Main extends javax.swing.JFrame {
 		attTableUsers();
     }//GEN-LAST:event_btnAddUserActionPerformed
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-		// TODO add your handling code here:
-		// Verifica se a tecla "Z" foi pressionada
-
-    }//GEN-LAST:event_formKeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarActionPerformed
 		// TODO add your handling code here:
 		jDialogAddUser.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AdicionarActionPerformed
+
+    private void jTableListaUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableListaUsuariosKeyPressed
+		// TODO add your handling code here:
+		if (evt.getKeyCode() == evt.VK_DELETE) {
+			//Pegar a linha selecionada
+			int selectedRow = jTableListaUsuarios.getSelectedRow();
+
+			if (selectedRow != -1) {
+				int idUser = (int) jTableListaUsuarios.getValueAt(selectedRow, 0); //Pego o valor da celula que corresponde a linha tal x coluna tal
+
+				if (ConexaoSQLite.deletarUsuario(conexao, idUser)) {
+					JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro: Não foi possível deletar", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+
+				attTableUsers();
+			}
+		}
+    }//GEN-LAST:event_jTableListaUsuariosKeyPressed
+
+    private void DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarActionPerformed
+		// TODO add your handling code here:
+		JOptionPane.showMessageDialog(null, "Para deletar algum usuário, selecione \na linha correspondente e aperte 'Delete'", "Informação", JOptionPane.QUESTION_MESSAGE);
+    }//GEN-LAST:event_DeletarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+		// TODO add your handling code here:
+		ConexaoSQLite.desconectar(conexao);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserActionPerformed
+		int id = Integer.parseInt(txtfId.getText());
+		String nome = txtfNome2.getText();
+		String email = txtfEmail2.getText();
+
+		// Verifique os valores antes de atualizar
+		System.out.println("Nome: " + nome);
+		System.out.println("Email: " + email);
+
+		if (ConexaoSQLite.atualizarUsuario(conexao, new User(id, nome, email))) {
+			JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			jDialogAddUser1.dispose();
+			attTableUsers();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro: Algo deu errado!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+    }//GEN-LAST:event_btnUpdateUserActionPerformed
+
+    private void txtfEmail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfEmail2ActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_txtfEmail2ActionPerformed
+
+    private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+		// TODO add your handling code here:
+		int selectedRow = jTableListaUsuarios.getSelectedRow();
+
+		if (selectedRow != -1) {
+			int idUser = (int) jTableListaUsuarios.getValueAt(selectedRow, 0); //Pego o valor da celula que corresponde a linha tal x coluna tal
+
+			User usuario = ConexaoSQLite.getUsuario(conexao, idUser);
+			if (usuario != null) {
+				txtfId.setText("" + usuario.id);
+				txtfNome2.setText(usuario.nome);
+				txtfEmail2.setText(usuario.email);
+				jDialogAddUser1.setVisible(true);
+			} else {
+
+			}
+		}
+    }//GEN-LAST:event_AtualizarActionPerformed
+
+    private void txtfNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfNome2ActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_txtfNome2ActionPerformed
+
+    private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_txtfIdActionPerformed
 
 	/**
 	 * @param args the command line arguments
 	 */
+	public static void main(String args[]) {
+		/* Set the Nimbus look and feel */
+		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+		 */
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Windows".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
+		//</editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new Main().setVisible(true);
+			}
+		});
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Adicionar;
+    private javax.swing.JButton Atualizar;
+    private javax.swing.JButton Deletar;
     private javax.swing.JButton btnAddUser;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnUpdateUser;
     private javax.swing.JDialog jDialogAddUser;
+    private javax.swing.JDialog jDialogAddUser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListaUsuarios;
     private javax.swing.JTextField txtfEmail;
+    private javax.swing.JTextField txtfEmail2;
+    private javax.swing.JTextField txtfId;
     private javax.swing.JTextField txtfNome;
+    private javax.swing.JTextField txtfNome2;
     // End of variables declaration//GEN-END:variables
 
-	ConexaoSQLite conexaoSQLite;
 	Connection conexao;
 
 	public void attTableUsers() {
-		System.out.println(conexaoSQLite.listarUsuarios(conexao));
+		System.out.println(ConexaoSQLite.listarUsuarios(conexao));
 
 		// Recupera os dados dos usuários do banco de dados
-		ArrayList<User> listaUsuarios = conexaoSQLite.listarUsuarios(conexao);
+		ArrayList<User> listaUsuarios = ConexaoSQLite.listarUsuarios(conexao);
 
 		// Obtém o modelo da tabela
 		DefaultTableModel model = (DefaultTableModel) jTableListaUsuarios.getModel();
