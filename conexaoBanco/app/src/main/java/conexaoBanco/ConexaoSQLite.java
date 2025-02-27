@@ -71,12 +71,6 @@ public class ConexaoSQLite {
 			System.out.println("Erro ao criar tabela: " + e.getMessage()); // Exibe mensagem de erro
 		}
 	}
-
-	// Definimos o método inserirUsuario, que recebe uma conexão com o banco de dados (conexao),
-	// um nome de usuário (nome) e um email de usuário (email).
-	public static void inserirUsuario2(Connection conexao, String nome, String email) {
-		
-	}
 	
 	public static void inserirUsuario(Connection conexao, String nome, String email) {
 

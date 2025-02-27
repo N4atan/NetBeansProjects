@@ -231,6 +231,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTableListaUsuarios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableListaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -366,20 +367,27 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserActionPerformed
-		int id = Integer.parseInt(txtfId.getText());
-		String nome = txtfNome2.getText();
-		String email = txtfEmail2.getText();
+		boolean isEmptyNome = txtfNome2.getText().equals("") ? false : true;
+		boolean isEmptyEmail = txtfEmail2.getText().equals("") ? false : true;
 
-		// Verifique os valores antes de atualizar
-		System.out.println("Nome: " + nome);
-		System.out.println("Email: " + email);
+		if (isEmptyEmail && isEmptyNome) {
+			int id = Integer.parseInt(txtfId.getText());
+			String nome = txtfNome2.getText();
+			String email = txtfEmail2.getText();
 
-		if (ConexaoSQLite.atualizarUsuario(conexao, new User(id, nome, email))) {
-			JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-			jDialogAddUser1.dispose();
-			attTableUsers();
+			// Verifique os valores antes de atualizar
+			System.out.println("Nome: " + nome);
+			System.out.println("Email: " + email);
+
+			if (ConexaoSQLite.atualizarUsuario(conexao, new User(id, nome, email))) {
+				JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				jDialogAddUser1.dispose();
+				attTableUsers();
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro: Algo deu errado!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Erro: Algo deu errado!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Campos preenchidos de forma inválida!", "Aviso", JOptionPane.WARNING_MESSAGE);
 		}
     }//GEN-LAST:event_btnUpdateUserActionPerformed
 
@@ -403,6 +411,8 @@ public class Main extends javax.swing.JFrame {
 			} else {
 
 			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Selecione um usuário na tabela para editá-lo!", "Informação", JOptionPane.QUESTION_MESSAGE);
 		}
     }//GEN-LAST:event_AtualizarActionPerformed
 
