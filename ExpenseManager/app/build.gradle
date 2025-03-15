@@ -25,6 +25,10 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
 // Dependência do SQLite JDBC (adicionada manualmente)
     implementation files('src/main/java/ExpenseManager/model/sqlite-jdbc-3.47.1.0.jar')
+
+implementation 'org.kordamp.ikonli:ikonli-swing:12.3.1' // Módulo Swing do Ikonli
+    implementation 'org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1' // Pack de ícones FontAwesome
+    implementation 'org.kordamp.ikonli:ikonli-core:12.3.1' // Core do Ikonli (opcional, mas recomendado)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
