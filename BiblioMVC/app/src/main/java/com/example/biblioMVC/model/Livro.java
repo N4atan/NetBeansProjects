@@ -9,14 +9,13 @@ package com.example.biblioMVC.model;
  * @author emanu
  */
 public class Livro {
-
+	private int id;
 	private String titulo;
 	private String autor;
 	private int anoPublicacao;
 
 	// Construtor
 	public Livro(String titulo, String autor, int anoPublicacao) {
-		
 		this.titulo = titulo;
 		this.autor = autor;
 		this.anoPublicacao = anoPublicacao;
@@ -46,4 +45,14 @@ public class Livro {
 	public void setAnoPublicacao(int anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 }

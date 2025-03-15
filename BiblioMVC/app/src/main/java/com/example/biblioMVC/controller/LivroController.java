@@ -8,6 +8,7 @@ import com.example.biblioMVC.model.Livro;
 import com.example.biblioMVC.model.LivroDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,5 +36,18 @@ public class LivroController {
 
 	public ArrayList<Livro> listarLivros() {
 		return livroDAO.listarLivros();
+	}
+
+	public String removerLivro(String tituloLivro, String autorLivro) {
+		ArrayList<Livro> listaLivros = livroDAO.listarLivros();
+		
+		System.out.println(listaLivros.size());
+		
+		for (Livro livro : listaLivros) {
+			if (livro.getTitulo().equals(tituloLivro) && livro.getAutor().equals(autorLivro)) {
+				return livroDAO.deletarLivro(livro.getId()); // Agora realmente deleta
+			}
+		}
+		return "Livro não encontrado!";
 	}
 }

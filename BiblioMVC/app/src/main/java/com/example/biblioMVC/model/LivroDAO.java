@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LivroDAO {
 
@@ -41,11 +42,14 @@ public class LivroDAO {
 		try (PreparedStatement stmt = conexao.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
 			while (rs.next()) {
-				listaLivros.add(new Livro(
+				Livro newLivro = new Livro(
 						rs.getString("titulo"),
 						rs.getString("autor"),
-						rs.getInt("ano")
-				));
+						rs.getInt("ano"));
+				
+				newLivro.setId(rs.getInt("id"));	
+				
+				listaLivros.add(newLivro);
 			}
 
 		} catch (SQLException e) {
@@ -53,5 +57,24 @@ public class LivroDAO {
 		}
 
 		return listaLivros;
+	}
+
+	
+	public String deletarLivro(int idLivro) {
+		// Define o comando SQL para deletar um usuário com base no ID
+		String sql = "DELETE FROM livros WHERE id = ?";
+
+		try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+			// Define o valor do parâmetro (idUsuario) no comando SQL
+			pstmt.setInt(1, idLivro); // Usamos setInt porque idUsuario é um int
+
+			// Executa o comando SQL
+			pstmt.executeUpdate();
+
+			return "Livro deletado com sucesso!";
+			
+		} catch (SQLException e) {
+			return "Erro ao deletar Livro: " + e.getMessage();  // Exibe a mensagem de erro.
+		}
 	}
 }
