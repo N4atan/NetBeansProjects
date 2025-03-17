@@ -46,9 +46,9 @@ public class LivroDAO {
 						rs.getString("titulo"),
 						rs.getString("autor"),
 						rs.getInt("ano"));
-				
-				newLivro.setId(rs.getInt("id"));	
-				
+
+				newLivro.setId(rs.getInt("id"));
+
 				listaLivros.add(newLivro);
 			}
 
@@ -59,7 +59,6 @@ public class LivroDAO {
 		return listaLivros;
 	}
 
-	
 	public String deletarLivro(int idLivro) {
 		// Define o comando SQL para deletar um usuário com base no ID
 		String sql = "DELETE FROM livros WHERE id = ?";
@@ -72,9 +71,27 @@ public class LivroDAO {
 			pstmt.executeUpdate();
 
 			return "Livro deletado com sucesso!";
-			
+
 		} catch (SQLException e) {
 			return "Erro ao deletar Livro: " + e.getMessage();  // Exibe a mensagem de erro.
 		}
+	}
+
+	public boolean autualizarLivro(int idLivro, Livro livroDadosNovos) throws SQLException{
+		// Query SQL com placeholders (?)
+		String sql = "UPDATE livros SET titulo = ?, autor = ?, ano = ? WHERE id = ?";
+
+		PreparedStatement pstmt = conexao.prepareStatement(sql);
+		
+		pstmt.setString(1, livroDadosNovos.getTitulo()); 
+		pstmt.setString(2, livroDadosNovos.getAutor());
+		pstmt.setInt(3, livroDadosNovos.getAnoPublicacao());
+		
+		pstmt.setInt(4, idLivro);
+		
+		// Executa a query e verifica se alguma linha foi afetada
+		int rowsAffected = pstmt.executeUpdate();
+		return rowsAffected > 0; // Retorna true se pelo menos uma linha foi atualizada
+
 	}
 }

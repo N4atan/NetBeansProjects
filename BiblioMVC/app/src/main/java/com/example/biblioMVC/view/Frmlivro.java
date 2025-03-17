@@ -6,6 +6,7 @@ package com.example.biblioMVC.view;
 
 import com.example.biblioMVC.controller.LivroController;
 import com.example.biblioMVC.model.Livro;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,9 @@ public class Frmlivro extends javax.swing.JFrame {
 	 * Creates new form Frmlivro
 	 */
 	private final LivroController livroController;
+	private String tituloSelecionado;
+	private String autorSelecionado;
+	private int anoSelecionado;
 
 	public Frmlivro() {
 		initComponents();
@@ -36,6 +40,7 @@ public class Frmlivro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelCadastroLivro = new javax.swing.JPanel();
         inputTitulo = new javax.swing.JTextField();
@@ -55,7 +60,6 @@ public class Frmlivro extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         PanelDeletarLivro = new javax.swing.JPanel();
         tituloLbl1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         PanelTableLivros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,10 +67,16 @@ public class Frmlivro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BiblioMVC");
+        setBackground(new java.awt.Color(51, 51, 51));
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        PanelCadastroLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Livro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14))); // NOI18N
+        jTabbedPane1.setBackground(PanelTableLivros.getBackground());
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+
+        PanelCadastroLivro.setBackground(new java.awt.Color(51, 51, 51));
+        PanelCadastroLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Livro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         inputTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +84,10 @@ public class Frmlivro extends javax.swing.JFrame {
             }
         });
 
+        tituloLbl.setForeground(new java.awt.Color(255, 255, 255));
         tituloLbl.setText("Titulo:");
 
+        autorLbl.setForeground(new java.awt.Color(255, 255, 255));
         autorLbl.setText("Autor:");
 
         inputAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -84,14 +96,19 @@ public class Frmlivro extends javax.swing.JFrame {
             }
         });
 
+        anoLbl.setForeground(new java.awt.Color(255, 255, 255));
         anoLbl.setText("Ano:");
 
-        btnAdicionar.setBackground(new java.awt.Color(0, 204, 102));
-        btnAdicionar.setForeground(new java.awt.Color(51, 51, 51));
+        btnAdicionar.setBackground(new java.awt.Color(102, 102, 102));
+        btnAdicionar.setForeground(new java.awt.Color(0, 204, 102));
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.setBorderPainted(false);
         btnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAdicionarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdicionarMouseExited(evt);
             }
         });
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,14 +148,15 @@ public class Frmlivro extends javax.swing.JFrame {
                 .addComponent(anoLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btnAdicionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Adicionar", PanelCadastroLivro);
 
-        PanelAtualizarLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atualizar Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14))); // NOI18N
+        PanelAtualizarLivro.setBackground(new java.awt.Color(51, 51, 51));
+        PanelAtualizarLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atualizar Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         inputTituloAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,8 +164,10 @@ public class Frmlivro extends javax.swing.JFrame {
             }
         });
 
+        tituloLbl3.setForeground(new java.awt.Color(255, 255, 255));
         tituloLbl3.setText("Titulo:");
 
+        autorLbl3.setForeground(new java.awt.Color(255, 255, 255));
         autorLbl3.setText("Autor:");
 
         inputAutorAtt.addActionListener(new java.awt.event.ActionListener() {
@@ -156,17 +176,24 @@ public class Frmlivro extends javax.swing.JFrame {
             }
         });
 
+        anoLbl2.setForeground(new java.awt.Color(255, 255, 255));
         anoLbl2.setText("Ano:");
 
-        btnAtualizar.setBackground(new java.awt.Color(0, 102, 204));
-        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setBackground(new java.awt.Color(102, 102, 102));
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 0));
         btnAtualizar.setText("Atualizar");
-        btnAtualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAtualizar.setBorder(null);
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtualizar.setDefaultCapable(false);
         btnAtualizar.setDoubleBuffered(true);
+        btnAtualizar.setFocusPainted(false);
+        btnAtualizar.setContentAreaFilled(true);
         btnAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAtualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAtualizarMouseExited(evt);
             }
         });
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,29 +233,34 @@ public class Frmlivro extends javax.swing.JFrame {
                 .addComponent(anoLbl2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputAnoAtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Atualizar", PanelAtualizarLivro);
 
-        PanelDeletarLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exclusão de Livro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14))); // NOI18N
+        PanelDeletarLivro.setBackground(new java.awt.Color(51, 51, 51));
+        PanelDeletarLivro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exclusão de Livro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
+        tituloLbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tituloLbl1.setForeground(new java.awt.Color(255, 255, 255));
         tituloLbl1.setText("Como Funciona ?");
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 12)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 102, 102));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Para  deleta algum livro, apenas selecione qual deseja, e aperte a tecla \"Delete\".");
+        jTextArea1.setText("Para  deletar algum livro, apenas selecione qual deseja, e aperte a tecla \"Delete\".");
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(null);
+        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextArea1.setFocusable(false);
+        jTextArea1.setOpaque(false);
         jTextArea1.setRequestFocusEnabled(false);
-        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout PanelDeletarLivroLayout = new javax.swing.GroupLayout(PanelDeletarLivro);
         PanelDeletarLivro.setLayout(PanelDeletarLivroLayout);
@@ -237,27 +269,33 @@ public class Frmlivro extends javax.swing.JFrame {
             .addGroup(PanelDeletarLivroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelDeletarLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloLbl1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tituloLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDeletarLivroLayout.createSequentialGroup()
+                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         PanelDeletarLivroLayout.setVerticalGroup(
             PanelDeletarLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDeletarLivroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tituloLbl1)
+                .addComponent(tituloLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Excluir", PanelDeletarLivro);
 
+        PanelTableLivros.setBackground(new java.awt.Color(51, 51, 51));
         PanelTableLivros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Livros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OCR A Extended", 3, 18))); // NOI18N
+        jScrollPane1.setBackground(PanelTableLivros.getBackground());
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Livros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OCR A Extended", 3, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
         tableLivros.setAutoCreateRowSorter(true);
+        tableLivros.setBackground(new java.awt.Color(255, 255, 255));
+        tableLivros.setForeground(new java.awt.Color(0, 0, 0));
         tableLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -284,9 +322,15 @@ public class Frmlivro extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableLivros.setFocusable(false);
         tableLivros.setGridColor(new java.awt.Color(102, 102, 102));
         tableLivros.setShowGrid(false);
         tableLivros.setShowHorizontalLines(true);
+        tableLivros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableLivrosMouseClicked(evt);
+            }
+        });
         tableLivros.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tableLivrosKeyPressed(evt);
@@ -299,7 +343,7 @@ public class Frmlivro extends javax.swing.JFrame {
         PanelTableLivros.setLayout(PanelTableLivrosLayout);
         PanelTableLivrosLayout.setHorizontalGroup(
             PanelTableLivrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGap(0, 487, Short.MAX_VALUE)
             .addGroup(PanelTableLivrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanelTableLivrosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -316,25 +360,36 @@ public class Frmlivro extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelTableLivros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelTableLivros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -362,13 +417,18 @@ public class Frmlivro extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(null, "Sucesso: " + success, "Success", JOptionPane.INFORMATION_MESSAGE);
 			attTableLivros();
 
+			inputTitulo.setText("");
+			inputAutor.setText("");
+			inputAno.setText("");
+
 			//JOptionPane.showMessageDialog(null, "Ops!... Algo deu errado. \n" + success, "Error", JOptionPane.ERROR_MESSAGE);
 		}
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAdicionarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseEntered
 		// TODO add your handling code here:
-
+		btnAdicionar.setBackground(new java.awt.Color(0,204,102));
+		btnAdicionar.setForeground(new java.awt.Color(102,102,102));
     }//GEN-LAST:event_btnAdicionarMouseEntered
 
     private void inputTituloAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTituloAttActionPerformed
@@ -381,10 +441,26 @@ public class Frmlivro extends javax.swing.JFrame {
 
     private void btnAtualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtualizarMouseEntered
 		// TODO add your handling code here:
+		btnAtualizar.setBackground(new java.awt.Color(255, 255, 0));
+		btnAtualizar.setForeground(new java.awt.Color(102,102,102));
     }//GEN-LAST:event_btnAtualizarMouseEntered
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
 		// TODO add your handling code here:
+		String newTitle = inputTituloAtt.getText();
+		String newAutor = inputAutorAtt.getText();
+		String newAno = inputAnoAtt.getText();
+
+		if (newTitle.isEmpty() && newAutor.isEmpty() && newAno.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Aviso: Alguns dos campos está em branco!\nPreencha todos os campos!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+		} else {
+			String success = livroController.atualizarLivro(tituloSelecionado, autorSelecionado, newTitle, newAutor, newAno);
+
+			JOptionPane.showMessageDialog(null, success, "Success", JOptionPane.INFORMATION_MESSAGE);
+			attTableLivros();
+
+			//JOptionPane.showMessageDialog(null, "Ops!... Algo deu errado. \n" + success, "Error", JOptionPane.ERROR_MESSAGE);
+		}
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void tableLivrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableLivrosKeyPressed
@@ -396,23 +472,49 @@ public class Frmlivro extends javax.swing.JFrame {
 			if (selectedRow != -1) {
 				String tituloLivro = (String) tableLivros.getValueAt(selectedRow, 0); //Pego o valor da celula que corresponde a linha tal x coluna tal
 				String autorLivro = (String) tableLivros.getValueAt(selectedRow, 1);
-				
+
 				/*
 				System.out.println(tituloLivro);
 				System.out.println(autorLivro);
-				*/
-				
+				 */
 				String success = livroController.removerLivro(tituloLivro, autorLivro);
-				
+
 				JOptionPane.showMessageDialog(null, success, "Informando", JOptionPane.INFORMATION_MESSAGE);
 				attTableLivros();
 			}
 		}
     }//GEN-LAST:event_tableLivrosKeyPressed
 
+    private void tableLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLivrosMouseClicked
+		// TODO add your handling code here:
+		int linhaSelecionada = tableLivros.getSelectedRow();
+
+		if (linhaSelecionada != -1) {
+			tituloSelecionado = (String) tableLivros.getValueAt(linhaSelecionada, 0);
+			autorSelecionado = (String) tableLivros.getValueAt(linhaSelecionada, 1);
+			anoSelecionado = (int) tableLivros.getValueAt(linhaSelecionada, 2);
+
+			inputTituloAtt.setText(tituloSelecionado);
+			inputAutorAtt.setText(autorSelecionado);
+			inputAnoAtt.setText("" + anoSelecionado);
+		}
+    }//GEN-LAST:event_tableLivrosMouseClicked
+
+    private void btnAtualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtualizarMouseExited
+        // TODO add your handling code here:
+		btnAtualizar.setBackground(new java.awt.Color(102,102,102));
+		btnAtualizar.setForeground(new java.awt.Color(255, 255, 0));
+    }//GEN-LAST:event_btnAtualizarMouseExited
+
+    private void btnAdicionarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseExited
+        // TODO add your handling code here:
+		btnAdicionar.setForeground(new java.awt.Color(0,204,102));
+		btnAdicionar.setBackground(new java.awt.Color(102,102,102));
+    }//GEN-LAST:event_btnAdicionarMouseExited
+
 	/**
-		 * @param args the command line arguments
-		 */
+	 * @param args the command line arguments
+	 */
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
 		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -462,8 +564,8 @@ public class Frmlivro extends javax.swing.JFrame {
     private javax.swing.JTextField inputAutorAtt;
     private javax.swing.JTextField inputTitulo;
     private javax.swing.JTextField inputTituloAtt;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tableLivros;
@@ -489,5 +591,9 @@ public class Frmlivro extends javax.swing.JFrame {
 			// Adiciona a linha ao modelo da tabela
 			model.addRow(rowData);
 		}
+	}
+
+	private Color Color(int i, int i0, int i1) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 	}
 }
