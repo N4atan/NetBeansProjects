@@ -7,6 +7,7 @@ package com.example.biblioMVC.view;
 import com.example.biblioMVC.controller.LivroController;
 import com.example.biblioMVC.model.Livro;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +62,7 @@ public class Frmlivro extends javax.swing.JFrame {
         PanelDeletarLivro = new javax.swing.JPanel();
         tituloLbl1 = new javax.swing.JLabel();
         jTextArea1 = new javax.swing.JTextArea();
+        btnRemover = new javax.swing.JButton();
         PanelTableLivros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLivros = new javax.swing.JTable();
@@ -148,7 +150,7 @@ public class Frmlivro extends javax.swing.JFrame {
                 .addComponent(anoLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -233,7 +235,7 @@ public class Frmlivro extends javax.swing.JFrame {
                 .addComponent(anoLbl2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputAnoAtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -254,13 +256,31 @@ public class Frmlivro extends javax.swing.JFrame {
         jTextArea1.setForeground(new java.awt.Color(255, 102, 102));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Para  deletar algum livro, apenas selecione qual deseja, e aperte a tecla \"Delete\".");
+        jTextArea1.setText("Para  deletar algum livro, apenas selecione qual deseja, e aperte a tecla \"Delete\". Caso não funcione, use o botão abaixo.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setBorder(null);
         jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextArea1.setFocusable(false);
         jTextArea1.setOpaque(false);
         jTextArea1.setRequestFocusEnabled(false);
+
+        btnRemover.setBackground(new java.awt.Color(102, 102, 102));
+        btnRemover.setForeground(new java.awt.Color(255, 0, 0));
+        btnRemover.setText("Remover");
+        btnRemover.setBorderPainted(false);
+        btnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRemoverMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRemoverMouseExited(evt);
+            }
+        });
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelDeletarLivroLayout = new javax.swing.GroupLayout(PanelDeletarLivro);
         PanelDeletarLivro.setLayout(PanelDeletarLivroLayout);
@@ -272,7 +292,8 @@ public class Frmlivro extends javax.swing.JFrame {
                     .addComponent(tituloLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDeletarLivroLayout.createSequentialGroup()
                         .addGap(0, 2, Short.MAX_VALUE)
-                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelDeletarLivroLayout.setVerticalGroup(
@@ -282,7 +303,9 @@ public class Frmlivro extends javax.swing.JFrame {
                 .addComponent(tituloLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Excluir", PanelDeletarLivro);
@@ -465,10 +488,12 @@ public class Frmlivro extends javax.swing.JFrame {
 
     private void tableLivrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableLivrosKeyPressed
 		// TODO add your handling code here:
-		if (evt.getKeyCode() == evt.VK_DELETE) {
+		if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
 			//Pegar a linha selecionada
 			int selectedRow = tableLivros.getSelectedRow();
-
+			
+			System.out.println(""+selectedRow);
+			
 			if (selectedRow != -1) {
 				String tituloLivro = (String) tableLivros.getValueAt(selectedRow, 0); //Pego o valor da celula que corresponde a linha tal x coluna tal
 				String autorLivro = (String) tableLivros.getValueAt(selectedRow, 1);
@@ -511,6 +536,36 @@ public class Frmlivro extends javax.swing.JFrame {
 		btnAdicionar.setForeground(new java.awt.Color(0,204,102));
 		btnAdicionar.setBackground(new java.awt.Color(102,102,102));
     }//GEN-LAST:event_btnAdicionarMouseExited
+
+    private void btnRemoverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemoverMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverMouseEntered
+
+    private void btnRemoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemoverMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverMouseExited
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+		int selectedRow = tableLivros.getSelectedRow();
+			
+			System.out.println(""+selectedRow);
+			
+			if (selectedRow != -1) {
+				String tituloLivro = (String) tableLivros.getValueAt(selectedRow, 0); //Pego o valor da celula que corresponde a linha tal x coluna tal
+				String autorLivro = (String) tableLivros.getValueAt(selectedRow, 1);
+
+				/*
+				System.out.println(tituloLivro);
+				System.out.println(autorLivro);
+				 */
+				String success = livroController.removerLivro(tituloLivro, autorLivro);
+
+				JOptionPane.showMessageDialog(null, success, "Informando", JOptionPane.INFORMATION_MESSAGE);
+				attTableLivros();
+			}
+		
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -558,6 +613,7 @@ public class Frmlivro extends javax.swing.JFrame {
     private javax.swing.JLabel autorLbl3;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JTextField inputAno;
     private javax.swing.JTextField inputAnoAtt;
     private javax.swing.JTextField inputAutor;

@@ -140,7 +140,7 @@
                           <Component id="anoLbl" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="inputAno" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
                           <Component id="btnAdicionar" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -258,7 +258,7 @@
                           <Component id="anoLbl2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="inputAnoAtt" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
                           <Component id="btnAtualizar" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -365,6 +365,7 @@
                                   <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                                   <Component id="jTextArea1" min="-2" pref="137" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="btnRemover" alignment="0" pref="139" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -377,7 +378,9 @@
                           <Component id="tituloLbl1" min="-2" pref="28" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextArea1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="123" max="32767" attributes="0"/>
+                          <EmptySpace pref="100" max="32767" attributes="0"/>
+                          <Component id="btnRemover" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -409,7 +412,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Para  deletar algum livro, apenas selecione qual deseja, e aperte a tecla &quot;Delete&quot;."/>
+                    <Property name="text" type="java.lang.String" value="Para  deletar algum livro, apenas selecione qual deseja, e aperte a tecla &quot;Delete&quot;. Caso n&#xe3;o funcione, use o bot&#xe3;o abaixo."/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
@@ -421,6 +424,23 @@
                     <Property name="opaque" type="boolean" value="false"/>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnRemover">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="66" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Remover"/>
+                    <Property name="borderPainted" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRemoverMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRemoverMouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
