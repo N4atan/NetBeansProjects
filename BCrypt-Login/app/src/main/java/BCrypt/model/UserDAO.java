@@ -7,6 +7,7 @@ package BCrypt.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -130,6 +131,31 @@ public class UserDAO {
 		} catch(SQLException e){
 			this.error = e.getLocalizedMessage();
 			return null;
+		}
+	}
+	
+	public ArrayList<User> listUsers(){
+		String sql = """
+                                     SELECT * FROM users
+				""";
+		
+		ArrayList<User> listUsers = new ArrayList();
+		
+		try{
+			PreparedStatement pstmt = this.db.getConnection().prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				User user = new User(
+								rs.getString("user_email"),
+								""
+								);
+				user.setUserPasswordCrypt(rs.getString("user_password"));
+				listUsers.add(user);
+			}
+			return listUsers;
+		} catch (SQLException e){
+			return listUsers;
 		}
 	}
 }

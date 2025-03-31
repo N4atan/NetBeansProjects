@@ -6,6 +6,7 @@ package BCrypt.controler;
 
 import BCrypt.model.UserDAO;
 import BCrypt.model.User;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,5 +30,9 @@ public class UserControler {
 		userLogged = userDAO.getSingleUserByEmail(user);
 		
 		return userLogged != null ? null : this.userDAO.getError();
+	}
+	
+	public ArrayList<User> getAllUsers(){
+		return this.userDAO.listUsers();
 	}
 }
