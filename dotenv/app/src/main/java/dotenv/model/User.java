@@ -14,9 +14,22 @@ public class User {
 	private String user_email;
 	private String user_password;
 	private String user_passwordEncrypted;
+	public String getUser_name;
 	
 	public User(String user_email){
 		this.user_id = -1;
+		this.user_email = user_email;
+	}
+	
+	public User(int user_id, String user_name, String user_email, String user_passwordEncrypted){
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_email = user_email;
+		this.user_passwordEncrypted = user_passwordEncrypted;
+	}
+	
+	public User(String user_name, String user_email){
+		this.user_name = user_name;
 		this.user_email = user_email;
 	}
 
