@@ -43,6 +43,8 @@ public class UserController {
 		
 		User userLogged = UserDao.userGet(user);
 		
+		user.setUser_password(password);
+		
 		if(userLogged == null){
 			this.errorController = this.UserDao.getErrorDAO();
 			return null;
