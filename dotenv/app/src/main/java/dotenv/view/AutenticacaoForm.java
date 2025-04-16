@@ -4,12 +4,21 @@
  */
 package dotenv.view;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.google.common.io.FileWriteMode;
+
 import dotenv.controller.UserController;
 import dotenv.model.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.List;
 import java.awt.event.KeyEvent;
+import java.awt.geom.FlatteningPathIterator;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.JTextComponent;
 
@@ -29,10 +39,10 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 	/**
 	 * Creates new form AutenticacaoForm
 	 */
-	
 	private static final LineBorder RED_BORDER = new LineBorder(Color.RED, 1);
 	private static final UserController UserController = new UserController();
-	
+	File file = new File("src/temp/lastUserEmail.txt");
+
 	public AutenticacaoForm() {
 		initComponents();
 	}
@@ -69,6 +79,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         inputSenhaLogin = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         optLogin1 = new javax.swing.JLabel();
+        checkBoxRemember = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -82,6 +93,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Autenticação");
 
         PanelMain.setLayout(new java.awt.CardLayout());
 
@@ -187,15 +199,19 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(PanelRegisterLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelRegisterLayout.createSequentialGroup()
                                 .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(titleName)
-                                    .addComponent(inputNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelRegisterLayout.createSequentialGroup()
+                                        .addComponent(titleName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(83, 83, 83))
+                                    .addComponent(inputNome))
                                 .addGap(18, 18, 18)
                                 .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(titleLastName)
-                                    .addComponent(inputSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PanelRegisterLayout.createSequentialGroup()
+                                        .addComponent(titleLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(83, 83, 83))
+                                    .addComponent(inputSobrenome)))
                             .addComponent(optLogin)
                             .addGroup(PanelRegisterLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
@@ -206,13 +222,17 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                                         .addComponent(inputEmail))
                                     .addGroup(PanelRegisterLayout.createSequentialGroup()
                                         .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(titlePassword)
-                                            .addComponent(inputSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PanelRegisterLayout.createSequentialGroup()
+                                                .addComponent(titlePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(89, 89, 89))
+                                            .addComponent(inputSenha1))
                                         .addGap(18, 18, 18)
                                         .addGroup(PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(titlePassword2)
+                                            .addGroup(PanelRegisterLayout.createSequentialGroup()
+                                                .addComponent(titlePassword2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(35, 35, 35))
                                             .addComponent(inputSenha2))))))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
         PanelRegisterLayout.setVerticalGroup(
             PanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,6 +319,14 @@ public class AutenticacaoForm extends javax.swing.JFrame {
             }
         });
 
+        checkBoxRemember.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 12)); // NOI18N
+        checkBoxRemember.setText("Remember me?");
+        checkBoxRemember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxRememberActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLoginLayout = new javax.swing.GroupLayout(PanelLogin);
         PanelLogin.setLayout(PanelLoginLayout);
         PanelLoginLayout.setHorizontalGroup(
@@ -310,13 +338,18 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                     .addComponent(titleCard)
                     .addGroup(PanelLoginLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(PanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputEmailLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                        .addGroup(PanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputEmailLogin, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(optLogin1)
-                            .addComponent(titleEmail1)
-                            .addComponent(titlePassword1)
-                            .addComponent(inputSenhaLogin, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addGroup(PanelLoginLayout.createSequentialGroup()
+                                .addComponent(titleEmail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(281, 281, 281))
+                            .addGroup(PanelLoginLayout.createSequentialGroup()
+                                .addComponent(titlePassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(257, 257, 257))
+                            .addComponent(inputSenhaLogin, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkBoxRemember))))
+                .addGap(12, 12, 12))
         );
         PanelLoginLayout.setVerticalGroup(
             PanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +364,9 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                 .addComponent(titlePassword1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(checkBoxRemember)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optLogin1)
@@ -352,6 +387,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNomeActionPerformed
@@ -378,110 +414,164 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 			String user_password = String.valueOf(inputSenha1.getPassword());
 			String user_password2 = String.valueOf(inputSenha2.getPassword());
 
-			if(!user_password.equals(user_password2)) {
+			if (!user_password.equals(user_password2)) {
 				JOptionPane.showMessageDialog(rootPane, "Senhas não coincidem!", "Aviso", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			
+
 			boolean resultOpC = UserController.registerUser(user_name, user_lastName, user_email, user_password);
-			
-			if(resultOpC){
+
+			if (resultOpC) {
 				JOptionPane.showMessageDialog(rootPane, "Usuário Cadastrando com Sucesso!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clearInputs(inputList);
 			} else {
 				JOptionPane.showMessageDialog(rootPane, UserController.getErrController(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void inputNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNomeFocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputNome);
     }//GEN-LAST:event_inputNomeFocusLost
 
     private void inputSobrenomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSobrenomeFocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputSobrenome);
     }//GEN-LAST:event_inputSobrenomeFocusLost
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputEmail);
     }//GEN-LAST:event_inputEmailFocusLost
 
     private void inputSenha1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenha1FocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputSenha1);
     }//GEN-LAST:event_inputSenha1FocusLost
 
     private void inputSenha2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenha2FocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputSenha2);
     }//GEN-LAST:event_inputSenha2FocusLost
 
     private void inputSenha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSenha2ActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_inputSenha2ActionPerformed
 
     private void inputEmailLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailLoginFocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputEmailLogin);
     }//GEN-LAST:event_inputEmailLoginFocusLost
 
     private void inputSenhaLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenhaLoginFocusLost
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		checkBorderRed(this.inputSenhaLogin);
     }//GEN-LAST:event_inputSenhaLoginFocusLost
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		ArrayList<JTextComponent> inputList = new ArrayList();
 		inputList.add(inputEmailLogin);
 		inputList.add(inputSenhaLogin);
-		
-		if(checkInputsEmpty(inputList)){
+
+		if (checkInputsEmpty(inputList)) {
 			JOptionPane.showMessageDialog(rootPane, "Há campos em branco!", "Aviso", JOptionPane.WARNING_MESSAGE);
 			return;
-		} else{
+		} else {
 			User userLogged = UserController.loginUser(inputEmailLogin.getText(), String.valueOf(inputSenhaLogin.getPassword()));
-			
-			if(userLogged == null){
+
+			if (userLogged == null) {
 				JOptionPane.showMessageDialog(rootPane, UserController.getErrController(), "Error", JOptionPane.ERROR_MESSAGE);
 				return;
-			} else {JOptionPane.showMessageDialog(rootPane, "Login Realizado com Sucesso!", "Login Bem-Sucedido", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(rootPane, "Login Realizado com Sucesso!", "Login Bem-Sucedido", JOptionPane.INFORMATION_MESSAGE);
+				new HomeForm(userLogged).setVisible(true);
+				this.dispose();
 				
+				
+				try {
+					if (checkBoxRemember.isSelected()) {
+
+						if (!file.exists()) {
+							FileWriter writer = new FileWriter(file);
+							writer.write(inputEmailLogin.getText());
+							writer.close();
+
+							System.out.println("Salvo com sucesso!");
+						} else {
+							FileWriter writer = new FileWriter(file, false);
+							writer.write(inputEmailLogin.getText());
+							writer.close();
+
+							System.out.println("Reescrito com sucesso!");
+						}
+					} else {
+						if (file.exists()) {
+							FileWriter writer = new FileWriter(file, false);
+							writer.write("");
+							writer.close();
+						}
+					}
+				} catch (Exception e) {
+					System.err.println("Erro ao salvar o email: " + e.getLocalizedMessage());
+				}
 			}
 		}
-		
-		
-		
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void optLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optLoginMouseClicked
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		changeCard(1);
+
+		if (file.exists()) {
+			System.out.println("Iniciando leitura");
+			try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
+				String line = bfr.readLine();
+				if (line == null) line = "";
+				
+				inputEmailLogin.setText(line);
+				checkBoxRemember.setSelected(!line.isBlank());
+			} catch (Exception e) {
+				System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+			}
+		}
     }//GEN-LAST:event_optLoginMouseClicked
 
     private void optLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_optLoginKeyPressed
-        // TODO add your handling code here:
-		if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+		// TODO add your handling code here:
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			changeCard(1);
+
+			if (file.exists()) {
+				System.out.println("Iniciando leitura");
+				try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
+					inputEmailLogin.setText(bfr.readLine());
+				} catch (Exception e) {
+					System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+				}
+			}
 		}
     }//GEN-LAST:event_optLoginKeyPressed
 
     private void optLogin1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_optLogin1KeyPressed
-        // TODO add your handling code here:
-		if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+		// TODO add your handling code here:
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			changeCard(0);
 		}
     }//GEN-LAST:event_optLogin1KeyPressed
 
     private void optLogin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optLogin1MouseClicked
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		changeCard(0);
     }//GEN-LAST:event_optLogin1MouseClicked
+
+    private void checkBoxRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxRememberActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_checkBoxRememberActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -493,21 +583,11 @@ public class AutenticacaoForm extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
 		 */
 		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Windows".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(AutenticacaoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(AutenticacaoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(AutenticacaoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(AutenticacaoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			UIManager.setLookAndFeel(new FlatDarkLaf());
+		} catch (Exception e) {
+			System.err.println("Erro ao setar tema: " + e.getMessage());
 		}
+
 		//</editor-fold>
 
 		/* Create and display the form */
@@ -524,6 +604,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
     private javax.swing.JPanel PanelRegister;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JCheckBox checkBoxRemember;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputEmailLogin;
     private javax.swing.JTextField inputNome;
@@ -554,47 +635,49 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 			} else {
 				input.setBorder(new LineBorder(new java.awt.Color(153, 153, 153)));
 			}
-			
+
 		}
 		return anyEmpty;
 	}
-	
-	private void checkBorderRed(javax.swing.text.JTextComponent input){
-		if(input.getBorder() == RED_BORDER){
+
+	private void checkBorderRed(javax.swing.text.JTextComponent input) {
+		if (input.getBorder() == RED_BORDER) {
 			boolean isEmpty;
-			
-			if(input instanceof JPasswordField){
+
+			if (input instanceof JPasswordField) {
 				int length = ((JPasswordField) input).getPassword().length;
 				isEmpty = length == 0;
 			} else {
 				isEmpty = input.getText().isEmpty();
 			}
-			
-			if(!isEmpty) input.setBorder(new LineBorder(new java.awt.Color(153, 153, 153)));
+
+			if (!isEmpty) {
+				input.setBorder(new LineBorder(new java.awt.Color(153, 153, 153)));
+			}
 		}
 	}
-	
-	private void clearInputs(ArrayList<javax.swing.text.JTextComponent> inputList){
-		for(JTextComponent input : inputList){
+
+	private void clearInputs(ArrayList<javax.swing.text.JTextComponent> inputList) {
+		for (JTextComponent input : inputList) {
 			input.setText("");
 		}
 	}
-	
-	private void changeCard(int id){
+
+	private void changeCard(int id) {
 		//1 -> Login
 		//0 -> Registro
 		CardLayout cl = (CardLayout) PanelMain.getLayout();
-		
+
 		switch (id) {
 			case 1:
 				cl.show(PanelMain, "cardLogin");
 				break;
-				
+
 			case 0:
 				cl.show(PanelMain, "cardRegister");
 				break;
 			default:
 				throw new AssertionError();
-		}		
+		}
 	}
 }

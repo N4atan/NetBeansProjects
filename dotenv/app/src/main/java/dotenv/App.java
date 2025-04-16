@@ -3,15 +3,20 @@
  */
 package dotenv;
 
-import dotenv.database.Database;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+import dotenv.view.AutenticacaoForm;
+import javax.swing.UIManager;
 
 public class App {
 
-	public String getGreeting() {
-		return "Hello World!";
-	}
-
 	public static void main(String[] args) {
-		Database db = new Database();
+		try{
+			UIManager.setLookAndFeel(new FlatDarkLaf());
+		} catch (Exception e) {
+			System.err.println("Erro ao setar tema: "  + e.getMessage());
+		}
+		
+		new AutenticacaoForm().setVisible(true);
 	}
 }
