@@ -24,6 +24,8 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
     implementation 'io.github.cdimascio:dotenv-java:2.2.4'

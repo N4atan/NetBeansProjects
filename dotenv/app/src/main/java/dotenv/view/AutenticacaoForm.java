@@ -5,27 +5,23 @@
 package dotenv.view;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.google.common.io.FileWriteMode;
 
 import dotenv.controller.UserController;
 import dotenv.model.User;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.List;
 import java.awt.event.KeyEvent;
-import java.awt.geom.FlatteningPathIterator;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
+import java.util.Properties;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.JTextComponent;
@@ -42,6 +38,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 	private static final LineBorder RED_BORDER = new LineBorder(Color.RED, 1);
 	private static final UserController UserController = new UserController();
 	File file = new File("src/temp/lastUserEmail.txt");
+	String codigo;
 
 	public AutenticacaoForm() {
 		initComponents();
@@ -80,6 +77,15 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         optLogin1 = new javax.swing.JLabel();
         checkBoxRemember = new javax.swing.JCheckBox();
+        forgotPassword = new javax.swing.JLabel();
+        PanelRecovery = new javax.swing.JPanel();
+        titleCard1 = new javax.swing.JLabel();
+        titleEmail2 = new javax.swing.JLabel();
+        inputEmailGoogle = new javax.swing.JTextField();
+        btnRecovery = new javax.swing.JButton();
+        optLogin3 = new javax.swing.JLabel();
+        titleCode = new javax.swing.JLabel();
+        inputCode = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -327,6 +333,20 @@ public class AutenticacaoForm extends javax.swing.JFrame {
             }
         });
 
+        forgotPassword.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 10)); // NOI18N
+        forgotPassword.setText("Forgot your password?");
+        forgotPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        forgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgotPasswordMouseClicked(evt);
+            }
+        });
+        forgotPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                forgotPasswordKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLoginLayout = new javax.swing.GroupLayout(PanelLogin);
         PanelLogin.setLayout(PanelLoginLayout);
         PanelLoginLayout.setHorizontalGroup(
@@ -340,7 +360,9 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(PanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(inputEmailLogin, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(optLogin1)
+                            .addGroup(PanelLoginLayout.createSequentialGroup()
+                                .addComponent(optLogin1)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(PanelLoginLayout.createSequentialGroup()
                                 .addComponent(titleEmail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(281, 281, 281))
@@ -348,7 +370,10 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                                 .addComponent(titlePassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(257, 257, 257))
                             .addComponent(inputSenhaLogin, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBoxRemember))))
+                            .addGroup(PanelLoginLayout.createSequentialGroup()
+                                .addComponent(checkBoxRemember)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(forgotPassword)))))
                 .addGap(12, 12, 12))
         );
         PanelLoginLayout.setVerticalGroup(
@@ -365,7 +390,9 @@ public class AutenticacaoForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(checkBoxRemember)
+                .addGroup(PanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkBoxRemember)
+                    .addComponent(forgotPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -374,6 +401,99 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         );
 
         PanelMain.add(PanelLogin, "cardLogin");
+
+        titleCard1.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        titleCard1.setText("Recovery Password");
+
+        titleEmail2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        titleEmail2.setText("Your Google Email:");
+
+        inputEmailGoogle.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+        inputEmailGoogle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        inputEmailGoogle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailGoogleFocusLost(evt);
+            }
+        });
+
+        btnRecovery.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnRecovery.setText("Send Code");
+        btnRecovery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRecovery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecoveryActionPerformed(evt);
+            }
+        });
+
+        optLogin3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 10)); // NOI18N
+        optLogin3.setText("Back to login");
+        optLogin3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        optLogin3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                optLogin3MouseClicked(evt);
+            }
+        });
+        optLogin3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                optLogin3KeyPressed(evt);
+            }
+        });
+
+        titleCode.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 14)); // NOI18N
+        titleCode.setText("Code:");
+        titleCode.setEnabled(false);
+
+        inputCode.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+        inputCode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        inputCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputCodeFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelRecoveryLayout = new javax.swing.GroupLayout(PanelRecovery);
+        PanelRecovery.setLayout(PanelRecoveryLayout);
+        PanelRecoveryLayout.setHorizontalGroup(
+            PanelRecoveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRecoveryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelRecoveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRecovery, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleCard1)
+                    .addGroup(PanelRecoveryLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(PanelRecoveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputEmailGoogle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PanelRecoveryLayout.createSequentialGroup()
+                                .addGroup(PanelRecoveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titleCode, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(optLogin3)
+                                    .addComponent(titleEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 129, Short.MAX_VALUE))
+                            .addComponent(inputCode))))
+                .addGap(12, 12, 12))
+        );
+        PanelRecoveryLayout.setVerticalGroup(
+            PanelRecoveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRecoveryLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(titleCard1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(titleEmail2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputEmailGoogle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(titleCode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputCode, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(btnRecovery, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optLogin3)
+                .addGap(17, 17, 17))
+        );
+
+        PanelMain.add(PanelRecovery, "cardRecovery");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -490,8 +610,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(rootPane, "Login Realizado com Sucesso!", "Login Bem-Sucedido", JOptionPane.INFORMATION_MESSAGE);
 				new HomeForm(userLogged).setVisible(true);
 				this.dispose();
-				
-				
+
 				try {
 					if (checkBoxRemember.isSelected()) {
 
@@ -531,8 +650,10 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 			System.out.println("Iniciando leitura");
 			try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
 				String line = bfr.readLine();
-				if (line == null) line = "";
-				
+				if (line == null) {
+					line = "";
+				}
+
 				inputEmailLogin.setText(line);
 				checkBoxRemember.setSelected(!line.isBlank());
 			} catch (Exception e) {
@@ -573,6 +694,60 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 		// TODO add your handling code here:
     }//GEN-LAST:event_checkBoxRememberActionPerformed
 
+    private void forgotPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_forgotPasswordKeyPressed
+		// TODO add your handling code here:
+
+    }//GEN-LAST:event_forgotPasswordKeyPressed
+
+    private void inputEmailGoogleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailGoogleFocusLost
+		// TODO add your handling code here:
+    }//GEN-LAST:event_inputEmailGoogleFocusLost
+
+    private void btnRecoveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecoveryActionPerformed
+		// TODO add your handling code here:		
+		if (btnRecovery.getText().equals("Validate Code")) {
+			if(inputCode.getText().isEmpty()){
+				JOptionPane.showMessageDialog(this, "O campo está em branco!", "Preencha Corretamente!", JOptionPane.WARNING_MESSAGE);
+			} else {
+				
+			}
+		} else {
+			if (inputEmailGoogle.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "O campo está em branco!", "Preencha Corretamente!", JOptionPane.WARNING_MESSAGE);
+			} else {
+				this.codigo = UserController.enviarCodigo(inputEmailGoogle.getText());
+
+				if (this.codigo == null) {
+					JOptionPane.showMessageDialog(this, UserController.getErrController(), "Algo deu errado...", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(this, "Código enviado com Sucesso!", "Código Enviado", JOptionPane.INFORMATION_MESSAGE);
+					this.inputEmailGoogle.setEnabled(false);
+					this.titleCard.setEnabled(true);
+					this.inputCode.setEnabled(true);
+					this.btnRecovery.setText("Validate Code");
+				}
+			}
+		}
+    }//GEN-LAST:event_btnRecoveryActionPerformed
+
+    private void optLogin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optLogin3MouseClicked
+		// TODO add your handling code here:
+		changeCard(1);
+    }//GEN-LAST:event_optLogin3MouseClicked
+
+    private void optLogin3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_optLogin3KeyPressed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_optLogin3KeyPressed
+
+    private void forgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordMouseClicked
+		// TODO add your handling code here:
+		changeCard(2);
+    }//GEN-LAST:event_forgotPasswordMouseClicked
+
+    private void inputCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCodeFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputCodeFocusLost
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -601,11 +776,16 @@ public class AutenticacaoForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelLogin;
     private javax.swing.JPanel PanelMain;
+    private javax.swing.JPanel PanelRecovery;
     private javax.swing.JPanel PanelRegister;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRecovery;
     private javax.swing.JButton btnRegister;
     private javax.swing.JCheckBox checkBoxRemember;
+    private javax.swing.JLabel forgotPassword;
+    private javax.swing.JTextField inputCode;
     private javax.swing.JTextField inputEmail;
+    private javax.swing.JTextField inputEmailGoogle;
     private javax.swing.JTextField inputEmailLogin;
     private javax.swing.JTextField inputNome;
     private javax.swing.JPasswordField inputSenha1;
@@ -616,9 +796,13 @@ public class AutenticacaoForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel optLogin;
     private javax.swing.JLabel optLogin1;
+    private javax.swing.JLabel optLogin3;
     private javax.swing.JLabel titleCard;
+    private javax.swing.JLabel titleCard1;
+    private javax.swing.JLabel titleCode;
     private javax.swing.JLabel titleEmail;
     private javax.swing.JLabel titleEmail1;
+    private javax.swing.JLabel titleEmail2;
     private javax.swing.JLabel titleLastName;
     private javax.swing.JLabel titleName;
     private javax.swing.JLabel titlePassword;
@@ -664,17 +848,20 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 	}
 
 	private void changeCard(int id) {
+		//2 -> Recovery
 		//1 -> Login
 		//0 -> Registro
 		CardLayout cl = (CardLayout) PanelMain.getLayout();
 
 		switch (id) {
+			case 0:
+				cl.show(PanelMain, "cardRegister");
+				break;
 			case 1:
 				cl.show(PanelMain, "cardLogin");
 				break;
-
-			case 0:
-				cl.show(PanelMain, "cardRegister");
+			case 2:
+				cl.show(PanelMain, "cardRecovery");
 				break;
 			default:
 				throw new AssertionError();
