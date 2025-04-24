@@ -542,12 +542,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="inputEmailGoogle" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="inputEmailRecovery" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="titleCode" min="-2" pref="189" max="-2" attributes="0"/>
                                           <Component id="optLogin3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="titleEmail2" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
+                                          <Component id="titleEmailRecovery" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="129" max="32767" attributes="0"/>
                                   </Group>
@@ -565,9 +565,9 @@
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="titleCard1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="titleEmail2" min="-2" max="-2" attributes="0"/>
+                      <Component id="titleEmailRecovery" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="inputEmailGoogle" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="inputEmailRecovery" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="titleCode" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -590,7 +590,7 @@
                 <Property name="text" type="java.lang.String" value="Recovery Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="titleEmail2">
+            <Component class="javax.swing.JLabel" name="titleEmailRecovery">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semilight" size="14" style="0"/>
@@ -598,7 +598,7 @@
                 <Property name="text" type="java.lang.String" value="Your Google Email:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputEmailGoogle">
+            <Component class="javax.swing.JTextField" name="inputEmailRecovery">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Light" size="12" style="0"/>
@@ -612,7 +612,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputEmailGoogleFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputEmailRecoveryFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnRecovery">
@@ -665,6 +665,7 @@
                     </LineBorder>
                   </Border>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputCodeFocusLost"/>
