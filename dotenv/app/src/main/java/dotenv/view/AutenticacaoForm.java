@@ -610,7 +610,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
 				return;
 			} else {
 				JOptionPane.showMessageDialog(rootPane, "Login Realizado com Sucesso!", "Login Bem-Sucedido", JOptionPane.INFORMATION_MESSAGE);
-				new HomeForm(userLogged).setVisible(true);
+				new HomeForm(userLogged, UserController).setVisible(true);
 				this.dispose();
 
 				try {

@@ -14,8 +14,13 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
+import javax.swing.DefaultListModel;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -23,43 +28,44 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author NATANGABRIELWILDNERD
  */
 public class UserController {
+
 	private final UserDAO UserDao = new UserDAO();
 	private String errorController;
-	
-	public String getErrController(){
+
+	public String getErrController() {
 		return this.errorController;
 	}
-	
-	public boolean registerUser(String name, String lastName, String email, String password){
+
+	public boolean registerUser(String name, String lastName, String email, String password) {
 		String fullName = String.format("%s %s", name, lastName);
 		var encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-		
+
 		User user = new User(email);
 		user.setUser_name(fullName);
 		user.setUser_passwordEncrypted(encryptedPassword);
-		
+
 		boolean resultOp = UserDao.userPost(user);
-		
-		if(resultOp){
+
+		if (resultOp) {
 			return true;
 		} else {
 			this.errorController = this.UserDao.getErrorDAO();
 			return false;
 		}
 	}
-	
-	public User loginUser(String email, String password){
+
+	public User loginUser(String email, String password) {
 		User user = new User(email);
-		
+
 		User userLogged = UserDao.userGet(user);
-		
+
 		user.setUser_password(password);
-		
-		if(userLogged == null){
+
+		if (userLogged == null) {
 			this.errorController = this.UserDao.getErrorDAO();
 			return null;
 		} else {
-			if(BCrypt.checkpw(user.getUser_password(), userLogged.getUser_passwordEncrypted())){
+			if (BCrypt.checkpw(user.getUser_password(), userLogged.getUser_passwordEncrypted())) {
 				return new User(userLogged.getUser_name(), userLogged.getUser_email());
 			} else {
 				this.errorController = "Senhas Não Coincidem!";
@@ -67,11 +73,11 @@ public class UserController {
 			}
 		}
 	}
-	
+
 	public String enviarCodigo(String emailDestino) {
 		final String remetente = "gabrielnathan2912@gmail.com";
 		final String senha = "bulf cyrj pzar rrer"; //Senha de app google
-		
+
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true"); // ativa autenticação SMTP (usuário/senha)
 		props.put("mail.smtp.starttls.enable", "true"); // ativa criptografia TLS (segurança)
@@ -90,9 +96,7 @@ public class UserController {
 			Random random = new Random();
 			int codigoInt = 100000 + random.nextInt(900000); // Gera número entre 100000 e 999999
 			String codigo = String.valueOf(codigoInt);
-			
-			
-			
+
 			//Configuração da mensagem:
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(remetente)); // remetente
@@ -105,6 +109,59 @@ public class UserController {
 		} catch (MessagingException e) {
 			this.errorController = e.getLocalizedMessage();
 			return null;
+		}
+	}
+
+	public ArrayList<User> listUsers(String emailUser) {
+		ArrayList<User> listUser = this.UserDao.getUsers();
+
+		if (listUser == null) {
+			this.errorController = this.UserDao.getErrorDAO();
+			return null;
+		}
+
+		User userLogin = listUser.stream().filter((u) -> u.getUser_email().equals(emailUser)).findFirst().orElse(null);
+		listUser.remove(userLogin);
+
+		return listUser;
+	}
+
+	public File checkFileChat(String emailUser, String emailContact) {
+		String nameJson = String.format("%s-%s.json", emailUser, emailContact);
+		File pastaChats = new File("src/main/java/chats");
+
+		File chatJson = new File(pastaChats, nameJson);
+
+		if (!chatJson.exists()) {
+			System.err.println("Arquivo nao encontrado!");
+			return null;
+		} else {
+			System.out.println("Arquivo encontrado!");
+			return chatJson;
+		}
+	}
+
+	public boolean createFileChat(String emailUser, String emailContact) {
+		String nameJson = String.format("%s-%s.json", emailUser, emailContact);
+
+		File fileChat = new File("src/main/java/chats/" + nameJson);
+
+		try {
+			//Checa se é arquivo novo
+			if (!fileChat.createNewFile()) {
+				this.errorController = "Arquivo já existente!";
+				return false;
+			}
+			
+			//Deixando o arquvio como json vazio
+			FileWriter writer = new FileWriter(fileChat);
+			writer.write("[]");
+			writer.close();
+			
+			return true;
+		} catch (Exception e) {
+			this.errorController = e.getMessage();
+			return false;
 		}
 	}
 }

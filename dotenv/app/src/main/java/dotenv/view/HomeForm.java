@@ -4,8 +4,15 @@
  */
 package dotenv.view;
 
+import dotenv.controller.UserController;
 import dotenv.model.User;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Optional;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -17,11 +24,15 @@ public class HomeForm extends javax.swing.JFrame {
 	 * Creates new form HomeForm
 	 */
 	private User userLogged;
-	public HomeForm(User userLogged) {
+	private UserController UserController;
+	private ArrayList<User> listUsers;
+
+	public HomeForm(User userLogged, UserController UserController) {
+		this.UserController = UserController;
 		this.userLogged = userLogged;
 		initComponents();
 	}
-	
+
 	public HomeForm() {
 		initComponents();
 	}
@@ -35,46 +46,137 @@ public class HomeForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        RigthPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        RightPanel = new javax.swing.JPanel();
+        ContactPane = new javax.swing.JPanel();
+        lblContactName = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        areaMsg = new javax.swing.JTextArea();
+        btnSend = new javax.swing.JButton();
         LeftPanel = new javax.swing.JPanel();
-        btnSair = new javax.swing.JButton();
+        UserPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListUsers = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
         setExtendedState(6);
+        setMinimumSize(new java.awt.Dimension(600, 400));
+        setResizable(false);
 
-        jSplitPane1.setDividerLocation(80);
+        jSplitPane1.setDividerLocation(230);
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Bem Vindo, " + userLogged.getUser_name() + "!");
+        ContactPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout RigthPanelLayout = new javax.swing.GroupLayout(RigthPanel);
-        RigthPanel.setLayout(RigthPanelLayout);
-        RigthPanelLayout.setHorizontalGroup(
-            RigthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RigthPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(341, Short.MAX_VALUE))
-        );
-        RigthPanelLayout.setVerticalGroup(
-            RigthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RigthPanelLayout.createSequentialGroup()
+        lblContactName.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lblContactName.setText("Selecione um contato....");
+
+        javax.swing.GroupLayout ContactPaneLayout = new javax.swing.GroupLayout(ContactPane);
+        ContactPane.setLayout(ContactPaneLayout);
+        ContactPaneLayout.setHorizontalGroup(
+            ContactPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContactPaneLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addComponent(lblContactName)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ContactPaneLayout.setVerticalGroup(
+            ContactPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContactPaneLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblContactName)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setRightComponent(RigthPanel);
+        areaMsg.setColumns(20);
+        areaMsg.setLineWrap(true);
+        areaMsg.setRows(5);
+        areaMsg.setWrapStyleWord(true);
+        areaMsg.setEnabled(false);
+        jScrollPane3.setViewportView(areaMsg);
 
-        btnSair.setText("Sair");
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
+        btnSend.setBackground(new java.awt.Color(51, 153, 0));
+        btnSend.setText("Enviar");
+        btnSend.setEnabled(false);
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
+                btnSendActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout RightPanelLayout = new javax.swing.GroupLayout(RightPanel);
+        RightPanel.setLayout(RightPanelLayout);
+        RightPanelLayout.setHorizontalGroup(
+            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ContactPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSend)))
+                .addContainerGap())
+        );
+        RightPanelLayout.setVerticalGroup(
+            RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ContactPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
+                .addGroup(RightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jSplitPane1.setRightComponent(RightPanel);
+
+        UserPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setToolTipText("");
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 10)); // NOI18N
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText(this.userLogged.getUser_name() + "\n" + this.userLogged.getUser_email());
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setFocusable(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout UserPanelLayout = new javax.swing.GroupLayout(UserPanel);
+        UserPanel.setLayout(UserPanelLayout);
+        UserPanelLayout.setHorizontalGroup(
+            UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        UserPanelLayout.setVerticalGroup(
+            UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic UI", 0, 14))); // NOI18N
+
+        ListUsers.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+        attListUser();
+        ListUsers.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListUsersValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(ListUsers);
 
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
@@ -82,14 +184,19 @@ public class HomeForm extends javax.swing.JFrame {
             LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LeftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LeftPanelLayout.createSequentialGroup()
+                        .addComponent(UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
         );
         LeftPanelLayout.setVerticalGroup(
             LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftPanelLayout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(btnSair)
+            .addGroup(LeftPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(UserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -99,7 +206,9 @@ public class HomeForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,12 +219,61 @@ public class HomeForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
-		this.dispose();
-		this.userLogged = null;
-		new AutenticacaoForm().setVisible(true);
-    }//GEN-LAST:event_btnSairActionPerformed
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+		// TODO add your handling code here:
+		String msg = areaMsg.getText();
+		
+		if(msg.isEmpty()){
+			JOptionPane.showMessageDialog(this, "Por favor, certifique-se que escreveu algo...", "Campo em branco", JOptionPane.WARNING_MESSAGE);
+		}
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private void ListUsersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListUsersValueChanged
+		// TODO add your handling code here:
+		if (ListUsers.getSelectedIndex() != -1) {
+			String emailContact = ListUsers.getSelectedValue();
+			User userContact = listUsers.stream()
+					.filter(u -> u.getUser_email().equals(emailContact))
+					.findFirst()
+					.orElse(null);
+			
+			lblContactName.setText(userContact.getUser_name());
+			areaMsg.setEnabled(false);
+			btnSend.setEnabled(false);
+			
+
+			File chatJson = this.UserController.checkFileChat(this.userLogged.getUser_email(), userContact.getUser_email());
+			
+
+			if (chatJson == null) {
+				int resposta = JOptionPane.showConfirmDialog(this,
+						String.format("Você ainda não conversou com: \nNome: %s\nEmail: %s \nDeseja criar uma conversa?", userContact.getUser_name(), userContact.getUser_email()),
+						"Muito tímido você",
+						JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+
+				if (resposta == JOptionPane.YES_OPTION) {
+					//Chamar controler passando o meu email e o email do contato e obter um bolean caso de certo a criaçao do json
+					final boolean criandoChat = this.UserController.createFileChat(this.userLogged.getUser_email(), emailContact);
+					final String msg = criandoChat ? "Chat criado com sucesso!" : this.UserController.getErrController();
+					final String title = criandoChat ? "Já pode conversar!" : "Não fique nervoso...";
+					final int kind = criandoChat ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE;
+
+					JOptionPane.showMessageDialog(this, msg, title, kind);
+					
+					lblContactName.setText(userContact.getUser_name());
+					areaMsg.setEnabled(criandoChat);
+					btnSend.setEnabled(criandoChat);
+				} else {
+					
+				}
+			} else {
+				lblContactName.setText(userContact.getUser_name());
+				areaMsg.setEnabled(true);
+				btnSend.setEnabled(true);
+			}
+		}
+    }//GEN-LAST:event_ListUsersValueChanged
 
 	/**
 	 * @param args the command line arguments
@@ -153,10 +311,33 @@ public class HomeForm extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContactPane;
     private javax.swing.JPanel LeftPanel;
-    private javax.swing.JPanel RigthPanel;
-    private javax.swing.JButton btnSair;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> ListUsers;
+    private javax.swing.JPanel RightPanel;
+    private javax.swing.JPanel UserPanel;
+    private javax.swing.JTextArea areaMsg;
+    private javax.swing.JButton btnSend;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblContactName;
     // End of variables declaration//GEN-END:variables
+
+	private void attListUser() {
+		this.listUsers = this.UserController.listUsers(this.userLogged.getUser_email());
+		DefaultListModel model = new DefaultListModel();
+
+		if (listUsers == null) {
+			JOptionPane.showMessageDialog(this, this.UserController.getErrController(), "Algo deu errado", JOptionPane.ERROR_MESSAGE);
+		} else {
+			for (User user : this.listUsers) {
+				model.addElement(user.getUser_email());
+			}
+			ListUsers.setModel(model);
+		}
+
+	}
 }

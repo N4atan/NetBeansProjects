@@ -10,6 +10,7 @@ import dotenv.model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -84,5 +85,28 @@ public class UserDAO {
 			return null;
 		}
 	}
-
+	
+	public ArrayList<User> getUsers(){
+		ArrayList<User> listUsers =  new ArrayList();
+		
+		String sql = """
+				SELECT * FROM usuarios
+				""";
+		
+		try(PreparedStatement pstmt = this.db.getConnection().prepareStatement(sql); ResultSet rs = pstmt.executeQuery())
+		{
+			while(rs.next()){
+				User user = new User(
+								rs.getString("user_name"),
+								rs.getString("user_email")
+								);
+				listUsers.add(user);
+			}
+			return listUsers;
+		} catch(SQLException e){
+			this.errorDAO = e.getLocalizedMessage();
+			Log.severe("" + e.getErrorCode());
+			return null;	
+		}
+	}
 }
