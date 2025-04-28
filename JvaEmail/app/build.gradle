@@ -1,0 +1,35 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation libs.guava
+
+implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.4'
+
+    implementation 'com.formdev:flatlaf:3.5' // Verifique a versão mais recente
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+application {
+    mainClass = 'com.example.JvaEmail.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
