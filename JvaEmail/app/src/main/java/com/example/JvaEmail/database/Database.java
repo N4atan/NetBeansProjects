@@ -64,9 +64,9 @@ public class Database {
 			)
 				""";
 
-		try (
-				Statement stmt = this.getConnection().createStatement()) {
-			return stmt.execute(sql);
+		try (Statement stmt = this.getConnection().createStatement()) {
+			stmt.execute(sql);
+			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao criar a tabela usuarios: " + e.getLocalizedMessage());
 		}
@@ -94,7 +94,8 @@ public class Database {
 			)
 				""";
 		try(Statement stmt = this.getConnection().createStatement()){
-			return stmt.execute(sql);
+			stmt.execute(sql);
+			return true;
 		} catch (Exception e){
 			throw new RuntimeException("Erro ao criar a tabela emails: " + e.getLocalizedMessage());
 		}
