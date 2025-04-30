@@ -23,6 +23,10 @@ public class UsuarioDAO {
 		return errorDAO;
 	}
 
+	public boolean hasError() {
+		return this.errorDAO != null;
+	}
+	
 	public boolean saveUser(Usuario usuario) {
 		this.errorDAO = null;
 		if (usuario.userHasInicialized()) {
@@ -48,10 +52,6 @@ public class UsuarioDAO {
 		}
 	}
 
-	public boolean hasError() {
-		return this.errorDAO != null;
-	}
-
 	public Usuario getUser(Usuario usuario) {
 		this.errorDAO = null;
 		String sql = """
@@ -60,6 +60,35 @@ public class UsuarioDAO {
 
 		try (PreparedStatement pstmt = this.database.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, usuario.getEmail());
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				Usuario userDb = new Usuario();
+				userDb.setId(rs.getInt("id"));
+				userDb.setEmail(rs.getString("user_email"));
+				userDb.setNome(rs.getString("user_name"));
+				userDb.setSenha(rs.getString("user_password"));
+				
+				return userDb;
+			}
+			
+			this.errorDAO = "Usuario não encontrado";
+			return null;
+		} catch (SQLException e) {
+			this.errorDAO = e.getLocalizedMessage();
+			return null;
+		}
+	}
+	
+	public Usuario getUserById(Usuario usuario) {
+		this.errorDAO = null;
+		String sql = """
+                          SELECT * FROM usuarios WHERE id = ?
+				""";
+
+		try (PreparedStatement pstmt = this.database.getConnection().prepareStatement(sql)) {
+			pstmt.setInt(1, usuario.getId());
 
 			ResultSet rs = pstmt.executeQuery();
 
@@ -124,4 +153,6 @@ public class UsuarioDAO {
 			return false;
 		}
 	}
+	
+	
 }
