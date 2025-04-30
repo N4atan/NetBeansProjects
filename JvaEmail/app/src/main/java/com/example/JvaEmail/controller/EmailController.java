@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class EmailController {
 	private final EmailDAO emailDAO = new EmailDAO();
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private ArrayList<Email> emailRecebidos = new ArrayList();
 	private String errorController = null;
 	
 	public String getError(){
@@ -27,7 +28,7 @@ public class EmailController {
 		return this.errorController != null;
 	}
 	
-	public ArrayList<Email> listarEmailsRecebidos(Usuario	usuarioLocal){
+	public void attEmailsRecebidos(Usuario usuarioLocal){
 		this.errorController = null;
 		
 		Email email = new Email();
@@ -37,7 +38,7 @@ public class EmailController {
 		
 		if(this.emailDAO.hasError()){
 			this.errorController = this.emailDAO.getError();
-			return null;
+			return;
 		}
 		
 		for(Email e : listaEmails){
@@ -48,9 +49,47 @@ public class EmailController {
 			e.setRemetente(remDb);
 		}
 		
-		return listaEmails;
+		this.emailRecebidos = listaEmails;
 	}
 	
+	public String enviarEmail(Usuario usuario, String emailRem, String titulo, String corpo ){
+		this.errorController = null;
+		Usuario remetente = new Usuario();
+		remetente.setEmail(emailRem);
+		Usuario remetenteDb = this.usuarioDAO.getUser(remetente);
+		
+		Email email = new Email();
+		email.setDestinatario(usuario);
+		email.setRemetente(remetenteDb);
+		email.setTitulo(titulo);
+		email.setConteudo(corpo);
+		
+		boolean respDAO = this.emailDAO.saveEmail(email);
+		
+		if(this.emailDAO.hasError()){
+			this.errorController = this.emailDAO.getError();
+			return null;
+		}
+		
+		if(respDAO){
+			return "Email enviado";
+		} else {
+			return "Algo inesperado aconteceu...";
+		}
+	}
 	
+	public Email abrirDetalhes(int index){
+		if(index == -1) return null;
+		
+		return emailRecebidos.get(index);
+	}
 	
+	public ArrayList<Email> listarEmailsRecebidos(Usuario usuarioLocal){
+		this.attEmailsRecebidos(usuarioLocal);
+		return this.emailRecebidos;
+	}
+	
+	public boolean haveAnyEmail(){
+		return !this.emailRecebidos.isEmpty();
+	}
 }

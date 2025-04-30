@@ -6,6 +6,8 @@ package com.example.JvaEmail.controller;
 
 import com.example.JvaEmail.dao.UsuarioDAO;
 import com.example.JvaEmail.model.Usuario;
+import java.util.ArrayList;
+import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -111,6 +113,20 @@ public class UsuarioController {
 			return null;
 		}
 	}
+	
+	public ArrayList<Usuario> listarUsuarios(){
+		this.errorController = null;
+		
+		ArrayList<Usuario> lista = this.usuarioDAO.getUsers();
+		
+		if(this.usuarioDAO.hasError()){
+			this.errorController = this.usuarioDAO.getError();
+			return null;
+		}
+
+		return lista;
+	}
+	
 
 	public boolean hasError() {
 		return this.errorController != null;

@@ -4,6 +4,18 @@
  */
 package com.example.JvaEmail.view;
 
+import com.example.JvaEmail.controller.EmailController;
+import com.example.JvaEmail.controller.UsuarioController;
+import com.example.JvaEmail.model.Email;
+import com.example.JvaEmail.model.Usuario;
+import com.formdev.flatlaf.ui.FlatTextBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
+
 /**
  *
  * @author gabri
@@ -13,6 +25,17 @@ public class JvaHome extends javax.swing.JFrame {
 	/**
 	 * Creates new form JvaHome
 	 */
+	private Usuario usuarioLogado;
+	private EmailController emailController = new EmailController();
+	private UsuarioController usuarioController;
+
+	public JvaHome(UsuarioController usuarioController, Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+		this.usuarioController = usuarioController;
+		initComponents();
+		attTableEmails();
+	}
+
 	public JvaHome() {
 		initComponents();
 	}
@@ -27,10 +50,21 @@ public class JvaHome extends javax.swing.JFrame {
     private void initComponents() {
 
         MainPanel = new javax.swing.JPanel();
-        ScrollPaneEmails = new javax.swing.JScrollPane();
         ToolbarPanel = new javax.swing.JPanel();
         btnInbox = new javax.swing.JButton();
         btnCompose = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        ScrollPaneEmails = new javax.swing.JScrollPane();
+        tableListaEmails = new javax.swing.JTable();
+        ComposePanel = new javax.swing.JPanel();
+        titleDesti = new javax.swing.JLabel();
+        titleTitulo = new javax.swing.JLabel();
+        titleConteudo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtConteudo = new javax.swing.JTextArea();
+        inputTitulo = new javax.swing.JTextField();
+        comboBoxDest = new javax.swing.JComboBox<>();
+        btnEnviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JvaEmail-Home");
@@ -68,6 +102,117 @@ public class JvaHome extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        tableListaEmails.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+        tableListaEmails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome", "Titulo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableListaEmails.setShowGrid(false);
+        tableListaEmails.setShowHorizontalLines(true);
+        ScrollPaneEmails.setViewportView(tableListaEmails);
+
+        jPanel1.add(ScrollPaneEmails, "scrollEmails");
+
+        titleDesti.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        titleDesti.setText("Destinatário:");
+
+        titleTitulo.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        titleTitulo.setText("Título:");
+
+        titleConteudo.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        titleConteudo.setText("Conteúdo:");
+
+        txtConteudo.setColumns(20);
+        txtConteudo.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+        txtConteudo.setRows(5);
+        jScrollPane1.setViewportView(txtConteudo);
+
+        inputTitulo.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
+
+        comboBoxDest.setFont(new java.awt.Font("Lucida Console", 0, 14)); // NOI18N
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        for(Usuario u : this.usuarioController.listarUsuarios()){
+            modelo.addElement(u.getEmail());
+        }
+        comboBoxDest.setModel(modelo);
+
+        btnEnviar.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        btnEnviar.setText("Enviar 📤");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ComposePanelLayout = new javax.swing.GroupLayout(ComposePanel);
+        ComposePanel.setLayout(ComposePanelLayout);
+        ComposePanelLayout.setHorizontalGroup(
+            ComposePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ComposePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ComposePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addGroup(ComposePanelLayout.createSequentialGroup()
+                        .addComponent(titleTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputTitulo))
+                    .addGroup(ComposePanelLayout.createSequentialGroup()
+                        .addComponent(titleConteudo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(ComposePanelLayout.createSequentialGroup()
+                        .addComponent(titleDesti)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxDest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ComposePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEnviar)))
+                .addContainerGap())
+        );
+        ComposePanelLayout.setVerticalGroup(
+            ComposePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ComposePanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(ComposePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleDesti)
+                    .addComponent(comboBoxDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ComposePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleTitulo)
+                    .addComponent(inputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(titleConteudo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEnviar))
+        );
+
+        jPanel1.add(ComposePanel, "composeCard");
+
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
@@ -77,8 +222,8 @@ public class JvaHome extends javax.swing.JFrame {
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ToolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCompose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ScrollPaneEmails, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
@@ -86,11 +231,11 @@ public class JvaHome extends javax.swing.JFrame {
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                     .addGroup(MainPanelLayout.createSequentialGroup()
-                        .addComponent(btnCompose, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addComponent(btnCompose, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ToolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ScrollPaneEmails))
+                        .addComponent(ToolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -106,15 +251,48 @@ public class JvaHome extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInboxActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
+		CardLayout cl = (CardLayout) jPanel1.getLayout();
+		cl.show(jPanel1, "scrollEmails");
+
+		attTableEmails();
     }//GEN-LAST:event_btnInboxActionPerformed
 
     private void btnComposeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComposeActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
+		CardLayout cl = (CardLayout) jPanel1.getLayout();
+		cl.show(jPanel1, "composeCard");
     }//GEN-LAST:event_btnComposeActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+		// TODO add your handling code here:
+		ArrayList<JTextComponent> list = new ArrayList();
+		list.add(txtConteudo);
+		list.add(inputTitulo);
+		if (checkAnyEmpty(list)) {
+			JOptionPane.showMessageDialog(this, "Preencha com seu email.\nApós preencher, clique aqui novamente.", "Instruções", JOptionPane.QUESTION_MESSAGE);
+			return;
+		}
+
+		String respC = this.emailController.enviarEmail(usuarioLogado,
+				String.valueOf(comboBoxDest.getSelectedItem()),
+				inputTitulo.getText(),
+				txtConteudo.getText());
+
+		if (this.emailController.hasError()) {
+			JOptionPane.showMessageDialog(this, this.emailController.getError(), "Ops...", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		JOptionPane.showMessageDialog(this, respC, "Enviado!", JOptionPane.INFORMATION_MESSAGE);
+
+		inputTitulo.setText("");
+		txtConteudo.setText("");
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -152,10 +330,63 @@ public class JvaHome extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ComposePanel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JScrollPane ScrollPaneEmails;
     private javax.swing.JPanel ToolbarPanel;
     private javax.swing.JButton btnCompose;
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnInbox;
+    private javax.swing.JComboBox<String> comboBoxDest;
+    private javax.swing.JTextField inputTitulo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableListaEmails;
+    private javax.swing.JLabel titleConteudo;
+    private javax.swing.JLabel titleDesti;
+    private javax.swing.JLabel titleTitulo;
+    private javax.swing.JTextArea txtConteudo;
     // End of variables declaration//GEN-END:variables
+
+	private void attTableEmails() {
+		DefaultTableModel modelo = (DefaultTableModel) tableListaEmails.getModel();
+		modelo.setRowCount(0);
+
+		if (this.emailController.haveAnyEmail()) {
+			for (Email e : this.emailController.listarEmailsRecebidos(usuarioLogado)) {
+				modelo.addRow(new Object[]{e.getRemetente().getNome(), e.getTitulo()});
+			}
+		}
+	}
+
+	private boolean checkAnyEmpty(ArrayList<JTextComponent> list) {
+		boolean anyEmpty = false;
+
+		for (JTextComponent txtcm : list) {
+			if (txtcm.getText().isEmpty() && txtcm.isEnabled()) {
+				anyEmpty = true;
+				txtcm.setBorder(new LineBorder(Color.red, 1));
+			}
+		}
+
+		return anyEmpty;
+	}
+
+	private void checkBorderRed(JTextComponent txtcm) {
+		if (txtcm.getBorder() instanceof LineBorder border) {
+			if (border.getLineColor().equals(Color.red)) {
+				boolean isEmpty;
+
+				if (txtcm instanceof JPasswordField) {
+					isEmpty = ((JPasswordField) txtcm).getPassword().length == 0;
+				} else {
+					isEmpty = txtcm.getText().isEmpty();
+				}
+
+				if (!isEmpty) {
+					txtcm.setBorder(new FlatTextBorder());
+				}
+			}
+		}
+	}
 }

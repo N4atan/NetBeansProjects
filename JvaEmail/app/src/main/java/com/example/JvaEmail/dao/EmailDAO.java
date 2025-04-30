@@ -33,7 +33,7 @@ public class EmailDAO {
 		this.errorDAO = null;
 
 		String sql = """
-                          INSERT INTO emails (id_rementente, id_destinatario, title, body) VALUES (?, ?, ?, ?);
+                          INSERT INTO emails (id_remetente, id_destinatario, title, body) VALUES (?, ?, ?, ?);
 				""";
 
 		try (PreparedStatement pstmt = this.db.getConnection().prepareStatement(sql)) {

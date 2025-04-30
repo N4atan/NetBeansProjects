@@ -5,10 +5,12 @@ package com.example.JvaEmail.dao;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import com.example.JvaEmail.database.Database;
+import com.example.JvaEmail.model.Email;
 import com.example.JvaEmail.model.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -154,5 +156,29 @@ public class UsuarioDAO {
 		}
 	}
 	
-	
+	public ArrayList<Usuario> getUsers() {
+		this.errorDAO = null;
+		String sql = """
+                          SELECT * FROM usuarios
+				""";
+
+		try (PreparedStatement pstmt = this.database.getConnection().prepareStatement(sql)) {
+			ResultSet rs = pstmt.executeQuery();
+
+			ArrayList<Usuario> list = new ArrayList();
+
+			while (rs.next()) {
+				Usuario userdb = new Usuario();
+				userdb.setId(rs.getInt("id"));
+				userdb.setEmail(rs.getString("user_email"));
+				userdb.setNome(rs.getString("user_name"));
+				
+				list.add(userdb);
+			}
+			return list;
+		} catch (SQLException e) {
+			this.errorDAO = e.getLocalizedMessage();
+			return null;
+		}
+	}
 }

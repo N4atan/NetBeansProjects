@@ -383,6 +383,8 @@ public class Autenticacao extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, this.usuarioController.getError(), "Ops...", JOptionPane.ERROR_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!", "Bem-Vindo Novamente", JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
+			new JvaHome(usuarioController, usuarioLocal).setVisible(true);
 		}
     }//GEN-LAST:event_btnLoginActionPerformed
 
