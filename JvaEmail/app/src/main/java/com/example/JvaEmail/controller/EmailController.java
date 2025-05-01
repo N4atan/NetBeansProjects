@@ -31,8 +31,10 @@ public class EmailController {
 	public void attEmailsRecebidos(Usuario usuarioLocal){
 		this.errorController = null;
 		
+		Usuario usuarioDb = this.usuarioDAO.getUser(usuarioLocal);
+		
 		Email email = new Email();
-		email.setDestinatario(usuarioLocal);
+		email.setDestinatario(usuarioDb);
 		
 		ArrayList<Email> listaEmails = this.emailDAO.getEmails(email);
 		
@@ -41,6 +43,7 @@ public class EmailController {
 			return;
 		}
 		
+		//Precisa pois no banco salva só os IDs
 		for(Email e : listaEmails){
 			e.setDestinatario(usuarioLocal);
 			
@@ -49,18 +52,20 @@ public class EmailController {
 			e.setRemetente(remDb);
 		}
 		
-		this.emailRecebidos = listaEmails;
+		this.emailRecebidos = listaEmails;	
 	}
 	
-	public String enviarEmail(Usuario usuario, String emailRem, String titulo, String corpo ){
+	public String enviarEmail(Usuario usuario, String emailDest, String titulo, String corpo ){
 		this.errorController = null;
-		Usuario remetente = new Usuario();
-		remetente.setEmail(emailRem);
-		Usuario remetenteDb = this.usuarioDAO.getUser(remetente);
+		Usuario dest = new Usuario();
+		dest.setEmail(emailDest);
+		Usuario destDb = this.usuarioDAO.getUser(dest);
 		
+		usuario = this.usuarioDAO.getUser(usuario);
+			
 		Email email = new Email();
-		email.setDestinatario(usuario);
-		email.setRemetente(remetenteDb);
+		email.setRemetente(usuario);
+		email.setDestinatario(destDb);
 		email.setTitulo(titulo);
 		email.setConteudo(corpo);
 		
@@ -78,18 +83,43 @@ public class EmailController {
 		}
 	}
 	
-	public Email abrirDetalhes(int index){
-		if(index == -1) return null;
+	public Email abrirDetalhes(String nomeRem, String tituloEmail){
+		Email email = this.listarEmailsRecebidos().stream()
+									.filter(e -> e.getRemetente().getNome().equals(nomeRem) && e.getTitulo().equals(tituloEmail))
+									.findFirst()
+									.orElse(null);
 		
-		return emailRecebidos.get(index);
+		return email;	
 	}
 	
-	public ArrayList<Email> listarEmailsRecebidos(Usuario usuarioLocal){
-		this.attEmailsRecebidos(usuarioLocal);
+	public ArrayList<Email> listarEmailsRecebidos(){
 		return this.emailRecebidos;
 	}
 	
 	public boolean haveAnyEmail(){
 		return !this.emailRecebidos.isEmpty();
+	}
+	
+	public int getSize(){
+		return this.emailRecebidos.size();
+	}
+	
+	public String deletarEmail(int index){
+		Email email = new Email();
+		email.setId(index);
+		
+		boolean respDAO = this.emailDAO.deleteById(email);
+		
+		if(this.emailDAO.hasError()){
+			this.errorController = this.emailDAO.getError();
+			return null;
+		}
+		
+		if(respDAO){
+			return "Email deletado com sucesso";
+		} else {
+			return "Erro inesperado";
+		}
+		
 	}
 }

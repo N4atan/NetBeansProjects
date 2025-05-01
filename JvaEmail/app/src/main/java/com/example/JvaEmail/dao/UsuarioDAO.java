@@ -75,7 +75,7 @@ public class UsuarioDAO {
 				return userDb;
 			}
 			
-			this.errorDAO = "Usuario não encontrado";
+			this.errorDAO = "E-mail não cadastrado";
 			return null;
 		} catch (SQLException e) {
 			this.errorDAO = e.getLocalizedMessage();
